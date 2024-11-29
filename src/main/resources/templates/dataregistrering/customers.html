@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Alle kunder</title>
+</head>
+<body>
+<h1>Alle kunder</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>CPR nummer</th>
+        <th>Fornavn</th>
+        <th>Efternavn</th>
+        <th>E-mail</th>
+        <th>Telefonnummer</th>
+        <th>Addresse</th>
+        <th>By</th>
+        <th>Postnummer</th>
+        <th>Slet kunde</th>
+        <th>Rediger kunde</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer : ${customers}">
+        <td th:text="${customer.cpr_number}"></td>
+        <td th:text="${customer.first_name}"></td>
+        <td th:text="${customer.last_name}"></td>
+        <td th:text="${customer.email}"></td>
+        <td th:text="${customer.phone_number}"></td>
+        <td th:text="${customer.address}"></td>
+        <td th:text="${customer.city}"></td>
+        <td th:text="${customer.zip_code}"></td>
+        <td>
+        <!-- Slet knap udfra kundens cpr nummer  -->
+        <a th:href="@{'/deleteCustomer/'+${customer.cpr_number}}">
+            <button >Slet kunde</button>
+        </a>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Alle biler</title>
+</head>
+<body>
+<h1>Alle biler</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Stelnummer</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Bil status</th>
+        <th>Brændstofstype</th>
+        <th>Gear type</th>
+        <th>Produktionsår</th>
+        <th>Odometer</th>
+        <th>Original pris</th>
+        <th>Slet oplysninger</th>
+        <th>Rediger oplysninger</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.frame_number}"></td>
+        <td th:text="${car.brand}"></td>
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.car_status}"></td>
+        <td th:text="${car.fuel_type}"></td>
+        <td th:text="${car.gear_type}"></td>
+        <td th:text="${car.year_produced}"></td>
+        <td th:text="${car.odometer}"></td>
+        <td th:text="${car.orignal_price}"></td>
+        <td>
+            <!-- Slet knap udfra bilens framenumber  -->
+                <a th:href="@{'/deleteCar/'+${car.frame_number}}">
+                    <button >Slet bil</button>
+                </a>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
