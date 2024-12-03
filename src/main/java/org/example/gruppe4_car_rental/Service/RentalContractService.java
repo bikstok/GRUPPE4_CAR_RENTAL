@@ -15,7 +15,7 @@ public class RentalContractService {
     public double getTotalPrice(String frame_number, LocalDate start_date, LocalDate end_date) {
 
         double monthly_sub_price = this.rentalContractRepo.getMonthlySubscriptionPriceFromFrameNumber(frame_number);
-        System.out.println("monthly sub price is " + monthly_sub_price +" and frame number was " + frame_number);
+        System.out.println("monthly sub price is " + monthly_sub_price + " and frame number was " + frame_number);
         //todo: calculate and return the total price
 
 
@@ -24,8 +24,6 @@ public class RentalContractService {
 
     public void createRentalContract(RentalContract rentalContract) {
         this.rentalContractRepo.createRentalContract(rentalContract);
+
     }
-
-
-
 }

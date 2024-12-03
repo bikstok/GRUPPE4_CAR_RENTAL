@@ -44,4 +44,8 @@ public class CarRepo {
         );
         return jdbcTemplate.query(sql, rowMapper); // udfører query og mapper resultatet som objekter i en liste/table
     }
+    public int countByCarStatus(String status) {
+        String sql = "SELECT COUNT(*) FROM Cars WHERE car_status = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, status);
+    }
 }
