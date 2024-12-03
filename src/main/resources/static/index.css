@@ -1,0 +1,108 @@
+/* Grundlæggende styling for hele body */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Arial', sans-serif; /* Moderne skrifttype */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #4A7BB6, #1C3B59, #6C9BCF); /* Blå farver i gradient */
+    background-size: 300% 300%; /* Gør baggrunden større for at kunne animere */
+    animation: gradientAnimation 15s ease infinite; /* Bevægende baggrund */
+}
+
+/* Animation for baggrundens farver */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Styling for containeren */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+/* Styling for login-formular */
+.form-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Lysere baggrund for bedre kontrast */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Større skygge for dybde */
+    width: 380px; /* Bestemte bredde */
+    text-align: center;
+    margin-bottom: 30px; /* Afstand til testknapperne */
+}
+
+/* Overskrift */
+h1 {
+    font-size: 2.8em;
+    color: #1C3B59;
+    margin-bottom: 20px;
+}
+
+/* Form input og knapper */
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1.2em;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4A7BB6; /* En af de blå farver */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hover-effekt på knappen */
+button:hover {
+    background-color: #6C9BCF;
+}
+
+/* Fejlmeddelelse */
+p.error {
+    color: red;
+    font-size: 1.2em;
+}
+
+/* Styling for test knapper */
+.test-buttons {
+    text-align: center;
+}
+
+.test-buttons a {
+    display: inline-block;
+    margin: 10px;
+    padding: 12px;
+    background-color: #4A7BB6;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    transition: background-color 0.3s;
+}
+
+.test-buttons a:hover {
+    background-color: #6C9BCF;
+}

@@ -22,4 +22,11 @@ public class BusinessController {
         model.addAttribute("rentedCars", rentedCarsCount);
         return "kpiDashboard";
     }*/
+
+
+    //ændres til KPIDashboard når den er færdiglavet.
+    @GetMapping("/forretningsudvikler/testLogin")
+    public String showBusinessPage() {
+        return "forretningsudvikler/testLogin";
+    }
 }
