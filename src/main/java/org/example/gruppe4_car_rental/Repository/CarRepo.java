@@ -16,7 +16,6 @@ public class CarRepo {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-
     /*for at slette bil via frame_number skal vi først fjerne det fra RentalContract, da frame_number er en foreign key i RentalContract*/
     public boolean deleteCar(String frame_number) {
         this.jdbcTemplate.update("DELETE FROM RentalContract WHERE frame_number = ?", frame_number);

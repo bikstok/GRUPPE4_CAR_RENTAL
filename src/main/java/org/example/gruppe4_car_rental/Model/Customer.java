@@ -12,7 +12,7 @@ public class Customer {
 
     private String address;
     private String zip_code;
-private String city;
+    private String city;
 
     //Tom konstruktør
     public Customer() {

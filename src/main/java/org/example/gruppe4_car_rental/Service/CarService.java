@@ -15,9 +15,9 @@ public class CarService {
 private CarRepo carRepo;
     public List<Car> fetchAllCars() { //Til visning af alle biler / hente biler
         List<Car> cars = this.carRepo.fetchAllCars();
-        for (Car element : cars) {
-            System.out.println(element);
-        }
+        //for (Car element : cars) {
+        //    System.out.println(element);
+        //}
         return cars;
     }
 

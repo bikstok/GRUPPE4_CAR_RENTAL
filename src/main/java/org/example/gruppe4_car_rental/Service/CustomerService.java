@@ -21,9 +21,9 @@ public class CustomerService {
     }
     public List<Customer> fetchAllCustomers() {
         List<Customer> customers = this.customerRepo.fetchAllCustomers();
-        for (Customer element : customers) {
-            System.out.println(element);
-        }
+        //for (Customer element : customers) {
+        //    System.out.println(element);
+        //}
         return customers;
     }
 }

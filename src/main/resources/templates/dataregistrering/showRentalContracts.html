@@ -2,9 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Alle Lejekontrakter</title>
 </head>
 <body>
+<h1>Alle lejekontrakter</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>CPR nummer</th>
+        <th>Stel nummer</th>
+        <th>Start dato</th>
+        <th>Slut dato</th>
+        <th>Forsikring</th>
+        <th>Total pris</th>
+        <th>Max km</th>
+        <th>Voucher</th>
+        <th>Rediger lejekontrakt</th>
+        <th>Slet lejekontrakt</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="rentalcontract : ${rentalcontracts}">
+        <td th:text="${rentalcontract.cpr_number}"></td>
+        <td th:text="${rentalcontract.frame_number}"></td>
+        <td th:text="${rentalcontract.start_date}"></td>
+        <td th:text="${rentalcontract.end_date}"></td>
+        <td th:text="${rentalcontract.insurance}"></td>
+       <!-- <td th:text="${rentalcontract.}">total_price</td>-->
+        <td th:text="${rentalcontract.max_km}"></td>
+        <td th:text="${rentalcontract.voucher}"></td>
+        <td>
 
 </body>
 </html>

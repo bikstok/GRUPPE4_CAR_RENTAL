@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test123</title>
+</head>
+<body>
+
+<main>
+    <form action="/dataregistrering/viewRentalContracts" method="post">
+        <label for="cpr_number">Cpr nummer:</label>
+        <input type="text" id="cpr_number" name="cpr_number" th:value="${cpr_number}" pattern="^\d{10}$" required><br>
+        <input type="hidden" name="frame_number" th:value="${frame_number}">
+
+        <label for="start_date">Start Dato:</label>
+        <input type="date" id="start_date" name="start_date" th:value="${start_date}"><br>
+
+        <label for="end_date">Slut Dato:</label>
+        <input type="date" id="end_date" name="end_date" th:value="${end_date}"><br>
+
+        <!-- metode til at give brugeren muligheden for at sige ja eller nej, fremfor at indtaste svar -->
+        <label for="insurance">Skal bilen forsikres?</label>
+        <input type="checkbox" id="insurance" name="insurance" th:checked="${insurance}" required><br>
+
+        <label for="max_km">Max km:</label>
+        <input type="text" id="max_km" name="max_km" th:value="${max_km}" pattern="^\d+$" required title="Indtast venligst et gyldigt nummer"><br>
+
+        <label for="voucher">Voucher:</label>
+        <input type="text" id="voucher" name="voucher" th:value="${voucher}"/><br>
+
+
+        <a href="/dataregistrering/showRentalContracts">
+        <button type="submit">Opret</button>
+        </a>
+
+    </form>
+
+</main>
+</body>
+</html>

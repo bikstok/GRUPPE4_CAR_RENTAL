@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
 </head>
 <body>
-<p>HELLO WORLD TEST</p>
+
+
+<p th:if="${error}" th:text="${error}" style="color: red;"></p>
 
 <a href="dataregistrering/cars">Test Knap cars </a>
 
 <a href="dataregistrering/customers">Test Knap customers</a>
 
 <a href="dataregistrering/dataFrontPage">Test Knap data forside</a>
+
 </body>
 </html>
