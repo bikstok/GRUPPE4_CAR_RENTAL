@@ -3,22 +3,24 @@ package org.example.gruppe4_car_rental.Model;
 import java.sql.Date;
 
 public class RentalContract {
-private String cpr_number;
-private String frame_number;
-private Date start_date;
-private Date end_date;
-private boolean insurance;
-private double total_price;
-private int max_km;
-private boolean voucher;
+    private int contract_id;
+    private String cpr_number;
+    private String frame_number;
+    private Date start_date;
+    private Date end_date;
+    private boolean insurance;
+    private double total_price;
+    private int max_km;
+    private boolean voucher;
 
-//tom konstruktør
-public RentalContract(){
+    //tom konstruktør
+    public RentalContract() {
 
-}
+    }
 
-//konstruktør med parametre
-    public RentalContract(String cpr_number, String frame_number, Date start_date, Date end_date, boolean insurance, double total_price, int max_km, boolean voucher) {
+    //konstruktør med parametre
+    public RentalContract(int contract_id, String cpr_number, String frame_number, Date start_date, Date end_date, boolean insurance, double total_price, int max_km, boolean voucher) {
+        this.contract_id = contract_id;
         this.cpr_number = cpr_number;
         this.frame_number = frame_number;
         this.start_date = start_date;
@@ -27,6 +29,14 @@ public RentalContract(){
         this.total_price = total_price;
         this.max_km = max_km;
         this.voucher = voucher;
+    }
+
+    public int getContract_id() {
+        return this.contract_id;
+    }
+
+    public void setContract_id(int contract_id) {
+        this.contract_id = contract_id;
     }
 
     public String getCpr_number() {

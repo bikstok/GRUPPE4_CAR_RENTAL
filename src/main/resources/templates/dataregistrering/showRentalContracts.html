@@ -23,16 +23,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="rentalcontract : ${rentalcontracts}">
-        <td th:text="${rentalcontract.cpr_number}"></td>
-        <td th:text="${rentalcontract.frame_number}"></td>
-        <td th:text="${rentalcontract.start_date}"></td>
-        <td th:text="${rentalcontract.end_date}"></td>
-        <td th:text="${rentalcontract.insurance}"></td>
-       <!-- <td th:text="${rentalcontract.}">total_price</td>-->
-        <td th:text="${rentalcontract.max_km}"></td>
-        <td th:text="${rentalcontract.voucher}"></td>
-        <td>
-
+    <tr th:each="rentalContract : ${rentalContracts}">
+        <td th:text="${rentalContract.cpr_number}"></td>
+        <td th:text="${rentalContract.frame_number}"></td>
+        <td th:text="${rentalContract.start_date}"></td>
+        <td th:text="${rentalContract.end_date}"></td>
+        <td th:text="${rentalContract.insurance}"></td>
+        <td th:text="${rentalContract.total_price}"></td>
+        <td th:text="${rentalContract.max_km}"></td>
+        <td th:text="${rentalContract.voucher}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
