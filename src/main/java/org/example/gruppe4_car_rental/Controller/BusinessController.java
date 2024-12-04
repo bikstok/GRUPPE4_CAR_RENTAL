@@ -12,10 +12,10 @@ public class BusinessController {
     @Autowired
     private BusinessRepo businessRepo;
 
-    @GetMapping("/kpiDashboard")
+    @GetMapping("/forretningsudvikler/KPIDashboard")
     public String showKPIDashboard(Model model) {
-        int rentedCarsCount = businessRepo.countRentedCars();  // Henter antallet af udlejede biler fra BusinessRepo
+        int rentedCarsCount = this.businessRepo.countRentedCars();  // Henter antallet af udlejede biler fra BusinessRepo
         model.addAttribute("rentedCars", rentedCarsCount);  // Attributnavnet 'rentedCars' bruges til at vise data i HTML-filen
-        return "dataregistrering/KPIDashboard";
+        return "forretningsudvikler/KPIDashboard";
     }
 }

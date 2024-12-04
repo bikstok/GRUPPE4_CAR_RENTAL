@@ -2,18 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="index.css">
+    <!--favicon er ikonet i fanen i stedet for default globus.  -->
+    <link rel="icon" href="/images/bilabonnementLogo.png" type="image/png">
 </head>
 <body>
 
+<!-- Container/Boks til loginformularen-->
+<div class="container">
+    <!-- Login-formular -->
+    <div class="form-container">
+        <h1>Velkommen til Bilabonnement A/S</h1>
+        <p>Indtast dine loginoplysninger for at fortsætte.</p>
+
+        <!-- Login form -->
+        <form th:action="@{/login}" method="post">
+            <label for="username">Brugernavn:</label>
+            <input type="text" id="username" name="username" th:value="${username}" required><br><br>
+
+            <label for="password">Adgangskode:</label>
+            <input type="password" id="password" name="password" th:value="${password}" required><br><br>
+
+            <button type="submit">Login</button>
+        </form>
 
 
-<p th:if="${error}" th:text="${error}" style="color: red;"></p>
-<a href="/kpiDashboard" class="btn">KPI Dashboard</a>
-<a href="dataregistrering/cars">Test Knap cars </a>
+        <!--i tilfælde af fejl, hvis der er error, så printes en rød -->
+        <p class="error" th:if="${error}" th:text="${error}" style="color: red;"></p>
+    </div>
 
-<a href="dataregistrering/customers">Test Knap customers</a>
-
-<a href="dataregistrering/dataFrontPage">Test Knap data forside</a>
+    <!-- Test knapper -->
+    <div class="test-buttons">
+        <a href="dataregistrering/cars">Test Knap cars</a>
+        <a href="dataregistrering/customers">Test Knap customers</a>
+        <a href="dataregistrering/dataFrontPage">Test Knap data forside</a>
+        <a href="forretningsudvikler/KPIDashboard">Test Knap KPI</a>
+    </div>
+</div>
 
 </body>
 </html>

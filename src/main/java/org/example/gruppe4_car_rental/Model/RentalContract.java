@@ -18,7 +18,7 @@ public class RentalContract {
 
     }
 
-    //konstruktør med parametre
+    //konstruktør med parametrex
     public RentalContract(int contract_id, String cpr_number, String frame_number, Date start_date, Date end_date, boolean insurance, double total_price, int max_km, boolean voucher) {
         this.contract_id = contract_id;
         this.cpr_number = cpr_number;

@@ -16,7 +16,7 @@ public class HomeController {
     }
 
     // Håndtering af login-formularen
-    @PostMapping("/index")
+    @PostMapping("/login")
     public String handleLogin(@RequestParam("username") String username,
                               @RequestParam("password") String password,
                               Model model) {
@@ -25,6 +25,7 @@ public class HomeController {
         String redirectUrl;
 
         // Brug switch til at validere loginoplysninger
+
         switch (username) {
             case "dataNerds":
                 //ternary operator fremfor en masse if/else statements
@@ -35,7 +36,7 @@ public class HomeController {
                 redirectUrl = password.equals("WeLoveDamage") ? "skade_og_udbedring/skade" : "error";
                 break;
             case "businessNerds":
-                redirectUrl = password.equals("WeLoveKPI") ? "forretningsudvikler/testLogin" : "error";
+                redirectUrl = password.equals("WeLoveKPI") ? "forretningsudvikler/KPIDashboard" : "error";
                 break;
             default:
                 redirectUrl = "error"; // Hvis brugernavnet ikke findes
