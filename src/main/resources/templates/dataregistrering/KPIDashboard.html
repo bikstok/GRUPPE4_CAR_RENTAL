@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KPI Dashboard</title>
+    <link rel="stylesheet" href="/forretningsudvikler/KPIDashboardfrontpage.css">
 </head>
 <body>
-
+<header>
+    <h1>KPI Dashboard</h1>
+</header>
+<main>
+    <section class="kpi">
+        <h2>Antal udlejede biler</h2>
+        <!-- Viser antallet af udlejede biler-->
+        <div class="kpi-value" th:text="${rentedCars}">0</div>
+    </section>
+</main>
 </body>
 </html>
