@@ -7,20 +7,20 @@
 <body>
 
 <main>
-    <form action="/dataregistrering/viewRentalContracts" method="post">
+    <form action="/dataregistrering/createRentalContract" method="post">
         <label for="cpr_number">Cpr nummer:</label>
-        <input type="text" id="cpr_number" name="cpr_number" th:value="${cpr_number}" pattern="^\d{10}$" required><br>
+        <input type="text" id="cpr_number" name="cpr_number" th:value="${cpr_number}" pattern="^\d{10}$" required title="Indtast venligst et cpr nummer"><br>
         <input type="hidden" name="frame_number" th:value="${frame_number}">
 
         <label for="start_date">Start Dato:</label>
-        <input type="date" id="start_date" name="start_date" th:value="${start_date}"><br>
+        <input type="date" id="start_date" name="start_date" th:value="${start_date}" required><br>
 
         <label for="end_date">Slut Dato:</label>
-        <input type="date" id="end_date" name="end_date" th:value="${end_date}"><br>
+        <input type="date" id="end_date" name="end_date" th:value="${end_date}" required><br>
 
         <!-- metode til at give brugeren muligheden for at sige ja eller nej, fremfor at indtaste svar -->
         <label for="insurance">Skal bilen forsikres?</label>
-        <input type="checkbox" id="insurance" name="insurance" th:checked="${insurance}" required><br>
+        <input type="checkbox" id="insurance" name="insurance" th:checked="${insurance}"><br>
 
         <label for="max_km">Max km:</label>
         <input type="text" id="max_km" name="max_km" th:value="${max_km}" pattern="^\d+$" required title="Indtast venligst et gyldigt nummer"><br>
@@ -29,9 +29,7 @@
         <input type="text" id="voucher" name="voucher" th:value="${voucher}"/><br>
 
 
-        <a href="/dataregistrering/showRentalContracts">
         <button type="submit">Opret</button>
-        </a>
 
     </form>
 
