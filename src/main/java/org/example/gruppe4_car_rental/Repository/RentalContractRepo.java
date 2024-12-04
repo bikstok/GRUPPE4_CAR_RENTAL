@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -17,8 +16,7 @@ public class RentalContractRepo {
     private JdbcTemplate jdbcTemplate;
 
     public void createRentalContract(RentalContract rentalContract) {
-        String sql = "INSERT INTO RentalContract (cpr_number, frame_number, start_date, end_date, insurance, total_price, max_km, voucher) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO RentalContract (cpr_number, frame_number, start_date, end_date, insurance, total_price, max_km, voucher) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         this.jdbcTemplate.update(sql,
                 rentalContract.getCpr_number(),
                 rentalContract.getFrame_number(),
@@ -29,6 +27,8 @@ public class RentalContractRepo {
                 rentalContract.getMax_km(),
                 rentalContract.getVoucher()
         );
+        String updateCarStatus = "UPDATE Cars SET car_status = 'Lejet' WHERE frame_number = ?";
+        this.jdbcTemplate.update(updateCarStatus, rentalContract.getFrame_number());
     }
 
     public double getMonthlySubscriptionPriceFromFrameNumber(final String frame_number) {
@@ -52,5 +52,44 @@ public class RentalContractRepo {
                 resultSet.getBoolean("voucher")
                 );
         return jdbcTemplate.query(sql, rowMapper);
+    }
+
+    public List<Car> fetchAllAvailableCars() {
+        String sql = "SELECT Cars.frame_number, Cars.model, Cars.car_status, Cars.fuel_type, Cars.gear_type, " +
+                "Cars.year_produced, Cars.monthly_sub_price, Cars.odometer, Cars.orignal_price, CarModels.brand " +
+                "FROM Cars " +
+                "JOIN CarModels ON Cars.model = CarModels.model " +
+                "WHERE Cars.car_status = 'Ledig'";
+        RowMapper<Car> rowMapper = (rs, rowNum) -> new Car(
+                rs.getString("frame_number"),
+                rs.getString("brand"),
+                rs.getString("model"),
+                rs.getString("car_status"),
+                rs.getString("fuel_type"),
+                rs.getString("gear_type"),
+                rs.getInt("year_produced"),
+                rs.getDouble("monthly_sub_price"),
+                rs.getInt("odometer"),
+                rs.getDouble("orignal_price")
+        );
+        return jdbcTemplate.query(sql, rowMapper);
+
+    }
+
+    public boolean deleteRentalContract(int contract_id) {
+        String frameNumber = this.jdbcTemplate.queryForObject(
+                "SELECT frame_number FROM RentalContract WHERE contract_id = ?",
+                String.class,
+                contract_id
+        );
+
+        this.jdbcTemplate.update(
+                "UPDATE Cars SET car_status = 'Ledig' WHERE frame_number = ?",
+                frameNumber
+        );
+
+
+
+        return this.jdbcTemplate.update("DELETE FROM RentalContract WHERE contract_id = ?", contract_id) > 0;
     }
 }

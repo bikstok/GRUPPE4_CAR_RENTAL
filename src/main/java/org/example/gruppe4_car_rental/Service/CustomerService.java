@@ -12,18 +12,27 @@ import java.util.List;
 @Service
 public class CustomerService {
 
-
     @Autowired
     private CustomerRepo customerRepo;
 
     public boolean deleteCustomer(String cpr_number) {
         return this.customerRepo.deleteCustomer(cpr_number);
     }
+
     public List<Customer> fetchAllCustomers() {
-        List<Customer> customers = this.customerRepo.fetchAllCustomers();
-        //for (Customer element : customers) {
-        //    System.out.println(element);
-        //}
-        return customers;
+        return customerRepo.fetchAllCustomers();
     }
+
+
+    // Metode til at hente alle kunder og sortere efter den angivne 'sortBy'
+    public List<Customer> fetchAllCustomers(String sortBy) {
+        return customerRepo.fetchAllCustomers(sortBy);
+    }
+    // public List<Customer> fetchAllCustomers() {
+    //     List<Customer> customers = this.customerRepo.fetchAllCustomers();
+    //     //for (Customer element : customers) {
+    //     //    System.out.println(element);
+    //     //}
+    //     return customers;
+    // }
 }

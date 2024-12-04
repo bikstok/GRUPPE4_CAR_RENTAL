@@ -8,17 +8,17 @@
 <table border="1">
     <thead>
     <tr>
-        <th>CPR nummer</th>
-        <th>Fornavn</th>
-        <th>Efternavn</th>
-        <th>E-mail</th>
-        <th>Telefonnummer</th>
-        <th>Addresse</th>
-        <th>By</th>
-        <th>Postnummer</th>
+        <!-- Kolonneoverskrifter, der sender en sortBy parameter -->
+        <th><a th:href="@{'/dataregistrering/customers?sortBy=c.cpr_number&previousSortBy=' + ${sortBy}}">CPR nummer</a></th>
+        <th><a th:href="@{'/dataregistrering/customers?sortBy=c.first_name&previousSortBy=' + ${sortBy}}">Fornavn</a></th>
+        <th><a th:href="@{'/dataregistrering/customers?sortBy=c.last_name&previousSortBy=' + ${sortBy}}">Efternavn</a></th>
+        <th><a th:href="@{'/dataregistrering/customers?sortBy=c.email&previousSortBy=' + ${sortBy} }">E-mail</a></th>
+        <th><a th:href="@{'/dataregistrering/customers?sortBy=c.phone_number&previousSortBy=' + ${sortBy}}">Telefonnummer</a></th>
+        <th><a th:href="@{'/dataregistrering/customers?sortBy=c.address&previousSortBy=' + ${sortBy}}">Addresse</a></th>
+        <th><a th:href="@{'/dataregistrering/customers?sortBy=z.city&previousSortBy=' + ${sortBy}}">By</a></th>
+        <th><a th:href="@{'/dataregistrering/customers?sortBy=c.zip_code&previousSortBy=' + ${sortBy}}">Postnummer</a></th>
         <th>Slet kunde</th>
         <th>Rediger kunde</th>
-
     </tr>
     </thead>
     <tbody>
@@ -32,12 +32,11 @@
         <td th:text="${customer.city}"></td>
         <td th:text="${customer.zip_code}"></td>
         <td>
-        <!-- Slet knap udfra kundens cpr nummer  -->
-        <a th:href="@{'/deleteCustomer/'+${customer.cpr_number}}">
-            <button >Slet kunde</button>
-        </a>
+            <!-- Slet knap udfra kundens cpr nummer  -->
+            <a th:href="@{'/deleteCustomer/'+${customer.cpr_number}}">
+                <button>Slet kunde</button>
+            </a>
         </td>
-
     </tr>
     </tbody>
 </table>

@@ -10,12 +10,31 @@
 <header>
     <h1>KPI Dashboard</h1>
 </header>
+
+<div class="sidebar">
+    <!-- Contentbaren til venstre -->
+</div>
+
 <main>
     <section class="kpi">
-        <h2>Antal udlejede biler</h2>
-        <!-- Viser antallet af udlejede biler-->
+        <h2>Antal udlejede biler lige nu</h2>
+        <!-- Viser antallet af udlejede biler -->
         <div class="kpi-value" th:text="${rentedCars}">0</div>
     </section>
-</main>
-</body>
-</html>
+
+    <section class="top-rented-cars">
+        <h2>Top 5 Mest Udlejede Biler (All Time)</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Brand</th>
+                <th>Antal Udlejninger</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Iterér over listen af Map -->
+            <tr th:each="car : ${topRentedCarBrands}">
+                <td th:text="${car['brand']}">Brand</td> <!-- Brand -->
+                <td th:text="${car['rental_count']}">0</td> <!-- Antal udlejninger -->
+            </tr>
+            </tbody

@@ -23,7 +23,7 @@
         <input type="checkbox" id="insurance" name="insurance" th:checked="${insurance}"><br>
 
         <label for="max_km">Max km:</label>
-        <input type="text" id="max_km" name="max_km" th:value="${max_km}" pattern="^\d+$" required title="Indtast venligst et gyldigt nummer"><br>
+        <input type="text" id="max_km" name="max_km" th:value="${max_km}" pattern="^\d{1,9}$" required title="Indtast venligst et gyldigt nummer"><br>
 
         <label for="voucher">Voucher:</label>
         <input type="text" id="voucher" name="voucher" th:value="${voucher}"/><br>

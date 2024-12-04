@@ -36,4 +36,12 @@ public class RentalContractService {
     public List<RentalContract> fetchAllRentalContracts(){
         return this.rentalContractRepo.fetchAllRentalContracts();
     }
+
+    public List<Car> fetchAllAvailableCars() {
+        return this.rentalContractRepo.fetchAllAvailableCars();
+    }
+
+    public boolean deleteRentalContract(int contract_id) {
+        return this.rentalContractRepo.deleteRentalContract(contract_id);
+    }
 }

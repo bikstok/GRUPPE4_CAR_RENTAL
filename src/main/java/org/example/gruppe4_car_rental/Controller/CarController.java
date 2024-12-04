@@ -21,13 +21,6 @@ public class CarController {
         return "redirect:/dataregistrering/cars";
     }
 
-    @GetMapping("dataregistrering/dataFrontPage")
-    public String fetchAllCarsForFrontPage(Model model) {
-        List<Car> cars = this.carService.fetchAllCars();
-        model.addAttribute("cars", cars);
-        return "dataregistrering/dataFrontPage";
-    }
-
     @GetMapping("dataregistrering/cars")
     public String fetchAllCars(Model model) {
         List<Car> cars = this.carService.fetchAllCars(); // Få fat i alle biler

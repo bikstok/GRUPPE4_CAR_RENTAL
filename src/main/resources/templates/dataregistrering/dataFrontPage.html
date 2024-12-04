@@ -11,8 +11,7 @@
         <th>Stelnummer</th>
         <th>Brand</th>
         <th>Model</th>
-        <th>Bil status</th>
-        <th>Opret lejeaftale</th>
+        <th>Opret lejekontrakt</th>
 
     </tr>
     </thead>
@@ -21,7 +20,6 @@
         <td th:text="${car.frame_number}"></td>
         <td th:text="${car.brand}"></td>
         <td th:text="${car.model}"></td>
-        <td th:text="${car.car_status}"></td>
         <td>
             <!-- opret lejeaftale knap -->
             <a th:href="@{'/createRentalContract/'+${car.frame_number}}">

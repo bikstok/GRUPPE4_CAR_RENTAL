@@ -1,5 +1,6 @@
 package org.example.gruppe4_car_rental.Controller;
 
+import org.example.gruppe4_car_rental.Model.Car;
 import org.example.gruppe4_car_rental.Model.RentalContract;
 import org.example.gruppe4_car_rental.Service.RentalContractService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,19 @@ public class RentalContractController {
         List<RentalContract> rentalContracts = this.rentalContractService.fetchAllRentalContracts();
         model.addAttribute("rentalContracts", rentalContracts);
         return "dataregistrering/showRentalContracts";
+    }
+
+    @GetMapping("dataregistrering/dataFrontPage")
+    public String fetchAllAvailableCars(Model model) {
+        List<Car> cars = this.rentalContractService.fetchAllAvailableCars();
+        model.addAttribute("cars", cars);
+        return "dataregistrering/dataFrontPage";
+    }
+
+    @GetMapping("/deleteRentalContract/{contract_id}")
+    public String deleteRentalContract(@PathVariable("contract_id") int contract_id) {
+        this.rentalContractService.deleteRentalContract(contract_id);
+        return "redirect:/dataregistrering/showRentalContracts";
     }
 
 }

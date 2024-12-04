@@ -17,7 +17,7 @@
         <th>Total pris</th>
         <th>Max km</th>
         <th>Voucher</th>
-        <th>Rediger lejekontrakt</th>
+        <!--<th>Rediger lejekontrakt</th>-->
         <th>Slet lejekontrakt</th>
 
     </tr>
@@ -32,6 +32,12 @@
         <td th:text="${rentalContract.total_price}"></td>
         <td th:text="${rentalContract.max_km}"></td>
         <td th:text="${rentalContract.voucher}"></td>
+        <td>
+            <!-- Slet knap udfra kontraktens id  -->
+            <a th:href="@{'/deleteRentalContract/'+${rentalContract.contract_id}}">
+                <button >Slet lejekontrakt</button>
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>
