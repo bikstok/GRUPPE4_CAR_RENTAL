@@ -1,5 +1,9 @@
 package org.example.gruppe4_car_rental.Controller;
 
+import org.example.gruppe4_car_rental.Model.RentalContract;
+import org.example.gruppe4_car_rental.Service.DamageService;
+import org.example.gruppe4_car_rental.Service.HomeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,13 +12,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.List;
 
 @Controller
 public class HomeController {
 
+    @Autowired
+    private HomeService homeService;
+
     // Index forside/login siden
     @GetMapping("/")
     public String index() {
+        this.homeService.changeStatusOfCarsToRented();//when they have an active rental contract
+        this.homeService.changeStatusOfCarsToPendingInspection();//when the rental contract expires
         return "index";
     }
 

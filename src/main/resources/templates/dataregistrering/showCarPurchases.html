@@ -18,7 +18,7 @@
         <th>Max km</th>
         <th>Voucher</th>
         <th>Start Odometer</th>
-        <th>Rediger lejekontrakt</th>
+        <!--<th>Rediger lejekontrakt</th>-->
         <th>Slet lejekontrakt</th>
         <th>Opret forhåndsaftale</th>
 
@@ -45,11 +45,6 @@
             <a th:href="@{'/createCarPurchase/'+${rentalContract.contract_id}}">
                 <button >Opret forhåndsaftale</button>
             </a>
-
-            <a th:href="@{'/editRentalContract/' + ${rentalContract.contract_id}}">
-                <button>Rediger lejekontrakt</button>
-            </a>
-
         </td>
     </tr>
     </tbody>

@@ -7,10 +7,9 @@
     <link rel="icon" href="/images/bilabonnementLogo.png" type="image/png">
 </head>
 <body>
-
 <!-- Container/Boks til loginformularen-->
 <div class="container">
-    <!-- Login-formular -->
+    <!-- Login-formular i div boks-->
     <div class="form-container">
         <h1>Velkommen til Bilabonnement A/S</h1>
         <p>Indtast dine loginoplysninger for at fortsætte.</p>
@@ -20,13 +19,15 @@
             <label for="username">Brugernavn:</label>
             <input type="text" id="username" name="username" th:value="${username}" required><br><br>
 
+            <!--Typen password skjuler det indtastede input i adgangskodefeltet -->
             <label for="password">Adgangskode:</label>
             <input type="password" id="password" name="password" th:value="${password}" required><br><br>
 
             <button type="submit">Login</button>
         </form>
 
-        <!--i tilfælde af fejl, hvis der er error, så printes en rød -->
+        <!-- Viser en fejlmeddelelse i rødt, hvis variablen 'error' fra backend indeholder en værdi. -->
+        <!-- 'th:if' afgør, om elementet vises, og 'th:text' indsætter fejlens tekst i afsnittet. -->
         <p class="error" th:if="${error}" th:text="${error}" style="color: red;"></p>
     </div>
 

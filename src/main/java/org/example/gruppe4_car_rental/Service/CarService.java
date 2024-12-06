@@ -12,7 +12,9 @@ public class CarService {
 
 @Autowired
 private CarRepo carRepo;
-//   public List<Car> fetchAllCars() { //Til visning af alle biler / hente biler
+
+//Til visning af alle biler (UDEN SORTERING.)
+//   public List<Car> fetchAllCars() {
 //       List<Car> cars = this.carRepo.fetchAllCars();
 //       //for (Car element : cars) {
 //       //    System.out.println(element);
@@ -20,19 +22,22 @@ private CarRepo carRepo;
 //       return cars;
 //   }
 
+    //Returnerer liste af sorterede biler
     public List<Car> fetchAllCars(String sortBy) {
         return carRepo.fetchAllCars(sortBy);
     }
 
+    //Sletter en bil udfra frame_number
     public boolean deleteCar(String frame_number) {
         return this.carRepo.deleteCar(frame_number);
     }
 
+    //Redigerer en bil ud fra frame_number
     public Car findByFrameNumber(String frame_number) {
         return carRepo.findByFrameNumber(frame_number);  // Brug CarRepo til at hente bilen
     }
 
-    // Opdater bilens information
+    //Opdater bilens information efter redigering
     public void updateCar(Car car) {
         this.carRepo.updateCar(car);  // Brug CarRepo til at opdatere bilen i databasen
   }

@@ -15,8 +15,18 @@
         <label for="start_date">Start Dato:</label>
         <input type="date" id="start_date" name="start_date" th:value="${start_date}" required><br>
 
-        <label for="end_date">Slut Dato:</label>
-        <input type="date" id="end_date" name="end_date" th:value="${end_date}" required><br>
+
+        <label for="end_date">Antal måneder lejet:</label>
+        <select id="end_date" name="end_date">
+            <option value="3" th:selected="${end_date == 3}">3 Måneder</option>
+            <option value="6" th:selected="${end_date == 6}">6 Måneder</option>
+            <option value="12" th:selected="${end_date == 12}">12 Måneder</option>
+            <option value="24" th:selected="${end_date == 24}">24 Måneder</option>
+            <option value="36" th:selected="${end_date == 36}">36 Måneder</option>
+            <!-- Add more options as needed -->
+        </select><br>
+
+
 
         <!-- metode til at give brugeren muligheden for at sige ja eller nej, fremfor at indtaste svar -->
         <label for="insurance">Skal bilen forsikres?</label>
@@ -27,7 +37,6 @@
 
         <label for="voucher">Voucher:</label>
         <input type="text" id="voucher" name="voucher" th:value="${voucher}"/><br>
-
 
         <button type="submit">Opret</button>
 

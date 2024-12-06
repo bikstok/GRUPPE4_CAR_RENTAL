@@ -17,8 +17,6 @@
         <th><a th:href="@{'/dataregistrering/customers?sortBy=c.address&previousSortBy=' + ${sortBy}}">Addresse</a></th>
         <th><a th:href="@{'/dataregistrering/customers?sortBy=z.city&previousSortBy=' + ${sortBy}}">By</a></th>
         <th><a th:href="@{'/dataregistrering/customers?sortBy=c.zip_code&previousSortBy=' + ${sortBy}}">Postnummer</a></th>
-        <th>Slet kunde</th>
-        <th>Rediger kunde</th>
     </tr>
     </thead>
     <tbody>
@@ -35,6 +33,10 @@
             <!-- Slet knap udfra kundens cpr nummer  -->
             <a th:href="@{'/deleteCustomer/'+${customer.cpr_number}}">
                 <button>Slet kunde</button>
+            </a>
+
+            <a th:href="@{'/editCustomer/' + ${customer.cpr_number}}">
+                <button>Rediger kunde</button>
             </a>
         </td>
     </tr>

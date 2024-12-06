@@ -12,6 +12,7 @@ public class RentalContract {
     private double total_price;
     private int max_km;
     private boolean voucher;
+    private int start_odometer;
 
     //tom konstruktør
     public RentalContract() {
@@ -19,7 +20,7 @@ public class RentalContract {
     }
 
     //konstruktør med parametrex
-    public RentalContract(int contract_id, String cpr_number, String frame_number, Date start_date, Date end_date, boolean insurance, double total_price, int max_km, boolean voucher) {
+    public RentalContract(int contract_id, String cpr_number, String frame_number, Date start_date, Date end_date, boolean insurance, double total_price, int max_km, boolean voucher, int start_odometer) {
         this.contract_id = contract_id;
         this.cpr_number = cpr_number;
         this.frame_number = frame_number;
@@ -29,6 +30,11 @@ public class RentalContract {
         this.total_price = total_price;
         this.max_km = max_km;
         this.voucher = voucher;
+        this.start_odometer = start_odometer;
+    }
+
+    public int getStart_odometer() {
+        return this.start_odometer;
     }
 
     public int getContract_id() {

@@ -37,7 +37,8 @@ public class RowMapperUtil {
             resultSet.getBoolean("insurance"),
             resultSet.getDouble("total_price"),
             resultSet.getInt("max_km"),
-            resultSet.getBoolean("voucher")
+            resultSet.getBoolean("voucher"),
+            resultSet.getInt("start_odometer")
     );
     
 }

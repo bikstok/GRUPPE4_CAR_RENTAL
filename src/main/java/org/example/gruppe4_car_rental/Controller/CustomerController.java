@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -19,19 +20,22 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    //Viser alle kunder (UDEN SORTERING)
+    // @GetMapping("dataregistrering/customers")
+    // public String getAllCustomers(Model model) {
+    //     List<Customer> customers = this.customerService.fetchAllCustomers();
+    //     model.addAttribute("customers", customers);
+    //     return "dataregistrering/customers";
+    // }
+
+    //Sletter en kunde ud fra cpr_number
     @GetMapping("/deleteCustomer/{cpr_number}")
     public String deleteCustomer(@PathVariable("cpr_number") String cpr_number){
         this.customerService.deleteCustomer(cpr_number);
         return "redirect:/dataregistrering/customers";
     }
-   // @GetMapping("dataregistrering/customers")
-   // public String getAllCustomers(Model model) {
-   //     List<Customer> customers = this.customerService.fetchAllCustomers(); // Get all cars
-   //     model.addAttribute("customers", customers); // Add the cars to the model
-   //     return "dataregistrering/customers"; // Return the view (Thymeleaf template)
-   // }
 
-    // Endpoint for at vise alle kunder, med mulighed for sortering via sortBy-parameter
+    //Håndterer forespørgsler til visning af kunder med sorteringsmuligheder.
     @GetMapping("/dataregistrering/customers")
     public String showAllCustomers(
             @RequestParam(value = "previousSortBy", required = false) String previousSortBy,
@@ -43,17 +47,50 @@ public class CustomerController {
 
        /*vi tilføjer previousSortBy for at kunne holde fast i når en overskrift er blevet klikket på.
         sortBy = ASC order
-        previousSortBy = DESV */
+        previousSortBy = DESV
+        Hvis brugeren klikker på samme kolonne igen, ændres sorteringsrækkefølgen til DESC (omvendt).
+        Første klik på en kolonne sorterer stigende (ASC).
+        Andet klik på samme kolonne sorterer faldende (DESC).*/
          if (sortBy != null && sortBy.equals(previousSortBy)) {
              sortBy += " DESC";
         } else {
              //Denne linje gør at man kan få fat i previousSortBy næste gang.
              model.addAttribute("sortBy", sortBy);
          }
-        // Henter kunder fra service-laget, sorteret efter sortBy-parameteren
+        //Henter liste af kunder fra service-laget, sorteret efter sortBy-parameteren
         List<Customer> customers = customerService.fetchAllCustomers(sortBy);
         model.addAttribute("customers", customers);
         return "dataregistrering/customers";// Returnerer til customers.html
     }
+
+    //Henviser til redigeringsformular for en specifik kunde baseret på cpr_number, hvor man indtaster nye værdier.
+    //den tager kundens parametre med over i formularen så man ikke skal indtaste alle informationer.
+    @GetMapping("/editCustomer/{cpr_number}")
+    public String showEditForm(@PathVariable("cpr_number") String cpr_number, Model model) {
+        Customer customer = this.customerService.findByCprNumber(cpr_number);
+        model.addAttribute("customer", customer);
+        return "dataregistrering/editCustomer";  // Returner Thymeleaf-template for redigering
+    }
+
+    //Håndterer redigeringsformularen og opdaterer i databasen.
+    @PostMapping("/updateCustomer")
+    public String updateCustomer(
+            @RequestParam("cpr_number") String cpr_number,
+            @RequestParam("first_name") String first_name,
+            @RequestParam("last_name") String last_name,
+            @RequestParam("email") String email,
+            @RequestParam("phone_number") String phone_number,
+            @RequestParam("address") String address,
+            @RequestParam("city") String city,
+            @RequestParam("zip_code") String zip_code) {
+        //System.out.println("update customer method called");
+
+        //Opretter et ny Customer-objekt som er en opdateret version af det eksisterende.
+        Customer customer = new Customer(cpr_number, first_name, last_name, email, phone_number, address, city, zip_code);
+
+        this.customerService.updateCustomer(customer); //Opdaterer kunde i databasen via CustomerService
+        return "redirect:/dataregistrering/customers";
+    }
 }
+
 

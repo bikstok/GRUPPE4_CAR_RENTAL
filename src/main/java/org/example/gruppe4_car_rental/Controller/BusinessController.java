@@ -20,9 +20,19 @@ public class BusinessController {
         int rentedCarsCount = this.businessRepo.countRentedCars();
         model.addAttribute("rentedCars", rentedCarsCount);  // Attributnavnet 'rentedCars' bruges til at vise data i HTML-filen
 
+        //Henter antal lejekontrakter i alt
+        int rentedCarsCountOverall = this.businessRepo.countRentedCarsOverall();
+        model.addAttribute("rentedCarsOverall", rentedCarsCountOverall); //Attributnavnet 'rentedCarsOverall' bruges til at vise data i HTML-filen
+
         //Henter de top 5 mest udlejede biler
-        List<Map<String, Object>> topRentedCarBrands = businessRepo.getTopRentedCarBrands(); //List<Map<String, Object>> repræsenterer en liste af rækker fra en database, hvor hver række er gemt som et "nøgle-værdi"-par (Map).
+        List<Map<String, Object>> topRentedCarBrands = this.businessRepo.getTopRentedCarBrands(); //List<Map<String, Object>> repræsenterer en liste af rækker fra en database, hvor hver række er gemt som et "nøgle-værdi"-par (Map).
         model.addAttribute("topRentedCarBrands", topRentedCarBrands);
+
+        //Henter den månedlige indtjening udfra lejekontrakter
+        double monthlyEarnings = businessRepo.calculateMonthlyEarningsJava();
+        model.addAttribute("monthlyEarnings", monthlyEarnings + " DKK");
+
+
 
         return "forretningsudvikler/KPIDashboard";
     }

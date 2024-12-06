@@ -1,4 +1,3 @@
-
 /* Generelle indstillinger */
 body {
     margin: 0;
@@ -27,7 +26,6 @@ header {
     left: 0;
     padding: 9px;
     box-sizing: border-box; /* Inddrag padding i breddeberegning */
-
 }
 
 .sidebar h2 {
@@ -60,6 +58,7 @@ header {
     gap: 17px; /* Afstand mellem billede og tekst */
     transition: color 0.3s ease, transform 0.3s ease; /* Glat overgang for hover-effekt */
 }
+
 .sidebar ul li a:hover {
     color: #abdbe3; /* Skift farve ved hover */
     transform: translateX(5px); /* Flytter teksten lidt mod højre */
@@ -71,6 +70,11 @@ header {
 }
 
 
+.sidebar ul li a .icon {
+    width: 16px; /* Juster størrelsen på ikonet */
+    height: 16px; /* Sørg for, at billedet er kvadratisk */
+}
+
 /* Main content-stil */
 main {
     margin-left: 20%; /* Giver plads til sidebar */
@@ -81,7 +85,7 @@ main {
 }
 
 /* Bokse til KPI-sektioner */
-.kpi, .top-rented-cars {
+.kpi, .top-rented-cars, .monthly-earnings, .antal-lejekontrakter {
     background-color: white; /* Lys baggrund for boksene */
     border: 1px solid #ccc; /* Tynd kant */
     border-radius: 8px; /* Rundede hjørner */
@@ -92,7 +96,15 @@ main {
 }
 
 /* Specifik styling for overskrifter i boksene */
-.kpi h2, .top-rented-cars h2 {
+.kpi h2, .top-rented-cars h2, .monthly-earnings h2, .antal-lejekontrakter h2 {
     font-size: 20px;
     margin-bottom: 10px;
+}
+
+/* Styling for værdier */
+.kpi-value, .contracts-value, .earnings-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333; /* Mørk tekstfarve */
+    margin-top: 10px;
 }

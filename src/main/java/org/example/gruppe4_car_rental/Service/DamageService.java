@@ -15,8 +15,6 @@ import java.util.List;
 @Service
 public class DamageService {
     @Autowired
-    private RentalContractRepo rentalContractRepo;
-    @Autowired
     private DamageRepo damageRepo;
 
     public List<RentalContract> fetchContractsWithPendingInspections() {
@@ -35,7 +33,5 @@ public class DamageService {
         return this.damageRepo.getCarsWithPendingInspectionsForXDays(days);
     }
 
-    public void changeStatusOfCarsToPendingInspection() {
-        this.damageRepo.changeStatusOfCarsToPendingInspection(this.rentalContractRepo.fetchAllRentalContracts());
-    }
+
 }

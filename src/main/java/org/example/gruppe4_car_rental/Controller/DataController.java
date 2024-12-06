@@ -1,6 +1,7 @@
 package org.example.gruppe4_car_rental.Controller;
 
 import org.example.gruppe4_car_rental.Model.Car;
+import org.example.gruppe4_car_rental.Model.Customer;
 import org.example.gruppe4_car_rental.Model.RentalContract;
 import org.example.gruppe4_car_rental.Service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +28,17 @@ public class DataController {
             @RequestParam("cpr_number") String cpr_number,
             @RequestParam("frame_number") String frame_number,
             @RequestParam("start_date") String start_date_string,
-            @RequestParam("end_date") String end_date_string,
+            @RequestParam("end_date") int months,
             @RequestParam(name = "insurance", defaultValue = "false") boolean insurance,
             @RequestParam("max_km") String max_km_string,
             @RequestParam("voucher") String voucher_string,
             Model model) {
+
         try {
             boolean voucher = voucher_string != null && !voucher_string.trim().isEmpty();
             LocalDate local_start_date = LocalDate.parse(start_date_string);
-            LocalDate local_end_date = LocalDate.parse(end_date_string);
-            if (local_end_date.isBefore(local_start_date)) {//rental contract starts after it ends, ???
+            LocalDate local_end_date = local_start_date.plusMonths(months);
+            /*if (local_end_date.isBefore(local_start_date)) {//rental contract starts after it ends, ???
                 String message = "Du kan ikke vælge en slut dato i fortiden.";
                 model.addAttribute("message", message);
                 return "dataregistrering/error";
@@ -44,8 +46,8 @@ public class DataController {
                 String message = "Kontrakten skal være på mindst 3 måneder.";
                 model.addAttribute("message", message);
                 return "dataregistrering/error";
-            } else if (ChronoUnit.YEARS.between(LocalDate.now(), local_start_date) > 100) {//rental contract is over 100 years in the future
-                String message = "Du kan ikke vælge en dato så langt frem i tiden (back to the future)";
+            } else */if (ChronoUnit.WEEKS.between(LocalDate.now(), local_start_date) > 3) {//rental contract is over 100 years in the future
+                String message = "Du kan ikke vælge en dato så langt frem i tiden";
                 model.addAttribute("message", message);
                 return "dataregistrering/error";
             }
@@ -53,11 +55,12 @@ public class DataController {
             Date start_date = Date.valueOf(local_start_date);
             Date end_date = Date.valueOf(local_end_date);
             int max_km = Integer.parseInt(max_km_string);
-            this.dataService.createRentalContract(new RentalContract(-1, cpr_number, frame_number, start_date, end_date, insurance, total_price, max_km, voucher));
+            this.dataService.createRentalContract(new RentalContract(-1, cpr_number, frame_number, start_date, end_date, insurance, total_price, max_km, voucher, this.dataService.getCarFromFrameNumber(frame_number).getOdometer()));
             return "redirect:/dataregistrering/showRentalContracts";
         } catch (Throwable exception) {//basically the cpr number doesn't exist for any customer in the database
             String message = "Du har indtastet et ugyldigt CPR nummer";
             model.addAttribute("message", message);
+            //exception.printStackTrace();
             return "dataregistrering/error";
         }
     }
@@ -89,4 +92,41 @@ public class DataController {
         return "redirect:/dataregistrering/showRentalContracts";
     }
 
+    @GetMapping("/createCarPurchase/{contract_id}")
+    public String createCarPurchase(@PathVariable("contract_id") int contract_id, Model model) {
+        if (!this.dataService.createCarPurchase(contract_id)) {
+            String message = "Denne bil er allerede solgt";
+            model.addAttribute("message", message);
+            return "dataregistrering/error";
+        }
+        return "redirect:/dataregistrering/showRentalContracts";
+    }
+
+   //Henviser til redigeringsformular for en specifik lejekontrakt baseret på contract_id, hvor man indtaster nye værdier.
+   //den tager kundens parametre med over i formularen så man ikke skal indtaste alle informationer.
+   @GetMapping("/editRentalContract/{contract_id}")
+   public String showEditForm(@PathVariable("contract_id") int contract_id, Model model) {
+       RentalContract rentalContract = this.dataService.getRentalContractFromContractId(contract_id);
+       model.addAttribute("rentalContract", rentalContract);
+       return "dataregistrering/editRentalContract";  // Returner Thymeleaf-template for redigering
+   }
+
+    //Håndterer redigeringsformularen og opdaterer i databasen.
+    @PostMapping("/updateRentalContract")
+    public String updateRentalContract(
+            @RequestParam("cpr_number") String cpr_number,
+            @RequestParam("frame_number") String frame_number,
+            @RequestParam("start_date") Date start_date,
+            @RequestParam("end_date") Date end_date,
+            @RequestParam("insurance") String insurance,
+            @RequestParam("total_price") double total_price,
+            @RequestParam("max_km") int max_km,
+            @RequestParam("voucher") boolean voucher) {
+        //System.out.println("update rentalContract method called");
+
+        //Opretter et ny rentalContract-objekt som er en opdateret version af det eksisterende.
+        //RentalContract rentalContract = new RentalContract(cpr_number, frame_number, start_date, end_date, insurance, total_price, max_km, voucher);
+        //this.dataService.updateRentalContract(rentalContract); //Opdaterer lejekontrakt i databasen via dataService
+        return "redirect:/dataregistrering/showRentalContracts";
+    }
 }

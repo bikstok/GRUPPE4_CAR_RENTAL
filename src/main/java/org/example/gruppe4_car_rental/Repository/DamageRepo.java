@@ -97,19 +97,4 @@ public class DamageRepo {
         }
         return results;
     }
-
-    public void changeStatusOfCarsToPendingInspection(List<RentalContract> allRentalContracts) {
-        LocalDate now = LocalDate.now();
-        for (RentalContract rentalContract : allRentalContracts) {
-            if (now.isAfter(rentalContract.getEnd_date().toLocalDate())) {
-                String sql = "SELECT COUNT(*) FROM DamageReport WHERE contract_id = ?";
-                Integer count = jdbcTemplate.queryForObject(sql, new Object[]{rentalContract.getContract_id()}, Integer.class);
-                if (count == null || count <= 0) {//there isn't a damage report
-                    this.jdbcTemplate.update("UPDATE Cars SET car_status = 'Mangler tilsyn' WHERE frame_number = ? AND car_status = 'Lejet';",
-                            rentalContract.getFrame_number()
-                    );
-                }
-            }
-        }
-    }
 }

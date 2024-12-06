@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rediger Kunde</title>
+</head>
+<body>
+<h1>Rediger Kunde</h1>
+<form th:action="@{/updateCustomer}" method="post">
+    <!-- Skjult input for cpr_number for at identificere den valgte kunde -->
+    <input type="hidden" th:name="cpr_number" th:value="${customer.cpr_number}"/>
+
+    <label for="first_name">Fornavn</label>
+    <input type="text" id="first_name" name="first_name" th:value="${customer.first_name}" required/><br>
+
+    <label for="last_name">Efternavn</label>
+    <input type="text" id="last_name" name="last_name" th:value="${customer.last_name}" required/><br>
+
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" th:value="${customer.email}" required/><br>
+
+    <label for="phone_number">Telefonnummer</label>
+    <input type="text" id="phone_number" name="phone_number" th:value="${customer.phone_number}" required/><br>
+
+    <label for="address">Addresse</label>
+    <input type="text" id="address" name="address" th:value="${customer.address}" required/><br>
+
+    <label for="city">By</label>
+    <input type="text" id="city" name="city" th:value="${customer.city}" required/><br>
+
+    <label for="zip_code">Postnummer</label>
+    <input type="text" id="zip_code" name="zip_code" th:value="${customer.zip_code}" required/><br>
+
+    <button type="submit">Opdater Kunde</button>
+</form>
+</body>
+</html>

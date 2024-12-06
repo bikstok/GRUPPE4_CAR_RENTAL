@@ -15,13 +15,7 @@ public class CarController {
     @Autowired
     private CarService carService;
 
-    //@GetMapping("dataregistrering/cars")
-    //public String fetchAllCars(Model model) {
-    //       List<Car> cars = this.carService.fetchAllCars(); // Få fat i alle biler
-    //       model.addAttribute("cars", cars); // Tilføj biler til Model
-    //       return "dataregistrering/cars"; // Returnerer view (Thymeleaf template)
-    //}
-
+    //Håndterer forespørgsler til visning af biler med sorteringsmuligheder.
     @GetMapping("/dataregistrering/cars")
     public String showAllCars(
             @RequestParam(value = "previousSortBy", required = false) String previousSortBy,
@@ -31,31 +25,37 @@ public class CarController {
         //System.out.println("show all cars called with sortby " + sortBy);
         //System.out.println("existing attribute is " + previousSortBy);
 
+        /*Hvis brugeren klikker på samme kolonne igen, ændres sorteringsrækkefølgen til DESC (omvendt).
+        Første klik på en kolonne sorterer stigende (ASC).
+        Andet klik på samme kolonne sorterer faldende (DESC).*/
         if (sortBy != null && sortBy.equals(previousSortBy)) {
             sortBy += " DESC";
         } else {
             model.addAttribute("sortBy", sortBy);
         }
-        //henter liste af sorterede biler
+        //Henter listen af biler baseret på den valgte sortering.
         List<Car> cars = this.carService.fetchAllCars(sortBy);
         model.addAttribute("cars", cars);
         return "dataregistrering/cars";
     }
 
+    //Sletter en bil fra databasen baseret på frame_number.
     @GetMapping("/deleteCar/{frame_number}")
     public String deleteCar(@PathVariable("frame_number") String frame_number) {
         this.carService.deleteCar(frame_number);
         return "redirect:/dataregistrering/cars";
     }
 
+    //Henviser til redigeringsformular for en specifik bil baseret på frame_number, hvor man indtaster nye værdier.
+    //den tager bilens parametre med over i formularen så man ikke skal indtaste alle informationer.
     @GetMapping("/editCar/{frame_number}")
     public String showEditForm(@PathVariable("frame_number") String frame_number, Model model) {
-        Car car = this.carService.findByFrameNumber(frame_number);  // Henter bil fra CarService
-        model.addAttribute("car", car);
-        return "dataregistrering/editCar";  // Returner Thymeleaf-template for redigering
+        Car car = this.carService.findByFrameNumber(frame_number);  //Henter bil fra CarService
+        model.addAttribute("car", car); //Sender bilens data til Thymeleaf-formularen.
+        return "dataregistrering/editCar";
     }
 
-    // håndterer redigeringsformularen og opdaterer i databasen.
+    //Håndterer redigeringsformularen og opdaterer i databasen.
     @PostMapping("/updateCar")
     public String updateCar(
             @RequestParam("frame_number") String frame_number,
@@ -70,10 +70,11 @@ public class CarController {
             @RequestParam("original_price") double original_price) {
         //System.out.println("update car method called");
 
+        //Opretter et ny Car-objekt som er en opdateret version af det eksisterende.
         Car car = new Car(frame_number, model, brand, car_status, fuel_type, gear_type, year_produced, monthly_sub_price, odometer, original_price);
 
-        this.carService.updateCar(car);  // Opdater bil i databasen via CarService
-        return "redirect:/dataregistrering/cars";  // Omidiger til biloversigt
+        this.carService.updateCar(car);  // Opdaterer bil i databasen via CarService
+        return "redirect:/dataregistrering/cars";  // Omidigerer til biloversigt
     }
 }
 

@@ -22,10 +22,8 @@ public class DamageController {
 
     @GetMapping("skade_og_udbedring/damageFrontPage")
     public String fetchContractsWithPendingInspections(Model model) {
-        this.damageService.changeStatusOfCarsToPendingInspection();
         int days = 2;
         List<Car> carsWithPendingInspections = this.damageService.getCarsWithPendingInspectionsForXDays(days);
-        System.out.println("cars that have pending for inspection for 2 days: " + carsWithPendingInspections);
         if (!carsWithPendingInspections.isEmpty()) {
             String dage = days > 1 ? "dage" : "dag";
             int antalBiler = carsWithPendingInspections.size();

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rediger Lejekontrakt</title>
+</head>
+<body>
+<h1>Rediger Lejekontrakt</h1>
+<form th:action="@{/updateRentalContract}" method="post">
+    <!-- Hidden input for contract_id to identify the car -->
+    <input type="hidden" th:name="contract_id" th:value="${rentalContract.contract_id}"/>
+
+    <label for="cpr_number">Cpr nummer</label>
+    <input type="text" id="cpr_number" name="cpr_number" th:value="${rentalContract.cpr_number}" required/><br>
+
+    <label for="frame_number">frame_number</label>
+    <input type="text" id="frame_number" name="frame_number" th:value="${rentalContract.frame_number}" required/><br>
+
+    <label for="start_date">Start dato</label>
+    <input type="date" id="start_date" name="start_date" th:value="${rentalContract.start_date}" required/><br>
+
+    <label for="end_date">Slut dato</label>
+    <input type="date" id="end_date" name="end_date" th:value="${rentalContract.end_date}" required/><br>
+
+    <label for="insurance">Forsikring</label>
+    <input type="text" id="insurance" name="insurance" th:value="${rentalContract.insurance}" required/><br>
+
+    <label for="total_price">Total pris</label>
+    <input type="double" step="0.01" id="total_price" name="total_price" th:value="${rentalContract.total_price}" required/><br>
+
+    <label for="max_km">Max kilometer</label>
+    <input type="number" id="max_km" name="max_km" th:value="${rentalContract.max_km}" required/><br>
+
+    <label for="voucher">Voucher</label>
+    <input type="text" id="voucher" name="voucher" th:value="${rentalContract.voucher}" required/><br>
+
+    <button type="submit">Opdater Lejekontrakt</button>
+</form>
+</body>
+</html>

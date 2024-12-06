@@ -6,26 +6,32 @@
     <title>KPI Dashboard</title>
     <link rel="stylesheet" href="/forretningsudvikler/KPIDashboardfrontpage.css">
 </head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 <body>
 <header>
     <h1>KPI Dashboard</h1>
 </header>
 
 <div class="sidebar">
-    <!-- Contentbaren til venstre -->
+    <!-- Sidebar indhold -->
     <h2>Bilabonnement A/S</h2>
     <ul>
         <li><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="/forretningsudvikler/BilopkobOversigt"><i class="fas fa-car"></i> Bilopkøb - Oversigt</a></li>
+        <!-- Andre links kan tilføjes her -->
     </ul>
 </div>
 
 <main>
-    <section class="kpi">
-        <h2>Antal udlejede biler lige nu</h2>
-        <!-- Viser antallet af udlejede biler -->
+    <section class="aktive udlejninger">
+        <h2>Aktive lejekontrakter</h2>
+        <!-- Viser antallet af udlejede biler lige nu -->
         <div class="kpi-value" th:text="${rentedCars}">0</div>
+    </section>
+
+    <section class="antal lejekontrakter">
+        <h2>Antal lejekontrakter</h2>
+        <!-- viser antallet af lejekontrakter i alt -->
+        <div class="antal-lejekontrakter" th:text="${rentedCarsOverall}">0</div>
     </section>
 
     <section class="top-rented-cars">
@@ -38,13 +44,19 @@
             </tr>
             </thead>
             <tbody>
-            <!-- Iterér over listen af Map -->
+            <!-- Iterér over listen af biler -->
             <tr th:each="car : ${topRentedCarBrands}">
-                <td th:text="${car['brand']}">Brand</td> <!-- Brand -->
-                <td th:text="${car['rental_count']}">0</td> <!-- Antal udlejninger -->
+                <td th:text="${car['brand']}">Brand</td>
+                <td th:text="${car['rental_count']}">0</td>
             </tr>
             </tbody>
         </table>
+    </section>
+
+    <section class="monthly-earnings">
+        <h2>Månedlig Indtjening for denne måned</h2>
+        <!-- Viser den månedlige indtjening -->
+        <div class="earnings-value" th:text="${monthlyEarnings}"></div>
     </section>
 </main>
 
