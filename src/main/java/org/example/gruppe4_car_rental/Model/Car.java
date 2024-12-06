@@ -10,16 +10,14 @@ public class Car {
     private int year_produced;
     private double monthly_sub_price;
     private int odometer;
-    private double original_price
-        ;
+    private double original_price;
 
-    public Car(){
-
+    public Car() {
     }
 
     public Car(String frame_number, String brand, String model, String car_status, String fuel_type, String gear_type, int year_produced, double monthly_sub_price, int odometer, double original_price) {
         this.frame_number = frame_number;
-        this.brand =brand;
+        this.brand = brand;
         this.model = model;
         this.car_status = car_status;
         this.fuel_type = fuel_type;

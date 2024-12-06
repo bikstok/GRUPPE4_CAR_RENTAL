@@ -4,7 +4,6 @@ import org.example.gruppe4_car_rental.Model.Car;
 import org.example.gruppe4_car_rental.Model.DamageReport;
 import org.example.gruppe4_car_rental.Model.DamageType;
 import org.example.gruppe4_car_rental.Model.RentalContract;
-import org.example.gruppe4_car_rental.Repository.DamageRepo;
 import org.example.gruppe4_car_rental.Service.DamageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,13 +22,27 @@ public class DamageController {
 
     @GetMapping("skade_og_udbedring/damageFrontPage")
     public String fetchContractsWithPendingInspections(Model model) {
-
         this.damageService.changeStatusOfCarsToPendingInspection();
-        List<Car> bruh = this.damageService.getCarsWithPendingInspectionsForXDays(2);
-        System.out.println("cars that have pending for inspection for 2 days: " + bruh);
-
-
-
+        int days = 2;
+        List<Car> carsWithPendingInspections = this.damageService.getCarsWithPendingInspectionsForXDays(days);
+        System.out.println("cars that have pending for inspection for 2 days: " + carsWithPendingInspections);
+        if (!carsWithPendingInspections.isEmpty()) {
+            String dage = days > 1 ? "dage" : "dag";
+            int antalBiler = carsWithPendingInspections.size();
+            String biler = antalBiler > 1 ? "biler" : "bil";
+            String message = "Der er " + antalBiler + " " + biler + " der har overskrevet tidsgrænsen på " + days + " " + dage + " og mangler en skadereport: ";
+            boolean first = true;
+            for (Car car : carsWithPendingInspections) {
+                if (!first) {
+                    message += ", " + car.getFrame_number();
+                } else {
+                    message += car.getFrame_number();
+                    first = false;
+                }
+            }
+            model.addAttribute("notification_title", "Notifikation om statusændringer");
+            model.addAttribute("notification", message);
+        }
         List<RentalContract> rentalContracts = this.damageService.fetchContractsWithPendingInspections();
         model.addAttribute("rentalContracts", rentalContracts);
         return "skade_og_udbedring/damageFrontPage";
@@ -39,9 +51,9 @@ public class DamageController {
     @GetMapping("/createDamageReport/{contract_id}")
     public String redirectToDamageReportForm(@PathVariable("contract_id") String contract_id, Model model) {
         model.addAttribute("contract_id", contract_id);
-           List<DamageType> damageTypes = this.damageService.fetchAllDamageTypes();
-           model.addAttribute("damageTypes", damageTypes);
-           return "skade_og_udbedring/createDamageReport";
+        List<DamageType> damageTypes = this.damageService.fetchAllDamageTypes();
+        model.addAttribute("damageTypes", damageTypes);
+        return "skade_og_udbedring/createDamageReport";
     }
 
     @PostMapping("/skade_og_udbedring/createDamageReport")
@@ -50,10 +62,10 @@ public class DamageController {
             @RequestParam("damage_prices") List<Double> damage_prices,
             Model model) {
 
-            double total_repair_price = 0.0;
-            for (double damage_price : damage_prices) {
-                total_repair_price += damage_price;
-            }
+        double total_repair_price = 0.0;
+        for (double damage_price : damage_prices) {
+            total_repair_price += damage_price;
+        }
 
         this.damageService.createDamageReport(new DamageReport(-1, contract_id, total_repair_price));
 

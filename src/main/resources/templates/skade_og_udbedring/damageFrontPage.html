@@ -4,35 +4,46 @@
     <title>Skade og registrering forside</title>
 </head>
 <body>
-<h1>Alle biler</h1>
-<table border="1">
-    <thead>
-    <tr>
-        <th>Kontrakt ID</th>
-        <th>CPR Nummer</th>
-        <th>Stel nummer</th>
-        <th>Start dato</th>
-        <th>Slut dato</th>
-        <th>Forsikring</th>
-        <th>Opret skaderapport</th>
-
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="rentalContract : ${rentalContracts}">
-        <td th:text="${rentalContract.contract_id}"></td>
-        <td th:text="${rentalContract.cpr_number}"></td>
-        <td th:text="${rentalContract.frame_number}"></td>
-        <td th:text="${rentalContract.start_date}"></td>
-        <td th:text="${rentalContract.end_date}"></td>
-        <td th:text="${rentalContract.insurance}"></td>
+<table border="0" width="100%">
+    <tr valign="top">
         <td>
-            <a th:href="@{'/createDamageReport/'+${rentalContract.contract_id}}">
-                <button >Opret skaderapport</button>
-            </a>
+            <!-- Left Content -->
+            <h1>Alle biler</h1>
+            <table border="1" width="100%">
+                <thead>
+                <tr>
+                    <th>Kontrakt ID</th>
+                    <th>CPR Nummer</th>
+                    <th>Stel nummer</th>
+                    <th>Start dato</th>
+                    <th>Slut dato</th>
+                    <th>Forsikring</th>
+                    <th>Opret skaderapport</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="rentalContract : ${rentalContracts}">
+                    <td th:text="${rentalContract.contract_id}"></td>
+                    <td th:text="${rentalContract.cpr_number}"></td>
+                    <td th:text="${rentalContract.frame_number}"></td>
+                    <td th:text="${rentalContract.start_date}"></td>
+                    <td th:text="${rentalContract.end_date}"></td>
+                    <td th:text="${rentalContract.insurance}"></td>
+                    <td>
+                        <a th:href="@{'/createDamageReport/'+${rentalContract.contract_id}}">
+                            <button>Opret skaderapport</button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+        <td width="37.5%">
+            <!-- Right Content -->
+            <h3 class="error" th:if="${notification_title}" th:text="${notification_title}" style="color: red;"></h3>
+            <p class="error" th:if="${notification}" th:text="${notification}" style="color: red;"></p>
         </td>
     </tr>
-    </tbody>
 </table>
 </body>
 </html>

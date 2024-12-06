@@ -22,7 +22,7 @@ public class DataRepo {
 
     public List<Car> fetchAllAvailableCars() {
         String sql = "SELECT Cars.frame_number, Cars.model, Cars.car_status, Cars.fuel_type, Cars.gear_type, " +
-                "Cars.year_produced, Cars.monthly_sub_price, Cars.odometer, Cars.orignal_price, CarModels.brand " +
+                "Cars.year_produced, Cars.monthly_sub_price, Cars.odometer, Cars.original_price, CarModels.brand " +
                 "FROM Cars " +
                 "JOIN CarModels ON Cars.model = CarModels.model " +
                 "WHERE Cars.car_status = 'Ledig'";
