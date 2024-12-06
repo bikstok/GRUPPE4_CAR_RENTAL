@@ -1,78 +1,98 @@
+
+/* Generelle indstillinger */
 body {
     margin: 0;
-    padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #f5f5fa; /* Lysegrå baggrund */
+    background-color: #f9f9f9; /* Baggrund for hele siden */
 }
 
+/* Header-stil */
 header {
-    width: 100%;
-    height: 60px;
-    background-color: #ffffff; /* Hvid header */
+    background-color: white; /* Grøn-hvid farve */
+    color: black; /* Ændret fra hvid til sort for synlighed */
+    padding: 8px; /* Størrelse af kant */
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tilføjer en skygge */
+}
+
+/* Sidebar-stil */
+.sidebar {
+    background-color: white; /* Baggrundsfarve */
+    width: 17%; /* Sidebar bredde */
+    height: 100vh; /* Fylder hele højden */
+    position: fixed; /* Holder den til venstre */
+    top: 0;
+    left: 0;
+    padding: 9px;
+    box-sizing: border-box; /* Inddrag padding i breddeberegning */
+
+}
+
+.sidebar h2 {
+    font-size: 16px; /* Gør teksten lidt større */
+    font-weight: bold;
+    margin-bottom: 20px; /* Giver lidt afstand til resten af indholdet */
+    text-align: left; /* Centrer teksten i sidebar til venstre */
+    padding-left: 10px; /* Tilføjer lidt afstand til venstre kant */
+    color: black; /* Sørg for, at teksten er tydelig */
+}
+
+.sidebar ul {
+    margin-top: 40px; /* Giver afstand mellem overskriften og listen */
+    padding: 0; /* Fjerner eventuelle standardindrykninger */
+    list-style-type: none; /* Fjerner standardliste-styling */
+    padding-left: 18px;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px; /* Tilføjer lidt afstand mellem listeelementer */
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: darkgrey;
+    font-size: 14px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lidt skygge */
-    position: fixed; /* Fast position */
-    top: 0;
-    z-index: 10;
+    gap: 17px; /* Afstand mellem billede og tekst */
+    transition: color 0.3s ease, transform 0.3s ease; /* Glat overgang for hover-effekt */
+}
+.sidebar ul li a:hover {
+    color: #abdbe3; /* Skift farve ved hover */
+    transform: translateX(5px); /* Flytter teksten lidt mod højre */
 }
 
-header h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #333;
+.sidebar ul li a .icon {
+    width: 16px; /* Juster størrelsen på ikonet */
+    height: 16px; /* Sørg for, at billedet er kvadratisk */
 }
 
-.sidebar {
-    width: 250px; /* Fast bredde til sidebar */
-    height: 100vh; /* Fylder hele højden af skærmen */
-    background-color: #ffffff; /* Hvid sidebar */
-    position: fixed; /* Fast position */
-    top: 60px; /* Lige under headeren */
-    left: 0;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Lidt skygge */
-}
 
+/* Main content-stil */
 main {
-    margin-left: 250px; /* Gør plads til sidebar */
-    margin-top: 60px; /* Gør plads til header */
+    margin-left: 20%; /* Giver plads til sidebar */
     padding: 20px;
+    display: flex;
+    flex-wrap: wrap; /* Tillader flere bokse på små skærme */
+    gap: 20px; /* Afstand mellem bokse */
 }
 
+/* Bokse til KPI-sektioner */
 .kpi, .top-rented-cars {
-    background-color: #ffffff; /* Hvid baggrund for sektionerne */
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lidt skygge */
+    background-color: white; /* Lys baggrund for boksene */
+    border: 1px solid #ccc; /* Tynd kant */
+    border-radius: 8px; /* Rundede hjørner */
+    padding: 15px;
+    flex: 1 1 calc(50% - 20px); /* Hver boks fylder halvdelen af bredden */
+    box-sizing: border-box;
+    text-align: center; /* Center-justerer tekst */
 }
 
+/* Specifik styling for overskrifter i boksene */
 .kpi h2, .top-rented-cars h2 {
-    margin-top: 0;
-    color: #333;
+    font-size: 20px;
+    margin-bottom: 10px;
 }
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-table th, table td {
-    text-align: left;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-table th {
-    background-color: #f0f0f0; /* Lysegrå baggrund til tabeloverskrifter */
-    color: #333;
-}
-
-table tbody tr:hover {
-    background-color: #f9f9f9; /* Lys farve ved hover */
-}
-
-
-

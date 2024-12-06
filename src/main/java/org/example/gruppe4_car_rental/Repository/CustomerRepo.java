@@ -1,6 +1,7 @@
 package org.example.gruppe4_car_rental.Repository;
 
 import org.example.gruppe4_car_rental.Model.Customer;
+import org.example.gruppe4_car_rental.RowMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -21,18 +22,8 @@ public class CustomerRepo {
                 "FROM Customers " +
                 "JOIN ZipCodes ON Customers.zip_code = ZipCodes.zip_code";
         //String sql = "SELECT * FROM Cars"; // SQL query to fetch all cars
-        RowMapper<Customer> rowMapper = (rs, rowNum) -> new Customer(
-                rs.getString("cpr_number"),
-                rs.getString("first_name"),
-                rs.getString("last_name"),
-                rs.getString("email"),
-                rs.getString("phone_number"),
-                rs.getString("address"),
-                rs.getString("city"),
-                rs.getString("zip_code")
 
-        );
-        return jdbcTemplate.query(sql, rowMapper); // udfører query og mapper resultatet som objekter i en liste/table
+        return jdbcTemplate.query(sql, RowMapperUtil.CUSTOMER_ROW_MAPPER); // udfører query og mapper resultatet som objekter i en liste/table
     }
 
     // Fetch all customers with sortBy functionality using if-else
@@ -58,7 +49,6 @@ public class CustomerRepo {
                 rs.getString("address"),
                 rs.getString("city"),
                 rs.getString("zip_code")
-
         );
 
         return jdbcTemplate.query(sql, rowMapper);

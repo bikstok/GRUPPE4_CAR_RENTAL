@@ -8,18 +8,16 @@
 <table border="1">
     <thead>
     <tr>
-        <th>Stelnummer</th>
-        <th>Brand</th>
-        <th>Model</th>
-        <th>Bil status</th>
-        <th>Brændstofstype</th>
-        <th>Gear type</th>
-        <th>Produktionsår</th>
-        <th>Odometer</th>
-        <th>Original pris</th>
-        <th>Slet oplysninger</th>
-        <th>Rediger oplysninger</th>
-
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.frame_number&previousSortBy=' + ${sortBy}}">Stelnummer</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=m.brand&previousSortBy=' + ${sortBy}}">Brand</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.model&previousSortBy=' + ${sortBy}}">Model</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.car_status&previousSortBy=' + ${sortBy}}">Bil status</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.fuel_type&previousSortBy=' + ${sortBy}}">Brændstofstype</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.gear_type&previousSortBy=' + ${sortBy}}">Gear type</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.year_produced&previousSortBy=' + ${sortBy}}">Produktionsår</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.monthly_sub_price&previousSortBy=' + ${sortBy}}">Månedlig abonnementspris</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.odometer&previousSortBy=' + ${sortBy}}">Odometer</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.original_price&previousSortBy=' + ${sortBy}}">Original pris</a></th>
     </tr>
     </thead>
     <tbody>
@@ -31,15 +29,19 @@
         <td th:text="${car.fuel_type}"></td>
         <td th:text="${car.gear_type}"></td>
         <td th:text="${car.year_produced}"></td>
+        <td th:text="${car.monthly_sub_price}"></td>
         <td th:text="${car.odometer}"></td>
-        <td th:text="${car.orignal_price}"></td>
+        <td th:text="${car.original_price}"></td>
         <td>
             <!-- Slet knap udfra bilens framenumber  -->
                 <a th:href="@{'/deleteCar/'+${car.frame_number}}">
                     <button >Slet bil</button>
                 </a>
-        </td>
 
+                <a th:href="@{'/editCar/' + ${car.frame_number}}">
+                <button>Rediger bil</button>
+                </a>
+        </td>
     </tr>
     </tbody>
 </table>

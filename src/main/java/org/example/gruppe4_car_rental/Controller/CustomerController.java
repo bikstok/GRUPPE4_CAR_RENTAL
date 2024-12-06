@@ -38,8 +38,8 @@ public class CustomerController {
             @RequestParam(value = "sortBy", required = false) String sortBy,
                                    Model model) {
 
-        System.out.println("show all customers called with sortby " + sortBy);
-        System.out.println("existing attribute is " + previousSortBy);
+        //System.out.println("show all customers called with sortby " + sortBy);
+        //System.out.println("existing attribute is " + previousSortBy);
 
        /*vi tilføjer previousSortBy for at kunne holde fast i når en overskrift er blevet klikket på.
         sortBy = ASC order

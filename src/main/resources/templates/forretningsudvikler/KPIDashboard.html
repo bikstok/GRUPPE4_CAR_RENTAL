@@ -6,6 +6,8 @@
     <title>KPI Dashboard</title>
     <link rel="stylesheet" href="/forretningsudvikler/KPIDashboardfrontpage.css">
 </head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <body>
 <header>
     <h1>KPI Dashboard</h1>
@@ -13,6 +15,10 @@
 
 <div class="sidebar">
     <!-- Contentbaren til venstre -->
+    <h2>Bilabonnement A/S</h2>
+    <ul>
+        <li><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
+    </ul>
 </div>
 
 <main>
@@ -37,4 +43,10 @@
                 <td th:text="${car['brand']}">Brand</td> <!-- Brand -->
                 <td th:text="${car['rental_count']}">0</td> <!-- Antal udlejninger -->
             </tr>
-            </tbody
+            </tbody>
+        </table>
+    </section>
+</main>
+
+</body>
+</html>

@@ -23,7 +23,6 @@ public class CustomerService {
         return customerRepo.fetchAllCustomers();
     }
 
-
     // Metode til at hente alle kunder og sortere efter den angivne 'sortBy'
     public List<Customer> fetchAllCustomers(String sortBy) {
         return customerRepo.fetchAllCustomers(sortBy);

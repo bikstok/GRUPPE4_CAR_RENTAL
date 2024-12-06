@@ -24,6 +24,13 @@ public class DamageController {
 
     @GetMapping("skade_og_udbedring/damageFrontPage")
     public String fetchContractsWithPendingInspections(Model model) {
+
+        this.damageService.changeStatusOfCarsToPendingInspection();
+        List<Car> bruh = this.damageService.getCarsWithPendingInspectionsForXDays(2);
+        System.out.println("cars that have pending for inspection for 2 days: " + bruh);
+
+
+
         List<RentalContract> rentalContracts = this.damageService.fetchContractsWithPendingInspections();
         model.addAttribute("rentalContracts", rentalContracts);
         return "skade_og_udbedring/damageFrontPage";

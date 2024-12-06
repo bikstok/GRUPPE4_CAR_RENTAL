@@ -2,6 +2,7 @@ package org.example.gruppe4_car_rental.Service;
 
 import org.example.gruppe4_car_rental.Model.Car;
 import org.example.gruppe4_car_rental.Model.RentalContract;
+import org.example.gruppe4_car_rental.Repository.DataRepo;
 import org.example.gruppe4_car_rental.Repository.RentalContractRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,12 +12,14 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
-public class RentalContractService {
+public class DataService {
     @Autowired
     private RentalContractRepo rentalContractRepo;
+    @Autowired
+    private DataRepo dataRepo;
 
     public double getTotalPrice(String frame_number, LocalDate start_date, LocalDate end_date) {
-        double monthly_sub_price = this.rentalContractRepo.getMonthlySubscriptionPriceFromFrameNumber(frame_number);
+        double monthly_sub_price = this.dataRepo.getMonthlySubscriptionPriceFromFrameNumber(frame_number);
         long monthsBetween = ChronoUnit.MONTHS.between(start_date, end_date);
         //rounds up incase its less than a month or whatever
         if (start_date.plusMonths(monthsBetween).isBefore(end_date)) {
@@ -38,7 +41,7 @@ public class RentalContractService {
     }
 
     public List<Car> fetchAllAvailableCars() {
-        return this.rentalContractRepo.fetchAllAvailableCars();
+        return this.dataRepo.fetchAllAvailableCars();
     }
 
     public boolean deleteRentalContract(int contract_id) {

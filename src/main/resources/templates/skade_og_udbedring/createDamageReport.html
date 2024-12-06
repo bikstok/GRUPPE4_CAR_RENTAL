@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Damage Selection</title>
+</head>
+<body>
+<main>
+    <form action="/skade_og_udbedring/createDamageReport" method="post">
+        <input type="hidden" name="contract_id" th:value="${contract_id}">
+        <table>
+            <thead>
+            <tr>
+                <th>Damage Name</th>
+                <th>Damage Price</th>
+                <th>Select</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Example of rendering dynamic data -->
+            <tr th:each="damageType : ${damageTypes}">
+                <td th:text="${damageType.damage_name}">Damage Name</td>
+                <td th:text="${damageType.damage_price}">Damage Price</td>
+                <td>
+                    <input type="checkbox" name="damage_prices" th:value="${damageType.damage_price}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit">Submit</button>
+    </form>
+</main>
+</body>
+</html>

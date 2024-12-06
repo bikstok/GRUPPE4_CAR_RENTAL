@@ -1,13 +1,17 @@
 package org.example.gruppe4_car_rental.Repository;
 
+import org.example.gruppe4_car_rental.Model.Car;
 import org.example.gruppe4_car_rental.Model.DamageReport;
 import org.example.gruppe4_car_rental.Model.DamageType;
 import org.example.gruppe4_car_rental.Model.RentalContract;
+import org.example.gruppe4_car_rental.RowMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -35,18 +39,7 @@ public class DamageRepo {
                 "WHERE " +
                 "    c.car_status = 'Mangler tilsyn';";
 
-        RowMapper<RentalContract> rowMapper = (rs, rowNum) -> new RentalContract(
-                rs.getInt("contract_id"),
-                rs.getString("cpr_number"),
-                rs.getString("frame_number"),
-                rs.getDate("start_date"),
-                rs.getDate("end_date"),
-                rs.getBoolean("insurance"),
-                rs.getDouble("total_price"),
-                rs.getInt("max_km"),
-                rs.getBoolean("voucher")
-        );
-        return jdbcTemplate.query(sql, rowMapper);
+        return jdbcTemplate.query(sql, RowMapperUtil.RENTAL_CONTRACT_ROW_MAPPER);
     }
 
     public List<DamageType> fetchAllDamageTypes() {
@@ -59,10 +52,64 @@ public class DamageRepo {
     }
 
     public void createDamageReport(DamageReport damageReport) {
+        String frameNumber = this.jdbcTemplate.queryForObject(
+                "SELECT frame_number FROM RentalContract WHERE contract_id = ?",
+                String.class,
+                damageReport.getContract_id()
+        );
+
+        String status = damageReport.getTotal_repair_price() > 0 ? "Skadet" : "Ledig";
+        this.jdbcTemplate.update(
+                "UPDATE Cars SET car_status = '" + status + "' WHERE frame_number = ?",
+                frameNumber
+        );
+
         String sql = "INSERT INTO DamageReport (contract_id, total_repair_price) VALUES (?, ?)";
         this.jdbcTemplate.update(sql,
                 damageReport.getContract_id(),
                 damageReport.getTotal_repair_price()
         );
+    }
+
+    public List<Car> getCarsWithPendingInspectionsForXDays(int days) {
+        List<Car> results = new ArrayList<>();
+        List<Car> carsWithPendingInspection = this.jdbcTemplate.query(
+                "SELECT c.frame_number, c.model, cm.brand, c.car_status, c.fuel_type, c.gear_type, c.year_produced, c.monthly_sub_price, c.odometer, c.original_price " +
+                        "FROM Cars c " +
+                        "JOIN CarModels cm ON c.model = cm.model " +
+                        "WHERE c.car_status = 'Mangler tilsyn'",
+                RowMapperUtil.CAR_ROW_MAPPER
+        );
+        for (Car car : carsWithPendingInspection) {
+            String fetchContractsSql = "SELECT * FROM RentalContract WHERE frame_number = ? ORDER BY end_date DESC";
+            List<RentalContract> rentalContracts = jdbcTemplate.query(
+                    fetchContractsSql,
+                    new Object[]{car.getFrame_number()},
+                    RowMapperUtil.RENTAL_CONTRACT_ROW_MAPPER
+            );
+            if (!rentalContracts.isEmpty()) {
+                RentalContract latestContract = rentalContracts.get(0);
+                LocalDate endDate = latestContract.getEnd_date().toLocalDate();
+                if (endDate.isBefore(LocalDate.now().minusDays(days))) {
+                    results.add(car);
+                }
+            }
+        }
+        return results;
+    }
+
+    public void changeStatusOfCarsToPendingInspection(List<RentalContract> allRentalContracts) {
+        LocalDate now = LocalDate.now();
+        for (RentalContract rentalContract : allRentalContracts) {
+            if (now.isAfter(rentalContract.getEnd_date().toLocalDate())) {
+                String sql = "SELECT COUNT(*) FROM DamageReport WHERE contract_id = ?";
+                Integer count = jdbcTemplate.queryForObject(sql, new Object[]{rentalContract.getContract_id()}, Integer.class);
+                if (count == null || count <= 0) {//there isn't a damage report
+                    this.jdbcTemplate.update("UPDATE Cars SET car_status = 'Mangler tilsyn' WHERE frame_number = ? AND car_status = 'Lejet';",
+                            rentalContract.getFrame_number()
+                    );
+                }
+            }
+        }
     }
 }
