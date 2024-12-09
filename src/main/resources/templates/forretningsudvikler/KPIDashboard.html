@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KPI Dashboard</title>
     <link rel="stylesheet" href="/forretningsudvikler/KPIDashboardfrontpage.css">
+    <link rel="stylesheet" href="/forretningsudvikler/BilopkobOversigt.css">
+
 </head>
 <body>
 <header>
@@ -20,20 +22,20 @@
         <!-- Andre links kan tilføjes her -->
     </ul>
 </div>
-
 <main>
-    <section class="aktive udlejninger">
-        <h2>Aktive lejekontrakter</h2>
-        <!-- Viser antallet af udlejede biler lige nu -->
+    <!-- Aktive udlejninger -->
+    <section class="kpi">
+        <h2>Aktive Lejekontrakter</h2>
         <div class="kpi-value" th:text="${rentedCars}">0</div>
     </section>
 
-    <section class="antal lejekontrakter">
-        <h2>Antal lejekontrakter</h2>
-        <!-- viser antallet af lejekontrakter i alt -->
-        <div class="antal-lejekontrakter" th:text="${rentedCarsOverall}">0</div>
+    <!-- Antal lejekontrakter -->
+    <section class="kpi">
+        <h2>Antal Lejekontrakter</h2>
+        <div class="kpi-value" th:text="${rentedCarsOverall}">0</div>
     </section>
 
+    <!-- Top 5 Mest Udlejede Biler -->
     <section class="top-rented-cars">
         <h2>Top 5 Mest Udlejede Biler (All Time)</h2>
         <table>
@@ -44,7 +46,7 @@
             </tr>
             </thead>
             <tbody>
-            <!-- Iterér over listen af biler -->
+            <!-- Iterér over topRentedCarBrands -->
             <tr th:each="car : ${topRentedCarBrands}">
                 <td th:text="${car['brand']}">Brand</td>
                 <td th:text="${car['rental_count']}">0</td>
@@ -53,12 +55,19 @@
         </table>
     </section>
 
+    <!-- Månedlig Indtjening -->
     <section class="monthly-earnings">
-        <h2>Månedlig Indtjening for denne måned</h2>
-        <!-- Viser den månedlige indtjening -->
-        <div class="earnings-value" th:text="${monthlyEarnings}"></div>
+        <h2>Månedlig Indtjening (Denne Måned)</h2>
+        <div class="earnings-value" th:text="${monthlyEarnings}">0 DKK</div>
+    </section>
+
+    <!-- Returnerede Biler -->
+    <section class="returned-cars">
+        <h2>Returnerede Biler</h2>
+        <form action="/forretningsudvikler/returnedCars" method="get">
+            <label for="end_date">Vælg en dato:</label>
+            <input type="date" id="end_date" name="endDate" required>
+            <button type="submit">Vis Returnerede Biler</button>
+        </form>
     </section>
 </main>
-
-</body>
-</html>

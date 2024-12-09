@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Returnerede Biler</title>
+</head>
+<body>
+<h1>Biler der afleveres den valgte dag</h1>
+
+<!-- Hvis der er returnerede biler, vis antallet -->
+<p th:if="${not #lists.isEmpty(returnedCars)}">
+    Der er <span th:text="${returnedCars.size()}"></span> biler, der afleveres den valgte dag.
+</p>
+
+<!-- Hvis ingen biler er returneret, vis en besked -->
+<p th:if="${#lists.isEmpty(returnedCars)}">
+    Ingen biler afleveres denne dag.
+</p>
+
+<!-- Vis en liste af biler -->
+<ul>
+    <li th:each="car : ${returnedCars}">
+        <span th:text="${car.frame_number}"></span>
+    </li>
+</ul>
+
+</body>
+</html>

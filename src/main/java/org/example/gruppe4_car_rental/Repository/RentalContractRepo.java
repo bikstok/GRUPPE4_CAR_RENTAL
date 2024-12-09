@@ -1,5 +1,6 @@
 package org.example.gruppe4_car_rental.Repository;
 
+import org.example.gruppe4_car_rental.Model.CarPurchase;
 import org.example.gruppe4_car_rental.Model.Customer;
 import org.example.gruppe4_car_rental.Model.RentalContract;
 import org.example.gruppe4_car_rental.RowMapperUtil;
@@ -27,6 +28,11 @@ public class RentalContractRepo {
                 rentalContract.getVoucher(),
                 rentalContract.getStart_odometer()
         );
+    }
+
+    public List<CarPurchase> fetchAllCarPurchases() {
+        String sql = "SELECT car_purchase_id, contract_id, purchase_price FROM CarPurchase";
+        return this.jdbcTemplate.query(sql, RowMapperUtil.CAR_PURCHASE_ROW_MAPPER);
     }
 
     public List<RentalContract> fetchAllRentalContracts() {
@@ -63,5 +69,27 @@ public class RentalContractRepo {
     }
 
 
+    public void updateRentalContract(RentalContract rentalContract) {
+        //System.out.println("we are updating rentalcontract " + rentalContract);
+        //System.out.println("updating in repo");
+
+        /*For at opdatere i RentalContracts tabellen.
+        Vi redigerer IKKE contract_id men skal bruge det til at tage fat i den rentalContract man vil redigere.*/
+
+        String sql = "UPDATE RentalContract SET cpr_number = ?, frame_number = ?, start_date = ?, end_start = ?, insurance = ?, total_price = ?, max_km = ?, voucher = ? WHERE contract_id = ?";
+        this.jdbcTemplate.update(sql,
+                rentalContract.getCpr_number(),
+                rentalContract.getFrame_number(),
+                rentalContract.getStart_date(),
+                rentalContract.getEnd_date(),
+                rentalContract.isInsurance(),
+                rentalContract.getTotal_price(),
+                rentalContract.getMax_km(),
+                rentalContract.getVoucher()
+
+        );
+    }
 }
+
+
 

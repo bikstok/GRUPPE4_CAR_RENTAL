@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Invoice</title>
+</head>
+<body>
+<h1>Invoice</h1>
+
+<div>
+    <p><strong>Date:</strong> <span th:text="${invoice.date}"></span></p>
+    <p th:if="${invoice.customerName != null}">
+        <strong>Customer Name:</strong> <span th:text="${invoice.customerName}"></span>
+    </p>
+    <p th:if="${invoice.customerName == null}">
+        <strong>Customer Name:</strong> Anonymous
+    </p>
+</div>
+
+<h2>Items</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Model</th>
+        <th>Brand</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${invoice.items}">
+        <td th:text="${item.brand}"></td>
+        <td th:text="${item.model}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Total</h3>
+<p><strong>Total:</strong> <span th:text="${invoice.total}"></span></p>
+
+<p th:if="${invoice.paid}">
+    <strong>Status:</strong> Betalt
+</p>
+<p th:if="${!invoice.paid}">
+    <strong>Status:</strong> Ikke betalt
+</p>
+</body>
+</html>

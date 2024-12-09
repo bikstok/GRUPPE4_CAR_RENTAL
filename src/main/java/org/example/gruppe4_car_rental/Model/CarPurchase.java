@@ -15,14 +15,14 @@ public class CarPurchase {
     }
 
     public int getCar_purchase_id() {
-        return car_purchase_id;
+        return this.car_purchase_id;
     }
 
     public int getContract_id() {
-        return contract_id;
+        return this.contract_id;
     }
 
     public double getPurchase_price() {
-        return purchase_price;
+        return this.purchase_price;
     }
 }

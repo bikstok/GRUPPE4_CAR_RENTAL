@@ -1,5 +1,7 @@
 package org.example.gruppe4_car_rental.Model;
 
+import java.sql.Date;
+
 public class Car {
     private String frame_number;
     private String model;
@@ -12,7 +14,7 @@ public class Car {
     private int odometer;
     private double original_price;
 
-    public Car() {
+    public Car(String frameNumber, String brand, String model, String carStatus, String fuelType, String gearType, int yearProduced, int monthlySubPrice, int odometer, double originalPrice, Date endPrice) {
     }
 
     public Car(String frame_number, String brand, String model, String car_status, String fuel_type, String gear_type, int year_produced, double monthly_sub_price, int odometer, double original_price) {

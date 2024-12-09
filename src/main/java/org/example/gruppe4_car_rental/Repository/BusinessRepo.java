@@ -10,6 +10,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 import java.time.LocalDate;
+import org.example.gruppe4_car_rental.Model.Car;
 
 @Repository
 public class BusinessRepo {
@@ -25,14 +26,16 @@ public class BusinessRepo {
     }
 
     //Viser antallet af lejekontrakter overall (på alle tidspunkter og frem)
-    public int countRentedCarsOverall () {
-         String sql = "SELECT COUNT(*) FROM RentalContract";
+    public int countRentedCarsOverall() {
+        String sql = "SELECT COUNT(*) FROM RentalContract";
         return jdbcTemplate.queryForObject(sql, Integer.class);
     }
 
-        // udfører en SQL-forespørgsel, der finder de 5 mest udlejede bilbrands baseret på antallet af lejeaftaler.
-        //Antallet af gange, et brand er blevet lejet, beregnes ved at:
-        //1. Tælle rækker i RentalContract for hver bil, 2. Gruppere resultaterne efter brand, 3. Summere antallet af lejeaftaler for hver gruppe.
+
+
+    // udfører en SQL-forespørgsel, der finder de 5 mest udlejede bilbrands baseret på antallet af lejeaftaler.
+    //Antallet af gange, et brand er blevet lejet, beregnes ved at:
+    //1. Tælle rækker i RentalContract for hver bil, 2. Gruppere resultaterne efter brand, 3. Summere antallet af lejeaftaler for hver gruppe.
     public List<Map<String, Object>> getTopRentedCarBrands() {
         String sql = "SELECT cm.brand AS brand, COUNT(rc.frame_number) AS rental_count " +
                 "FROM RentalContract rc " +
@@ -68,13 +71,56 @@ public class BusinessRepo {
             // Beregn månedlig pris og tilføj til totalen
             double monthlyEarnings = rentalContract.getTotal_price() / months;
             totalMonthlyEarnings += monthlyEarnings;
-            
+
         }
         return totalMonthlyEarnings;
     }
 
+    public List<Map<String, Object>> overviewOfCarPurchases() {
+        //1. Sammensætter køberens fulde navn (fornavn og efternavn)
+        //2. Tæller antal biler købt af hver kunde
+        //3. Summerer det samlede beløb brugt af kunden på bilkøb
+        //4. Joiner RentalContract for at matche bilkøbet med en specifik lejekontrakt
+        //5. Joiner Customers for at få kundens detaljer fra lejekontrakten
+        //6. Grupperer resultaterne efter kunde, baseret på CPR-nummer
+        String sql = """
+        SELECT
+            CONCAT(Customers.first_name, ' ', Customers.last_name) AS buyer_name, 
+            COUNT(CarPurchase.car_purchase_id) AS cars_purchased,
+            SUM(CarPurchase.purchase_price) AS total_spent
+        FROM
+            CarPurchase
+        JOIN
+            RentalContract ON CarPurchase.contract_id = RentalContract.contract_id
+        JOIN
+            Customers ON RentalContract.cpr_number = Customers.cpr_number
+        GROUP BY
+            Customers.cpr_number
+        ORDER BY
+            total_spent DESC;
+    """;
+        return jdbcTemplate.queryForList(sql);
+    }
 
+    public List<Car> findReturnedCarsByEndDate(LocalDate endDate) {
+        System.out.println("Repository: Querying for endDate = " + endDate);
 
+        // Konverter LocalDate til java.sql.Date
+        //java.sql.Date sqlDate = java.sql.Date.valueOf(endDate);
+
+        String sql = "SELECT c.frame_number + " +
+                "FROM Cars c " +
+                "JOIN RentalContract r ON c.frame_number = r.frame_number " +
+                "WHERE r.end_date = ?";
+
+//join CarModels, for at oprette en instans.
+
+        // Hent listen af biler ved hjælp af RowMapper
+        //OBS Kig nærmere på alternativ løsning til RowMapper, beanProperty, kig Cays måde
+        List<Car> cars = jdbcTemplate.query(sql, RowMapperUtil.CAR_ROW_MAPPER, endDate);
+
+        // Udskriv antallet af returnerede biler
+        System.out.println("Repository: Number of cars returned = " + cars.size());
+        return cars;
+    }
 }
-
-

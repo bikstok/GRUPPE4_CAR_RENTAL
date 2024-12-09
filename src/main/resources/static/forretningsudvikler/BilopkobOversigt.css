@@ -8,7 +8,7 @@ body {
 /* Header-stil */
 header {
     background-color: white; /* Grøn-hvid farve */
-    color: black; /* Sort tekstfarve for synlighed */
+    color: black; /* Ændret fra hvid til sort for synlighed */
     padding: 8px; /* Størrelse af kant */
     text-align: center;
     font-size: 10px;
@@ -69,16 +69,46 @@ header {
     height: 16px; /* Sørg for, at billedet er kvadratisk */
 }
 
-/* Main styling */
-main {
-    margin-left: 17%; /* Giver plads til sidebar */
-    padding: 20px;
-    display: grid; /* Grid layout for at arrangere sektioner */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Kolonner justeres efter plads */
-    gap: 20px; /* Afstand mellem sektioner */
+
+.sidebar ul li a .icon {
+    width: 16px; /* Juster størrelsen på ikonet */
+    height: 16px; /* Sørg for, at billedet er kvadratisk */
 }
 
-/* KPI sektion styling */
-.kpi, .top-rented-cars, .monthly-earnings, .returned-cars {
-    background-color: white;
+.content {
+    margin-left: 17%; /* Flyt indholdet til højre for at undgå sidebar */
+    padding: 20px; /* Giver lidt luft omkring indholdet */
+    box-sizing: border-box; /* Inkluder padding i bredden */
+    width: 83%; /* Fyld resten af siden */
+}
+
+.content table {
+    width: 100%; /* Fylder hele bredden af content-delen */
+    margin: 20px 0; /* Afstand over og under tabellen */
+    border-collapse: collapse; /* Fjerner dobbeltkanter */
+    background-color: #ffffff; /* Hvid baggrund */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Let skygge */
+}
+
+.content table th, .content table td {
+    border: 1px solid #ddd; /* Tynd kant rundt om cellerne */
+    padding: 12px; /* Rummelige celler */
+    text-align: left; /* Juster tekst til venstre */
+    font-size: 14px; /* Standard tekststørrelse */
+}
+
+.content table th {
+    background-color: #abdbe3; /* Lys blå baggrund til header */
+    color: black; /* Sort tekstfarve */
+    font-weight: bold; /* Fed skrift til header */
+    text-transform: uppercase; /* Header-tekst i store bogstaver */
+}
+
+.content table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Striber for hver anden række */
+}
+
+.content table tr:hover {
+    background-color: #eef7fb; /* Skift baggrundsfarve ved hover */
+    transition: background-color 0.3s ease; /* Glat overgangseffekt */
 }

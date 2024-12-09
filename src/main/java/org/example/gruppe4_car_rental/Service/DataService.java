@@ -2,7 +2,9 @@ package org.example.gruppe4_car_rental.Service;
 
 import org.example.gruppe4_car_rental.Model.Car;
 import org.example.gruppe4_car_rental.Model.CarPurchase;
+import org.example.gruppe4_car_rental.Model.Customer;
 import org.example.gruppe4_car_rental.Model.RentalContract;
+import org.example.gruppe4_car_rental.Repository.CustomerRepo;
 import org.example.gruppe4_car_rental.Repository.DataRepo;
 import org.example.gruppe4_car_rental.Repository.RentalContractRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,13 @@ public class DataService {
     @Autowired
     private RentalContractRepo rentalContractRepo;
     @Autowired
+    private CustomerRepo customerRepo;
+    @Autowired
     private DataRepo dataRepo;
+
+    public Customer getCustomerFromCprNumber(final String cpr_number) {
+        return this.customerRepo.findByCprNumber(cpr_number);
+    }
 
     public double getTotalPrice(String frame_number, LocalDate start_date, LocalDate end_date) {
         double monthly_sub_price = this.dataRepo.getMonthlySubscriptionPriceFromFrameNumber(frame_number);
@@ -37,6 +45,10 @@ public class DataService {
 
     public void createRentalContract(RentalContract rentalContract) {
         this.rentalContractRepo.createRentalContract(rentalContract);
+    }
+
+    public List<CarPurchase> fetchAllCarPurchases() {
+        return this.rentalContractRepo.fetchAllCarPurchases();
     }
 
     public List<RentalContract> fetchAllRentalContracts() {
@@ -72,5 +84,10 @@ public class DataService {
 
     public RentalContract getRentalContractFromContractId(int contract_id) {
         return this.rentalContractRepo.getRentalContractFromContractId(contract_id);
+    }
+
+    //Opdaterer lejekontraktens information efter redigering
+    public void updateRentalContract(RentalContract rentalContract) {
+        this.rentalContractRepo.updateRentalContract(rentalContract);  // Brug rentalContractRepo til at opdatere lejekontrakten i databasen
     }
 }

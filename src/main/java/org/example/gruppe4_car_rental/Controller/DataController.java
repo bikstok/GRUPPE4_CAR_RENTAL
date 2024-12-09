@@ -1,6 +1,7 @@
 package org.example.gruppe4_car_rental.Controller;
 
 import org.example.gruppe4_car_rental.Model.Car;
+import org.example.gruppe4_car_rental.Model.CarPurchase;
 import org.example.gruppe4_car_rental.Model.Customer;
 import org.example.gruppe4_car_rental.Model.RentalContract;
 import org.example.gruppe4_car_rental.Service.DataService;
@@ -15,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class DataController {
@@ -55,8 +59,15 @@ public class DataController {
             Date start_date = Date.valueOf(local_start_date);
             Date end_date = Date.valueOf(local_end_date);
             int max_km = Integer.parseInt(max_km_string);
-            this.dataService.createRentalContract(new RentalContract(-1, cpr_number, frame_number, start_date, end_date, insurance, total_price, max_km, voucher, this.dataService.getCarFromFrameNumber(frame_number).getOdometer()));
-            return "redirect:/dataregistrering/showRentalContracts";
+            RentalContract rentalContract = new RentalContract(-1, cpr_number, frame_number, start_date, end_date, insurance, total_price, max_km, voucher, this.dataService.getCarFromFrameNumber(frame_number).getOdometer());
+            this.dataService.createRentalContract(rentalContract);
+
+            Customer customer = this.dataService.getCustomerFromCprNumber(cpr_number);
+            return this.redirectToInvoice(model, customer.getFirst_name() + " " + customer.getLast_name(), rentalContract.getTotal_price(), this.dataService.getCarFromFrameNumber(frame_number));
+
+
+
+           // return "redirect:/dataregistrering/showRentalContracts";
         } catch (Throwable exception) {//basically the cpr number doesn't exist for any customer in the database
             String message = "Du har indtastet et ugyldigt CPR nummer";
             model.addAttribute("message", message);
@@ -70,6 +81,13 @@ public class DataController {
     public String redirectToRentalContractForm(@PathVariable("frame_number") String frame_number, Model model) {
         model.addAttribute("frame_number", frame_number);
         return "dataregistrering/createRentalContract";
+    }
+
+    @GetMapping("dataregistrering/showCarPurchases")
+    public String fetchAllCarPurchases(Model model) {
+        List<CarPurchase> carPurchases = this.dataService.fetchAllCarPurchases();
+        model.addAttribute("carPurchases", carPurchases);
+        return "dataregistrering/showCarPurchases";
     }
 
     @GetMapping("dataregistrering/showRentalContracts")
@@ -86,6 +104,52 @@ public class DataController {
         return "dataregistrering/dataFrontPage";
     }
 
+    private String redirectToInvoice(Model model, String customerName, double totalPrice, Car car) {
+        Map<String, Object> invoice = new HashMap<>();
+        //invoice.put("number", "INV-12345");
+        invoice.put("date", LocalDate.now().toString());
+        invoice.put("customerName", customerName);
+
+        List<Map<String, Object>> items = new ArrayList<>();
+        Map<String, Object> item1 = new HashMap<>();
+        //item1.put("name", "Widget B");
+        //item1.put("quantity", 1);
+        item1.put("brand", car.getBrand());
+        item1.put("model", car.getModel());
+        //item1.put("unitPrice", 10.50);
+        items.add(item1);
+
+        //Map<String, Object> item2 = new HashMap<>();
+        //item2.put("brand", car.getBrand());
+        //item2.put("model", car.getModel());
+        //item2.put("name", "Widget B");
+        //item2.put("quantity", 1);
+        //item2.put("unitPrice", 20.00);
+        //items.add(item2);
+
+        invoice.put("items", items);
+
+        //double subtotal = items.stream()
+        //        .mapToDouble(item -> (int) item.get("quantity") * (double) item.get("unitPrice"))
+        //        .sum();
+        //double tax = subtotal * 0.25; // Assuming 25% tax
+        //double total = subtotal + tax;
+
+        //invoice.put("subtotal", subtotal);
+        //invoice.put("tax", tax);
+        invoice.put("total", totalPrice);
+        invoice.put("paid", false);
+
+        model.addAttribute("invoice", invoice);
+        return "dataregistrering/invoice";
+    }
+
+    @GetMapping("dataregistrering/invoice")
+    public String showInvoice(Model model) {
+      return this.redirectToInvoice(model, "name name2", 123,new Car("123", "test1", "test2", "test3", "test4", "test5", 5,6,7,8));
+    }
+
+
     @GetMapping("/deleteRentalContract/{contract_id}")
     public String deleteRentalContract(@PathVariable("contract_id") int contract_id) {
         this.dataService.deleteRentalContract(contract_id);
@@ -99,7 +163,7 @@ public class DataController {
             model.addAttribute("message", message);
             return "dataregistrering/error";
         }
-        return "redirect:/dataregistrering/showRentalContracts";
+        return "redirect:/dataregistrering/showCarPurchases";
     }
 
    //Henviser til redigeringsformular for en specifik lejekontrakt baseret på contract_id, hvor man indtaster nye værdier.

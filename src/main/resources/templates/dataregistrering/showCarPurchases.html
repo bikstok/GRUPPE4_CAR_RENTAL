@@ -9,43 +9,17 @@
 <table border="1">
     <thead>
     <tr>
-        <th>CPR nummer</th>
-        <th>Stel nummer</th>
-        <th>Start dato</th>
-        <th>Slut dato</th>
-        <th>Forsikring</th>
-        <th>Total pris</th>
-        <th>Max km</th>
-        <th>Voucher</th>
-        <th>Start Odometer</th>
-        <!--<th>Rediger lejekontrakt</th>-->
-        <th>Slet lejekontrakt</th>
-        <th>Opret forhåndsaftale</th>
+        <th>Forhåndsaftale ID</th>
+        <th>Kontrakt ID</th>
+        <th>Købspris</th>
 
     </tr>
     </thead>
     <tbody>
-    <tr th:each="rentalContract : ${rentalContracts}">
-        <td th:text="${rentalContract.cpr_number}"></td>
-        <td th:text="${rentalContract.frame_number}"></td>
-        <td th:text="${rentalContract.start_date}"></td>
-        <td th:text="${rentalContract.end_date}"></td>
-        <td th:text="${rentalContract.insurance}"></td>
-        <td th:text="${rentalContract.total_price}"></td>
-        <td th:text="${rentalContract.max_km}"></td>
-        <td th:text="${rentalContract.voucher}"></td>
-        <td th:text="${rentalContract.start_odometer}"></td>
-        <td>
-            <!-- Slet knap udfra kontraktens id  -->
-            <a th:href="@{'/deleteRentalContract/'+${rentalContract.contract_id}}">
-                <button >Slet lejekontrakt</button>
-            </a>
-        </td>
-        <td>
-            <a th:href="@{'/createCarPurchase/'+${rentalContract.contract_id}}">
-                <button >Opret forhåndsaftale</button>
-            </a>
-        </td>
+    <tr th:each="carPurchase : ${carPurchases}">
+        <td th:text="${carPurchase.car_purchase_id}"></td>
+        <td th:text="${carPurchase.contract_id}"></td>
+        <td th:text="${carPurchase.purchase_price}"></td>
     </tr>
     </tbody>
 </table>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilopkøb - Oversigt</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/forretningsudvikler/BilopkobOversigt.css">
+    <link rel="stylesheet" href="/forretningsudvikler/KPIDashboardfrontpage.css">
+</head>
+<body>
+<header>
+    <h1>Bilopkøb - Oversigt</h1>
+</header>
+
+<div class="sidebar">
+    <!-- Sidebar indhold -->
+    <h2>Bilabonnement A/S</h2>
+    <ul>
+        <li><a href="/forretningsudvikler/KPIDashboard"><i class="fas fa-home"></i> Dashboard </a></li>
+        <li><a href="/forretningsudvikler/BilopkobOversigt"><i class="fas fa-car"></i> Bilopkøb - Oversigt</a></li>
+    </ul>
+</div>
+
+<div class="content">
+    <!-- Tabel til visning af bilkøb -->
+    <h2>Købsoversigt</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Køber</th>
+            <th>Antal Biler</th>
+            <th>Total Beløb (DKK)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterér over carPurchaseSummary med Thymeleaf -->
+        <tr th:each="purchase : ${carPurchaseSummary}">
+            <td th:text="${purchase.buyer_name}">Køberens Navn</td>
+            <td th:text="${purchase.cars_purchased}">Antal</td>
+            <td th:text="${purchase.total_spent}">Beløb</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
