@@ -2,6 +2,8 @@ package org.example.gruppe4_car_rental.Controller;
 import java.sql.Date;
 import java.util.Map;
 import java.util.List;
+
+import org.example.gruppe4_car_rental.Model.CarContractJoin;
 import org.example.gruppe4_car_rental.Repository.BusinessRepo;
 import org.example.gruppe4_car_rental.Service.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,7 @@ public class BusinessController {
     @GetMapping("/forretningsudvikler/returnedCars")
     public String getReturnedCarsByEndDate(@RequestParam LocalDate endDate, Model model) {
         System.out.println("Controller: Received end_date = " + endDate);
-        List<Car> returnedCars = this.businessService.getReturnedCarsByEndDate(endDate);
+        List<CarContractJoin> returnedCars = this.businessService.getReturnedCarsByEndDate(endDate);
         System.out.println("Controller: Returned cars size = " + returnedCars.size());
         model.addAttribute("returnedCars", returnedCars);
         return "forretningsudvikler/returnedCars";

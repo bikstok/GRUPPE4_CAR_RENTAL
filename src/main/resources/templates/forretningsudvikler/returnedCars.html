@@ -21,8 +21,10 @@
 <ul>
     <li th:each="car : ${returnedCars}">
         <span th:text="${car.frame_number}"></span>
+        <span th:text="${car.model}"></span>
+        <span th:text="${car.brand}"></span>
+
     </li>
 </ul>
-
 </body>
 </html>
