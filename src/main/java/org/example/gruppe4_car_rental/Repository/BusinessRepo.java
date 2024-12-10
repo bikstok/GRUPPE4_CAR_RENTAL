@@ -104,31 +104,32 @@ public class BusinessRepo {
     """;
         return jdbcTemplate.queryForList(sql);
     }
-/*
-    public List<Car> findReturnedCarsByEndDate(LocalDate endDate) {
+
+    public List<Car> findReturnedCarsByEndDate(String endDate) {
         System.out.println("Repository: Querying for endDate = " + endDate);
 
         // Konverter LocalDate til java.sql.Date
-        //java.sql.Date sqlDate = java.sql.Date.valueOf(endDate);
+        java.sql.Date sqlDate = java.sql.Date.valueOf(endDate);
 
-        String sql = "SELECT c.frame_number, cm.model, cm.brand, r.end_date\n" +
+        String sql = "SELECT c.frame_number, cm.model, cm.brand, r.end_date" +
                 "FROM Cars c" +
                 "JOIN CarModels cm ON cm.model = c.model" +
                 "JOIN RentalContract r ON c.frame_number = r.frame_number" +
                 "WHERE r.end_date = ?";
 
-//join CarModels, for at oprette en instans.
-
         // Hent listen af biler ved hjælp af RowMapper
         //OBS Kig nærmere på alternativ løsning til RowMapper, beanProperty, kig Cays måde
-        return jdbcTemplate.query(sql, RowMapperUtil.CAR_ROW_MAPPER, endDate);
+        RowMapper rowMapper = new BeanPropertyRowMapper(Car.class);
+        return jdbcTemplate.query(sql, rowMapper, endDate);
+
+        //return jdbcTemplate.query(sql, RowMapperUtil.CAR_ROW_MAPPER, endDate);
 
         // Udskriv antallet af returnerede biler
        // System.out.println("Repository: Number of cars returned = " + cars.size());
        // return cars;
     }
 
- */
+
   /*  public List<CarContractJoin> findReturnedCarsByEndDate(LocalDate endDate) {
         String sql = "SELECT c.frame_number, cm.model, cm.brand, r.end_date\n" +
                 "FROM Cars c\n" +
