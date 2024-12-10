@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Alle Lejekontrakter</title>
+    <title>Alle Forhåndsaftaler</title>
 </head>
 <body>
-<h1>Alle lejekontrakter</h1>
+<h1>Alle forhåndsaftaler</h1>
 <table border="1">
     <thead>
     <tr>
         <th>Forhåndsaftale ID</th>
         <th>Kontrakt ID</th>
         <th>Købspris</th>
-
+        <th>Slet forhåndsaftale</th>
     </tr>
     </thead>
     <tbody>
@@ -20,6 +20,11 @@
         <td th:text="${carPurchase.car_purchase_id}"></td>
         <td th:text="${carPurchase.contract_id}"></td>
         <td th:text="${carPurchase.purchase_price}"></td>
+        <td>
+            <a th:href="@{'/deleteCarPurchase/'+${carPurchase.car_purchase_id}}">
+                <button >Slet forhåndsaftale</button>
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>

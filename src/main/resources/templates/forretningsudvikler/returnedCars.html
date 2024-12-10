@@ -9,7 +9,7 @@
 
 <!-- Hvis der er returnerede biler, vis antallet -->
 <p th:if="${not #lists.isEmpty(returnedCars)}">
-    Der er <span th:text="${returnedCars.size()}"></span> biler, der afleveres den valgte dag.
+    Der er <span th:text="${returnedCars.size()}"></span>
 </p>
 
 <!-- Hvis ingen biler er returneret, vis en besked -->

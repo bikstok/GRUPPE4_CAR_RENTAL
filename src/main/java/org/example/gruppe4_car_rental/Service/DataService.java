@@ -63,20 +63,24 @@ public class DataService {
         return this.rentalContractRepo.deleteRentalContract(contract_id);
     }
 
-    public boolean createCarPurchase(int contract_id) {
-        RentalContract rentalContract = this.rentalContractRepo.getRentalContractFromContractId(contract_id);
-        Car car = this.dataRepo.getCarFromFrameNumber(rentalContract.getFrame_number());
-        if ("Solgt".equals(car.getCar_status())){
-            return false;
-        }
-        double originalPrice = car.getOriginal_price();
-        int kilometersDriven = car.getOdometer() - rentalContract.getStart_odometer();
-        int excessKilometers = Math.max(kilometersDriven - rentalContract.getMax_km(), 0);
-        int years = LocalDate.now().getYear() - car.getYear_produced();
-        double purchase_price = (originalPrice * Math.pow(0.9, years)) + (0.75 * excessKilometers);
-        this.dataRepo.createCarPurchase(new CarPurchase(-1, contract_id, Math.round(purchase_price * 100.0) / 100.0), rentalContract, car);
-        return true;
+    public void createCarPurchase(CarPurchase carPurchase, RentalContract rentalContract, Car car) {
+        this.dataRepo.createCarPurchase(carPurchase, rentalContract,car);
     }
+
+    //public String createCarPurchase(int contract_id) {
+    //    RentalContract rentalContract = this.rentalContractRepo.getRentalContractFromContractId(contract_id);
+    //    Car car = this.dataRepo.getCarFromFrameNumber(rentalContract.getFrame_number());
+    //    if ("Solgt".equals(car.getCar_status())){
+    //        return null;
+    //    }
+    //    double originalPrice = car.getOriginal_price();
+    //    int kilometersDriven = car.getOdometer() - rentalContract.getStart_odometer();
+    //    int excessKilometers = Math.max(kilometersDriven - rentalContract.getMax_km(), 0);
+    //    int years = LocalDate.now().getYear() - car.getYear_produced();
+    //    double purchase_price = (originalPrice * Math.pow(0.9, years)) + (0.75 * excessKilometers);
+    //    this.dataRepo.createCarPurchase(new CarPurchase(-1, contract_id, Math.round(purchase_price * 100.0) / 100.0), rentalContract, car);
+    //    return null;
+    //}
 
     public Car getCarFromFrameNumber(String frameNumber) {
         return this.dataRepo.getCarFromFrameNumber(frameNumber);
@@ -89,5 +93,9 @@ public class DataService {
     //Opdaterer lejekontraktens information efter redigering
     public void updateRentalContract(RentalContract rentalContract) {
         this.rentalContractRepo.updateRentalContract(rentalContract);  // Brug rentalContractRepo til at opdatere lejekontrakten i databasen
+    }
+
+    public void deleteCarPurchase(int car_purchase_id) {
+        this.dataRepo.deleteCarPurchase(car_purchase_id);
     }
 }

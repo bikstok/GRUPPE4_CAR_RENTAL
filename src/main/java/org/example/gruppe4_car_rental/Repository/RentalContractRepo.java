@@ -58,7 +58,7 @@ public class RentalContractRepo {
                 "UPDATE Cars SET car_status = 'Ledig' WHERE frame_number = ?",
                 frameNumber
         );
-
+        this.jdbcTemplate.update("DELETE FROM CarPurchase WHERE contract_id = ?", contract_id);
         this.jdbcTemplate.update("DELETE FROM DamageReport WHERE contract_id = ?", contract_id);
         return this.jdbcTemplate.update("DELETE FROM RentalContract WHERE contract_id = ?", contract_id) > 0;
     }

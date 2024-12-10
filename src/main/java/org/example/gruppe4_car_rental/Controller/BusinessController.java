@@ -1,18 +1,17 @@
 package org.example.gruppe4_car_rental.Controller;
-import java.sql.Date;
-import java.util.Map;
-import java.util.List;
 
-import org.example.gruppe4_car_rental.Model.CarContractJoin;
-import org.example.gruppe4_car_rental.Repository.BusinessRepo;
+import org.example.gruppe4_car_rental.Model.Car;
+import org.example.gruppe4_car_rental.Model.RentalContract;
 import org.example.gruppe4_car_rental.Service.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.example.gruppe4_car_rental.Model.Car;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class BusinessController {
@@ -38,6 +37,19 @@ public class BusinessController {
         double monthlyEarnings = this.businessService.calculateMonthlyEarningsJava();
         model.addAttribute("monthlyEarnings", monthlyEarnings + " DKK");
 
+
+        model.addAttribute("totalEarnings", this.businessService.getTotalEarnings() + " DKK");
+        int percentOfAvailableCars = (int) Math.round(this.businessService.getPercentOfAvailableCars() * 100);
+        model.addAttribute("notification", "Der er " + percentOfAvailableCars + "% ledige biler");
+        if (percentOfAvailableCars >= 75) {
+            model.addAttribute("color", "green");
+        } else if (percentOfAvailableCars <= 25) {
+            model.addAttribute("color", "red");
+        } else {
+            model.addAttribute("color", "black");
+        }
+
+
         return "forretningsudvikler/KPIDashboard";
     }
 
@@ -48,14 +60,23 @@ public class BusinessController {
         return "forretningsudvikler/BilopkobOversigt";
     }
 
+    @GetMapping("/forretningsudvikler/LejekontraktOversigt")
+    public String getActiveRentalContracts(Model model) {
+        List<RentalContract> getActiveRentalContracts = this.businessService.getActiveRentalOverview();
+        model.addAttribute("rentalContracts", getActiveRentalContracts);
+        return "forretningsudvikler/LejekontraktOversigt";
+    }
+
     @GetMapping("/forretningsudvikler/returnedCars")
-    public String getReturnedCarsByEndDate(@RequestParam LocalDate endDate, Model model) {
-        System.out.println("Controller: Received end_date = " + endDate);
-        List<CarContractJoin> returnedCars = this.businessService.getReturnedCarsByEndDate(endDate);
-        System.out.println("Controller: Returned cars size = " + returnedCars.size());
+    public String getReturnedCarsByEndDate(@RequestParam("end_date") String end_date, Model model) {
+        //System.out.println("Controller: Received end_date = " + end_date);
+        List<Car> returnedCars = this.businessService.getReturnedCarsByEndDate(LocalDate.parse(end_date));
+        //System.out.println("Controller: Returned cars size = " + returnedCars.size());
         model.addAttribute("returnedCars", returnedCars);
         return "forretningsudvikler/returnedCars";
     }
+
+
 }
 
 /*this.carService.deleteCar(frame_number);

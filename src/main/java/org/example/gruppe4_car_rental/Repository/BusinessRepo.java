@@ -1,6 +1,5 @@
 package org.example.gruppe4_car_rental.Repository;
 
-import org.example.gruppe4_car_rental.Model.CarContractJoin;
 import org.example.gruppe4_car_rental.Model.RentalContract;
 import org.example.gruppe4_car_rental.RowMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +33,12 @@ public class BusinessRepo {
         return jdbcTemplate.queryForObject(sql, Integer.class);
     }
 
-
-
-    // udfører en SQL-forespørgsel, der finder de 5 mest udlejede bilbrands baseret på antallet af lejeaftaler.
-    //Antallet af gange, et brand er blevet lejet, beregnes ved at:
-    //1. Tælle rækker i RentalContract for hver bil, 2. Gruppere resultaterne efter brand, 3. Summere antallet af lejeaftaler for hver gruppe.
     public List<Map<String, Object>> getTopRentedCarBrands() {
+        //udfører en SQL-forespørgsel, der finder de 5 mest udlejede bilbrands baseret på antallet af lejeaftaler.
+        //Antallet af gange, et brand er blevet lejet, beregnes ved at:
+        // 1. Tælle rækker i RentalContract for hver bil
+        // 2. Gruppere resultaterne efter brand
+        // 3. Summere antallet af lejeaftaler for hver gruppe.
         String sql = "SELECT cm.brand AS brand, COUNT(rc.frame_number) AS rental_count " +
                 "FROM RentalContract rc " +
                 "JOIN Cars c ON rc.frame_number = c.frame_number " +
@@ -47,31 +46,28 @@ public class BusinessRepo {
                 "GROUP BY cm.brand " +
                 "ORDER BY rental_count DESC " +
                 "LIMIT 5";
-
-        // Returner resultatet som en liste af Map (nøgle/værdi-par)
         return jdbcTemplate.queryForList(sql);
     }
 
     public double calculateMonthlyEarningsJava() {
         // SQL: Hent alle kontrakter, der er aktive i øjeblikket
+        // 1. Beregning af den samlede månedlige indtjening
+        // 2. Konverter start- og slutdato til LocalDate
+        // 3. Beregn varigheden af kontrakten i måneder
+        // 4. Beregn månedlig pris og tilføj til totalen
+
         String sql = "SELECT * FROM RentalContract WHERE CURRENT_DATE BETWEEN start_date AND end_date";
         List<RentalContract> rentalContracts = this.jdbcTemplate.query(sql, RowMapperUtil.RENTAL_CONTRACT_ROW_MAPPER);
-
-        // Beregning af den samlede månedlige indtjening
         double totalMonthlyEarnings = 0;
-
         for (RentalContract rentalContract : rentalContracts) {
-
-            // Konverter start- og slutdato til LocalDate
             LocalDate local_start_date = rentalContract.getStart_date().toLocalDate();
             LocalDate local_end_date = rentalContract.getEnd_date().toLocalDate();
 
-            // Beregn varigheden af kontrakten i måneder
             long months = ChronoUnit.MONTHS.between(local_start_date, local_end_date); //Den kan beregne forskellen mellem to datoer/tidspunkter i en specifik tidsenhed (f.eks. antal dage, måneder, år osv.).
             if (months < 3 || months > 36) {
-                continue; // Ignorer kontrakter uden for intervallet 3-36 måneder
+                continue;
             }
-            // Beregn månedlig pris og tilføj til totalen
+
             double monthlyEarnings = rentalContract.getTotal_price() / months;
             totalMonthlyEarnings += monthlyEarnings;
 
@@ -105,39 +101,26 @@ public class BusinessRepo {
         return jdbcTemplate.queryForList(sql);
     }
 
-    public List<Car> findReturnedCarsByEndDate(String endDate) {
-        System.out.println("Repository: Querying for endDate = " + endDate);
+    public List<Car> findReturnedCarsByEndDate(LocalDate end_date) {
+        //System.out.println("Repository: Querying for endDate = " + end_date);
 
-        // Konverter LocalDate til java.sql.Date
-        java.sql.Date sqlDate = java.sql.Date.valueOf(endDate);
-
-        String sql = "SELECT c.frame_number, cm.model, cm.brand, r.end_date" +
-                "FROM Cars c" +
-                "JOIN CarModels cm ON cm.model = c.model" +
-                "JOIN RentalContract r ON c.frame_number = r.frame_number" +
+        String sql = "SELECT c.frame_number, c.model, cm.brand, c.car_status, c.fuel_type, " +
+                "c.gear_type, c.year_produced, c.monthly_sub_price, c.odometer, c.original_price " +
+                "FROM Cars c " +
+                "JOIN CarModels cm ON cm.model = c.model " +
+                "JOIN RentalContract r ON c.frame_number = r.frame_number " +
                 "WHERE r.end_date = ?";
 
+        //mySQL test
+        /*SELECT c.frame_number
+        FROM Cars c
+        JOIN RentalContract r ON c.frame_number = r.frame_number
+        WHERE r.end_date = "2025-01-01";*/
+
         // Hent listen af biler ved hjælp af RowMapper
-        //OBS Kig nærmere på alternativ løsning til RowMapper, beanProperty, kig Cays måde
         RowMapper rowMapper = new BeanPropertyRowMapper(Car.class);
-        return jdbcTemplate.query(sql, rowMapper, endDate);
+        return this.jdbcTemplate.query(sql, rowMapper, end_date);
 
-        //return jdbcTemplate.query(sql, RowMapperUtil.CAR_ROW_MAPPER, endDate);
-
-        // Udskriv antallet af returnerede biler
-       // System.out.println("Repository: Number of cars returned = " + cars.size());
-       // return cars;
     }
 
-
-  /*  public List<CarContractJoin> findReturnedCarsByEndDate(LocalDate endDate) {
-        String sql = "SELECT c.frame_number, cm.model, cm.brand, r.end_date\n" +
-                "FROM Cars c\n" +
-                "JOIN CarModel cm ON c.model = cm.model AND c.brand = cm.brand\n" +
-                "JOIN RentalContract r ON c.frame_number = r.frame_number\n" +
-                "WHERE r.end_date = ?\n";
-        RowMapper rowMapper = new BeanPropertyRowMapper(CarContractJoin.class);
-        return jdbcTemplate.query(sql, rowMapper, endDate);
-    }
-    */
 }

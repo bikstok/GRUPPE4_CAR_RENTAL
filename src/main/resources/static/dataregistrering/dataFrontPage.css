@@ -1,0 +1,114 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: 'Nunito', sans-serif; /* Using Nunito font */
+    background-color: #f4f9fb; /* Light background for contrast */
+    color: #333; /* Dark text for readability */
+    padding: 20px;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #063970; /* Deep blue */
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px; /* Rounded corners for modern look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 3D effect */
+    margin-bottom: 20px; /* Space between navbar and content */
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+}
+
+.navbar .nav-buttons a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 10px 20px;
+    background-color: #76b5c5; /* Soft greenish-blue */
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .nav-buttons a:hover {
+    background-color: #63a0b8; /* Slightly darker greenish-blue */
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    color: #063970; /* Deeper blue */
+    margin-bottom: 20px;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 3D effect */
+    background-color: white;
+    border-radius: 8px; /* Rounded corners for a more modern look */
+    overflow: hidden;
+}
+
+/* Table Header */
+th {
+    background-color: #063970; /* Deep blue */
+    color: #fff;
+    padding: 12px;
+    text-align: left;
+}
+
+/* Table Body */
+tbody tr:nth-child(odd) {
+    background-color: #abdbe3; /* Lighter blue */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e4f0f9; /* Lighter blue, no orangey tones */
+}
+
+/* Hover effect on rows */
+tbody tr:hover {
+    background-color: #76b5c5; /* Lighter blue on hover */
+    cursor: pointer;
+}
+
+/* Table Cells */
+td {
+    padding: 12px;
+    text-align: left;
+}
+
+/* Button Styling */
+button {
+    background-color: #76b5c5; /* Soft greenish-blue button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #63a0b8; /* Slightly darker greenish-blue on hover */
+}
+
+/* Reduce space after the button */
+td a {
+    display: inline-block;
+    margin-bottom: 10px; /* Reduced space below the button */
+}

@@ -51,4 +51,25 @@ public class DataRepo {
         String updateCarStatus = "UPDATE Cars SET car_status = 'Solgt' WHERE frame_number = ?";
         this.jdbcTemplate.update(updateCarStatus, car.getFrame_number());
     }
+
+    public void deleteCarPurchase(int car_purchase_id) {
+        int contract_id = this.jdbcTemplate.queryForObject(
+                "SELECT contract_id FROM CarPurchase WHERE car_purchase_id = ?",
+                Integer.class,
+                car_purchase_id
+        );
+
+        String frameNumber = this.jdbcTemplate.queryForObject(
+                "SELECT frame_number FROM RentalContract WHERE contract_id = ?",
+                String.class,
+                contract_id
+        );
+
+        this.jdbcTemplate.update(
+                "UPDATE Cars SET car_status = 'Ledig' WHERE frame_number = ?",
+                frameNumber
+        );
+
+        this.jdbcTemplate.update("DELETE FROM CarPurchase WHERE car_purchase_id = ?", car_purchase_id);
+    }
 }

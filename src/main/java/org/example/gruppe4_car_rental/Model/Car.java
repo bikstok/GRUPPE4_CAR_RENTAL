@@ -1,7 +1,5 @@
 package org.example.gruppe4_car_rental.Model;
 
-import java.sql.Date;
-
 public class Car {
     private String frame_number;
     private String model;
@@ -14,7 +12,7 @@ public class Car {
     private int odometer;
     private double original_price;
 
-    public Car(String frameNumber, String brand, String model, String carStatus, String fuelType, String gearType, int yearProduced, int monthlySubPrice, int odometer, double originalPrice, Date endPrice) {
+    public Car() {
     }
 
     public Car(String frame_number, String brand, String model, String car_status, String fuel_type, String gear_type, int year_produced, double monthly_sub_price, int odometer, double original_price) {
@@ -29,6 +27,8 @@ public class Car {
         this.odometer = odometer;
         this.original_price = original_price;
     }
+
+
 
     @Override
     public String toString() {
@@ -73,6 +73,46 @@ public class Car {
 
     public double getOriginal_price() {
         return original_price;
+    }
+
+    public void setFrame_number(String frame_number) {
+        this.frame_number = frame_number;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public void setCar_status(String car_status) {
+        this.car_status = car_status;
+    }
+
+    public void setFuel_type(String fuel_type) {
+        this.fuel_type = fuel_type;
+    }
+
+    public void setGear_type(String gear_type) {
+        this.gear_type = gear_type;
+    }
+
+    public void setYear_produced(int year_produced) {
+        this.year_produced = year_produced;
+    }
+
+    public void setMonthly_sub_price(double monthly_sub_price) {
+        this.monthly_sub_price = monthly_sub_price;
+    }
+
+    public void setOdometer(int odometer) {
+        this.odometer = odometer;
+    }
+
+    public void setOriginal_price(double original_price) {
+        this.original_price = original_price;
     }
 
     @Override

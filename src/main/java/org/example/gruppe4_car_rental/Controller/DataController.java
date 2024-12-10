@@ -50,7 +50,8 @@ public class DataController {
                 String message = "Kontrakten skal være på mindst 3 måneder.";
                 model.addAttribute("message", message);
                 return "dataregistrering/error";
-            } else */if (ChronoUnit.WEEKS.between(LocalDate.now(), local_start_date) > 3) {//rental contract is over 100 years in the future
+            } else */
+            if (ChronoUnit.WEEKS.between(LocalDate.now(), local_start_date) > 3) {//rental contract is over 100 years in the future
                 String message = "Du kan ikke vælge en dato så langt frem i tiden";
                 model.addAttribute("message", message);
                 return "dataregistrering/error";
@@ -64,10 +65,7 @@ public class DataController {
 
             Customer customer = this.dataService.getCustomerFromCprNumber(cpr_number);
             return this.redirectToInvoice(model, customer.getFirst_name() + " " + customer.getLast_name(), rentalContract.getTotal_price(), this.dataService.getCarFromFrameNumber(frame_number));
-
-
-
-           // return "redirect:/dataregistrering/showRentalContracts";
+            // return "redirect:/dataregistrering/showRentalContracts";
         } catch (Throwable exception) {//basically the cpr number doesn't exist for any customer in the database
             String message = "Du har indtastet et ugyldigt CPR nummer";
             model.addAttribute("message", message);
@@ -104,51 +102,40 @@ public class DataController {
         return "dataregistrering/dataFrontPage";
     }
 
-    private String redirectToInvoice(Model model, String customerName, double totalPrice, Car car) {
+    public String redirectToInvoice(Model model, String customerName, double totalPrice, Car car) {
         Map<String, Object> invoice = new HashMap<>();
-        //invoice.put("number", "INV-12345");
         invoice.put("date", LocalDate.now().toString());
         invoice.put("customerName", customerName);
 
         List<Map<String, Object>> items = new ArrayList<>();
-        Map<String, Object> item1 = new HashMap<>();
-        //item1.put("name", "Widget B");
-        //item1.put("quantity", 1);
-        item1.put("brand", car.getBrand());
-        item1.put("model", car.getModel());
-        //item1.put("unitPrice", 10.50);
-        items.add(item1);
-
-        //Map<String, Object> item2 = new HashMap<>();
-        //item2.put("brand", car.getBrand());
-        //item2.put("model", car.getModel());
-        //item2.put("name", "Widget B");
-        //item2.put("quantity", 1);
-        //item2.put("unitPrice", 20.00);
-        //items.add(item2);
+        Map<String, Object> carInformation = new HashMap<>();
+        carInformation.put("brand", car.getBrand());
+        carInformation.put("model", car.getModel());
+        items.add(carInformation);
 
         invoice.put("items", items);
-
-        //double subtotal = items.stream()
-        //        .mapToDouble(item -> (int) item.get("quantity") * (double) item.get("unitPrice"))
-        //        .sum();
-        //double tax = subtotal * 0.25; // Assuming 25% tax
-        //double total = subtotal + tax;
-
-        //invoice.put("subtotal", subtotal);
-        //invoice.put("tax", tax);
-        invoice.put("total", totalPrice);
+        invoice.put("withoutMoms", totalPrice+ " DKK");
+        invoice.put("moms", (totalPrice * 0.25) + " DKK");
+        invoice.put("totalPrice", (totalPrice * 1.25) + " DKK");
+        double totalPriceEuro = Math.floor((totalPrice * 1.25) / 7.46);
+        invoice.put("totalPriceEuro", totalPriceEuro + " €");
         invoice.put("paid", false);
 
         model.addAttribute("invoice", invoice);
         return "dataregistrering/invoice";
     }
 
-    @GetMapping("dataregistrering/invoice")
-    public String showInvoice(Model model) {
-      return this.redirectToInvoice(model, "name name2", 123,new Car("123", "test1", "test2", "test3", "test4", "test5", 5,6,7,8));
-    }
+    //@GetMapping("dataregistrering/invoice")
+    //public String showInvoice(Model model) {
+    //  return this.redirectToInvoice(model, "name name2", 123,new Car("123", "test1", "test2", "test3", "test4", "test5", 5,6,7,8));
+    //}
 
+
+    @GetMapping("/deleteCarPurchase/{car_purchase_id}")
+    public String deleteCarPurchase(@PathVariable("car_purchase_id") int car_purchase_id) {
+        this.dataService.deleteCarPurchase(car_purchase_id);
+        return "redirect:/dataregistrering/showCarPurchases";
+    }
 
     @GetMapping("/deleteRentalContract/{contract_id}")
     public String deleteRentalContract(@PathVariable("contract_id") int contract_id) {
@@ -158,22 +145,37 @@ public class DataController {
 
     @GetMapping("/createCarPurchase/{contract_id}")
     public String createCarPurchase(@PathVariable("contract_id") int contract_id, Model model) {
-        if (!this.dataService.createCarPurchase(contract_id)) {
+        RentalContract rentalContract = this.dataService.getRentalContractFromContractId(contract_id);
+        Car car = this.dataService.getCarFromFrameNumber(rentalContract.getFrame_number());
+        if ("Solgt".equals(car.getCar_status())) {
             String message = "Denne bil er allerede solgt";
             model.addAttribute("message", message);
             return "dataregistrering/error";
         }
-        return "redirect:/dataregistrering/showCarPurchases";
+        double originalPrice = car.getOriginal_price();
+        int kilometersDriven = car.getOdometer() - rentalContract.getStart_odometer();
+        int excessKilometers = Math.max(kilometersDriven - rentalContract.getMax_km(), 0);
+        int years = LocalDate.now().getYear() - car.getYear_produced();
+        double purchase_price = (originalPrice * Math.pow(0.9, years)) + (0.75 * excessKilometers);
+        CarPurchase carPurchase = new CarPurchase(-1, contract_id, Math.round(purchase_price * 100.0) / 100.0);
+        this.dataService.createCarPurchase(carPurchase, rentalContract, car);
+        Customer customer = this.dataService.getCustomerFromCprNumber(rentalContract.getCpr_number());
+        return this.redirectToInvoice(model, customer.getFirst_name() + " " + customer.getLast_name(), carPurchase.getPurchase_price(), car);
+        //if (!this.dataService.createCarPurchase(contract_id)) {
+        //}
+        //RentalContract rentalContract = this.dataService.getRentalContractFromContractId(contract_id);
+        //Car car = this.dataService.getCarFromFrameNumber(rentalContract.getFrame_number());
+        //return "redirect:/dataregistrering/showCarPurchases";
     }
 
-   //Henviser til redigeringsformular for en specifik lejekontrakt baseret på contract_id, hvor man indtaster nye værdier.
-   //den tager kundens parametre med over i formularen så man ikke skal indtaste alle informationer.
-   @GetMapping("/editRentalContract/{contract_id}")
-   public String showEditForm(@PathVariable("contract_id") int contract_id, Model model) {
-       RentalContract rentalContract = this.dataService.getRentalContractFromContractId(contract_id);
-       model.addAttribute("rentalContract", rentalContract);
-       return "dataregistrering/editRentalContract";  // Returner Thymeleaf-template for redigering
-   }
+    //Henviser til redigeringsformular for en specifik lejekontrakt baseret på contract_id, hvor man indtaster nye værdier.
+    //den tager kundens parametre med over i formularen så man ikke skal indtaste alle informationer.
+    @GetMapping("/editRentalContract/{contract_id}")
+    public String showEditForm(@PathVariable("contract_id") int contract_id, Model model) {
+        RentalContract rentalContract = this.dataService.getRentalContractFromContractId(contract_id);
+        model.addAttribute("rentalContract", rentalContract);
+        return "dataregistrering/editRentalContract";  // Returner Thymeleaf-template for redigering
+    }
 
     //Håndterer redigeringsformularen og opdaterer i databasen.
     @PostMapping("/updateRentalContract")

@@ -2,9 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aktive lejekontrakter</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/forretningsudvikler/LejekontraktOversigt.css">
 </head>
 <body>
+<header>
+    <h1>Alle Lejekontrakter</h1>
+</header>
+
+<div class="sidebar">
+    <h2>Bilabonnement A/S</h2>
+    <ul>
+        <li><a href="/forretningsudvikler/KPIDashboard">Dashboard</a></li>
+        <li><a href="/forretningsudvikler/BilopkobOversigt">Bilopkøb - Oversigt</a></li>
+        <li><a href="/forretningsudvikler/LejekontraktOversigt">Lejekontrakt - Oversigt</a></li>
+    </ul>
+</div>
+
+
+<div class="content">
+    <h2>Liste over Aktive Lejekontrakter</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>CPR Nummer</th>
+            <th>Stel Nummer</th>
+            <th>Start Dato</th>
+            <th>Slut Dato</th>
+            <th>Forsikring</th>
+            <th>Total Pris</th>
+            <th>Max KM</th>
+            <th>Voucher</th>
+            <th>Start Odometer</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterér over rentalContracts med Thymeleaf -->
+        <tr th:each="rentalContract : ${rentalContracts}">
+            <td th:text="${rentalContract.cpr_number}">CPR Nummer</td>
+            <td th:text="${rentalContract.frame_number}">Stel Nummer</td>
+            <td th:text="${rentalContract.start_date}">Start Dato</td>
+            <td th:text="${rentalContract.end_date}">Slut Dato</td>
+            <td th:text="${rentalContract.insurance}">Forsikring</td>
+            <td th:text="${rentalContract.total_price}">Total Pris</td>
+            <td th:text="${rentalContract.max_km}">Max KM</td>
+            <td th:text="${rentalContract.voucher}">Voucher</td>
+            <td th:text="${rentalContract.start_odometer}">Start Odometer</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

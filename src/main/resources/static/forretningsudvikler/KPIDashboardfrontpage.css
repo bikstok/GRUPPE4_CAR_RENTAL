@@ -19,55 +19,52 @@ header {
 /* Sidebar-stil */
 .sidebar {
     background-color: white; /* Baggrundsfarve */
-    width: 17%; /* Sidebar bredde */
+    width: 17%; /* Ensartet bredde */
     height: 100vh; /* Fylder hele højden */
-    position: fixed; /* Holder den til venstre */
+    position: fixed; /* Holder sidebar fast */
     top: 0;
     left: 0;
-    padding: 9px;
-    box-sizing: border-box; /* Inddrag padding i breddeberegning */
+    padding: 10px; /* Ens padding */
+    box-sizing: border-box; /* Inkluder padding og border i breddeberegningen */
 }
 
 .sidebar h2 {
-    font-size: 16px; /* Gør teksten lidt større */
+    font-size: 16px; /* Ens tekststørrelse */
     font-weight: bold;
-    margin-bottom: 20px; /* Giver lidt afstand til resten af indholdet */
-    text-align: left; /* Centrer teksten i sidebar til venstre */
-    padding-left: 10px; /* Tilføjer lidt afstand til venstre kant */
-    color: black; /* Sørg for, at teksten er tydelig */
+    margin-bottom: 24px; /* Afstand mellem header og liste */
+    text-align: left;
+    padding-left: 10px; /* Ens padding til venstre */
+    color: black;
 }
 
 .sidebar ul {
-    margin-top: 40px; /* Giver afstand mellem overskriften og listen */
-    padding: 0; /* Fjerner eventuelle standardindrykninger */
-    list-style-type: none; /* Fjerner standardliste-styling */
-    padding-left: 18px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    padding-left: 10px; /* Ens padding */
 }
 
 .sidebar ul li {
-    margin-bottom: 10px; /* Tilføjer lidt afstand mellem listeelementer */
+    margin-bottom: 15px;
 }
 
 .sidebar ul li a {
     text-decoration: none;
     font-weight: bold;
     color: darkgrey;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 17px; /* Afstand mellem billede og tekst */
-    transition: color 0.3s ease, transform 0.3s ease; /* Glat overgang for hover-effekt */
+    font-size: 14px; /* Ens tekststørrelse */
+    display: block; /* Sørger for hele knappen er klikbar */
+    padding: 10px 15px; /* Ens padding for alle knapper */
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .sidebar ul li a:hover {
-    color: #abdbe3; /* Skift farve ved hover */
-    transform: translateX(5px); /* Flytter teksten lidt mod højre */
+    color: #abdbe3;
+    background-color: #f2f2f2; /* Baggrundsfarve ved hover */
+    transform: translateX(5px);
 }
 
-.sidebar ul li a .icon {
-    width: 16px; /* Juster størrelsen på ikonet */
-    height: 16px; /* Sørg for, at billedet er kvadratisk */
-}
+
 
 /* Main styling */
 main {

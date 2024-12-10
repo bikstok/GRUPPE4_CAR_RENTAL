@@ -4,19 +4,19 @@
     <title>Invoice</title>
 </head>
 <body>
-<h1>Invoice</h1>
+<h1>Faktura</h1>
 
 <div>
     <p><strong>Date:</strong> <span th:text="${invoice.date}"></span></p>
     <p th:if="${invoice.customerName != null}">
-        <strong>Customer Name:</strong> <span th:text="${invoice.customerName}"></span>
+        <strong>Kunde Navn:</strong> <span th:text="${invoice.customerName}"></span>
     </p>
     <p th:if="${invoice.customerName == null}">
-        <strong>Customer Name:</strong> Anonymous
+        <strong>Kunde Navn:</strong> Anonym
     </p>
 </div>
 
-<h2>Items</h2>
+<!--<h2>Items</h2>-->
 <table border="1">
     <thead>
     <tr>
@@ -32,8 +32,11 @@
     </tbody>
 </table>
 
-<h3>Total</h3>
-<p><strong>Total:</strong> <span th:text="${invoice.total}"></span></p>
+<!--<h3>Total</h3>-->
+<p><strong>Pris:</strong> <span th:text="${invoice.withoutMoms}"></span></p>
+<p><strong>Moms:</strong> <span th:text="${invoice.moms}"></span></p>
+<p><strong>Total med moms:</strong> <span th:text="${invoice.totalPrice}"></span></p>
+<p><strong>Total pris i euro:</strong> <span th:text="${invoice.totalPriceEuro}"></span></p>
 
 <p th:if="${invoice.paid}">
     <strong>Status:</strong> Betalt

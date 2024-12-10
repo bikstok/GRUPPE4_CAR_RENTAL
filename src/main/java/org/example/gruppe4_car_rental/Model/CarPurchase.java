@@ -25,4 +25,16 @@ public class CarPurchase {
     public double getPurchase_price() {
         return this.purchase_price;
     }
+
+    public void setCar_purchase_id(int car_purchase_id) {
+        this.car_purchase_id = car_purchase_id;
+    }
+
+    public void setContract_id(int contract_id) {
+        this.contract_id = contract_id;
+    }
+
+    public void setPurchase_price(double purchase_price) {
+        this.purchase_price = purchase_price;
+    }
 }

@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KPI Dashboard</title>
+    <!-- CSS -->
     <link rel="stylesheet" href="/forretningsudvikler/KPIDashboardfrontpage.css">
-    <link rel="stylesheet" href="/forretningsudvikler/BilopkobOversigt.css">
-
 </head>
 <body>
 <header>
@@ -14,14 +13,14 @@
 </header>
 
 <div class="sidebar">
-    <!-- Sidebar indhold -->
     <h2>Bilabonnement A/S</h2>
     <ul>
-        <li><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
-        <li><a href="/forretningsudvikler/BilopkobOversigt"><i class="fas fa-car"></i> Bilopkøb - Oversigt</a></li>
-        <!-- Andre links kan tilføjes her -->
+        <li><a href="/forretningsudvikler/KPIDashboard">Dashboard</a></li>
+        <li><a href="/forretningsudvikler/BilopkobOversigt">Bilopkøb - Oversigt</a></li>
+        <li><a href="/forretningsudvikler/LejekontraktOversigt">Lejekontrakt - Oversigt</a></li>
     </ul>
 </div>
+
 <main>
     <!-- Aktive udlejninger -->
     <section class="kpi">
@@ -66,8 +65,19 @@
         <h2>Returnerede Biler</h2>
         <form action="/forretningsudvikler/returnedCars" method="get">
             <label for="end_date">Vælg en dato:</label>
-            <input type="date" id="end_date" name="endDate" required>
+            <input type="date" id="end_date" name="end_date" required>
             <button type="submit">Vis Returnerede Biler</button>
         </form>
+    </section>
+
+    <section class ="Procentage">
+        <h2>Bestand af biler </h2>
+        <div class="notification" th:if="${notification}"  th:text="${notification}" th:style="'color: ' + ${color}" ></div>
+
+    </section>
+
+    <section class="total-earnings">
+        <h2>Total Indtjening</h2>
+        <div class="earnings-value" th:text="${totalEarnings}">0 DKK</div>
     </section>
 </main>

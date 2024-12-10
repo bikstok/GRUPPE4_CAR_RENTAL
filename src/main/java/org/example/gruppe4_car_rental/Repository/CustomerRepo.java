@@ -55,6 +55,8 @@ public class CustomerRepo {
 
     //Sletter en kunde baseret på cpr_number
     public boolean deleteCustomer(String cpr_number) {
+        this.jdbcTemplate.update("DELETE FROM CarPurchase WHERE contract_id IN (SELECT contract_id FROM RentalContract WHERE cpr_number = ?)", cpr_number);
+        this.jdbcTemplate.update("DELETE FROM DamageReport WHERE contract_id IN (SELECT contract_id FROM RentalContract WHERE cpr_number = ?)", cpr_number);
         this.jdbcTemplate.update("DELETE FROM RentalContract WHERE cpr_number = ?", cpr_number);
         return this.jdbcTemplate.update("DELETE FROM Customers WHERE cpr_number = ?", cpr_number) > 0;
     }

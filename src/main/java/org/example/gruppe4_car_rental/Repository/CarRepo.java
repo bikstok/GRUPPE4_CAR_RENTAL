@@ -35,6 +35,8 @@ public class CarRepo {
     /*for at slette bil via frame_number skal vi først fjerne det fra RentalContract,
     da frame_number er en foreign key i RentalContract*/
     public boolean deleteCar(String frame_number) {
+        this.jdbcTemplate.update("DELETE FROM CarPurchase WHERE contract_id IN (SELECT contract_id FROM RentalContract WHERE frame_number = ?)", frame_number);
+        this.jdbcTemplate.update("DELETE FROM DamageReport WHERE contract_id IN (SELECT contract_id FROM RentalContract WHERE frame_number = ?)", frame_number);
         this.jdbcTemplate.update("DELETE FROM RentalContract WHERE frame_number = ?", frame_number);
         return this.jdbcTemplate.update("DELETE FROM Cars WHERE frame_number = ?", frame_number) > 0;
     }

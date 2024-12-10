@@ -36,6 +36,11 @@
         <td th:text="${rentalContract.voucher}"></td>
         <td th:text="${rentalContract.start_odometer}"></td>
         <td>
+            <a th:href="@{'/editRentalContract/' + ${rentalContract.contract_id}}">
+                <button>Rediger lejekontrakt</button>
+            </a>
+        </td>
+        <td>
             <!-- Slet knap udfra kontraktens id  -->
             <a th:href="@{'/deleteRentalContract/'+${rentalContract.contract_id}}">
                 <button >Slet lejekontrakt</button>
@@ -45,11 +50,6 @@
             <a th:href="@{'/createCarPurchase/'+${rentalContract.contract_id}}">
                 <button >Opret forhåndsaftale</button>
             </a>
-
-            <a th:href="@{'/editRentalContract/' + ${rentalContract.contract_id}}">
-                <button>Rediger lejekontrakt</button>
-            </a>
-
         </td>
     </tr>
     </tbody>
