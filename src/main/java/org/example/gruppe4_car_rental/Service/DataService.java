@@ -32,7 +32,7 @@ public class DataService {
     public double getTotalPrice(String frame_number, LocalDate start_date, LocalDate end_date) {
         double monthly_sub_price = this.dataRepo.getMonthlySubscriptionPriceFromFrameNumber(frame_number);
         long monthsBetween = ChronoUnit.MONTHS.between(start_date, end_date);
-        //rounds up incase its less than a month or whatever
+        //rounds up incase it's less than a month or whatever
         if (start_date.plusMonths(monthsBetween).isBefore(end_date)) {
             monthsBetween++;
         }
