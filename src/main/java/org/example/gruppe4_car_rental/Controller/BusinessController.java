@@ -34,7 +34,7 @@ public class BusinessController {
         model.addAttribute("topRentedCarBrands", topRentedCarBrands);
 
         //Henter den månedlige indtjening udfra lejekontrakter
-        double monthlyEarnings = this.businessService.calculateMonthlyEarningsJava();
+        double monthlyEarnings = Math.round(this.businessService.calculateMonthlyEarningsJava() * 100.0) / 100.0;
         model.addAttribute("monthlyEarnings", monthlyEarnings + " DKK");
 
 

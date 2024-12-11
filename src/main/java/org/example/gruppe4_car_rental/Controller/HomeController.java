@@ -36,7 +36,6 @@ public class HomeController {
 
         // Variabel til at bestemme, hvilken side brugeren skal omdirigeres til
         String redirectUrl;
-
         String correctPasword;
         switch (username) {
             case "dataNerds":
