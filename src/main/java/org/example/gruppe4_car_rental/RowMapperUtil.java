@@ -1,9 +1,6 @@
 package org.example.gruppe4_car_rental;
 
-import org.example.gruppe4_car_rental.Model.Car;
-import org.example.gruppe4_car_rental.Model.CarPurchase;
-import org.example.gruppe4_car_rental.Model.Customer;
-import org.example.gruppe4_car_rental.Model.RentalContract;
+import org.example.gruppe4_car_rental.Model.*;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 public class RowMapperUtil {
@@ -15,5 +12,7 @@ public class RowMapperUtil {
             new BeanPropertyRowMapper(RentalContract.class);
     public static org.springframework.jdbc.core.RowMapper<CarPurchase> CAR_PURCHASE_ROW_MAPPER =
            new BeanPropertyRowMapper(CarPurchase.class);
+    public static org.springframework.jdbc.core.RowMapper<DamageReport> DAMAGE_REPORT_ROW_MAPPER =
+            new BeanPropertyRowMapper(DamageReport.class);
     
 }

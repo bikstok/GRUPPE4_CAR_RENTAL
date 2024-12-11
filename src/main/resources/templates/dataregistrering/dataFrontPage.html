@@ -1,45 +1,79 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
+    <meta charset="UTF-8">
     <title>Dataregistrering forside</title>
-    <!-- <link rel="stylesheet" href="/dataregistrering/dataFrontPage.css"> -->
-
+    <link rel="stylesheet" href="/dataregistrering/dataFrontPage.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-<!-- Navigation Bar -->
-<div class="navbar">
-    <div class="logo">Dataregistrering</div>
-    <div class="nav-buttons">
-        <a href="#">Test Button 1</a>
-        <a href="#">Test Button 2</a>
-        <a href="#">Test Button 3</a>
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>Bilabonnement A/S</h2>
+    <div class="sidebar-content">
+        <ul>
+            <li>
+                <a href="/dataregistrering/dataFrontPage">
+                    <i class="fas fa-house"></i> Home
+                </a>
+            </li>
+            <li>
+                <a href="/dataregistrering/customers">
+                    <i class="fas fa-user"></i> Kunder
+                </a>
+            </li>
+            <li>
+                <a href="/dataregistrering/cars">
+                    <i class="fas fa-car"></i> Biler
+                </a>
+            </li>
+            <li>
+                <a href="/dataregistrering/showRentalContracts">
+                    <i class="fas fa-folder-open"></i> Lejekontrakter
+                </a>
+            </li>
+            <li>
+                <a href="/dataregistrering/showCarPurchases">
+                    <i class="fas fa-folder-open"></i> Forhåndsaftaler
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="logout">
+        <a href="/">
+            <i class="fa-solid fa-right-from-bracket"></i> Log ud
+        </a>
     </div>
 </div>
 
-<h1>Alle biler</h1>
-<table border="1">
-    <thead>
-    <tr>
-        <th>Stelnummer</th>
-        <th>Brand</th>
-        <th>Model</th>
-        <th>Opret lejekontrakt</th>
-
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="car : ${cars}">
-        <td th:text="${car.frame_number}"></td>
-        <td th:text="${car.brand}"></td>
-        <td th:text="${car.model}"></td>
-        <td>
-            <!-- opret lejeaftale knap -->
-            <a th:href="@{'/createRentalContract/'+${car.frame_number}}">
-                <button >Opret lejekontrakt</button>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<!-- Main Content -->
+<main>
+    <h1>Dataregistrering</h1>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Stelnummer</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="car : ${cars}">
+            <td th:text="${car.frame_number}"></td>
+            <td th:text="${car.brand}"></td>
+            <td th:text="${car.model}"></td>
+            <td>
+                <span>
+                <a th:href="@{'/createRentalContract/'+${car.frame_number}}">
+                    <button>Opret lejekontrakt</button>
+                </a>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
 </body>
 </html>

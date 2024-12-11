@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    font-family: 'Arial', sans-serif; /* Moderne skrifttype */
+    font-family: 'Nunito', sans-serif; /* Moderne skrifttype */
     display: flex;
     justify-content: center;
     align-items: center;

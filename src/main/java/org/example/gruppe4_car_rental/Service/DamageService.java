@@ -34,4 +34,11 @@ public class DamageService {
     }
 
 
+    public List<DamageReport> fetchAllDamageReports() {
+        return this.damageRepo.fetchAllDamageReports();
+    }
+
+    public void deleteDamageReport(int contract_id) {
+        this.damageRepo.deleteDamageReport(contract_id);
+    }
 }

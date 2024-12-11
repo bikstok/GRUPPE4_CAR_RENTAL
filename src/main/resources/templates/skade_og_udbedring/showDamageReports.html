@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alle Skaderapporter</title>
+</head>
+<body>
+<h1>Alle Skaderapporter</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Skaderapport ID</th>
+        <th>Kontrakt ID</th>
+        <th>Total Reperationspris</th>
+        <th>Rediger skaderapport</th>
+        <th>Slet skaderapport</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="damageReport : ${damageReports}">
+        <td th:text="${damageReport.damage_report_id}"></td>
+        <td th:text="${damageReport.contract_id}"></td>
+        <td th:text="${damageReport.total_repair_price}"></td>
+        <td>
+            <a th:href="@{'/editDamageReport/' + ${damageReport.contract_id}}">
+                <button>Rediger skaderapport</button>
+            </a>
+        </td>
+        <td>
+            <!-- Slet knap udfra kontraktens id  -->
+            <a th:href="@{'/deleteDamageReport/'+${damageReport.contract_id}}">
+                <button >Slet skaderapport</button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
+<body>
+
+</body>
+</html>

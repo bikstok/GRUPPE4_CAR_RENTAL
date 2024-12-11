@@ -1,114 +1,158 @@
-/* General Reset */
-* {
+/* Generelle indstillinger */
+body {
+    margin: 0;
+    font-family: Nunito, sans-serif; /* Brug en moderne sans-serif skrifttype */
+    background-color: #f4f9fb; /* Lys baggrund for god kontrast */
+    color: #333; /* Mørk tekst for bedre læsbarhed */
+}
+
+/* Sidebar-stil */
+.sidebar {
+    display: flex;
+    flex-direction: column; /* Organiser sidebar-indholdet lodret */
+    justify-content: space-between; /* Sørg for plads mellem indholdet og bunden */
+    background-color: white; /* Baggrundsfarve */
+    width: 17%; /* Ensartet bredde */
+    height: 100vh; /* Fylder hele højden */
+    position: fixed; /* Holder sidebar fast */
+    top: 0;
+    left: 0;
+    padding: 10px; /* Ens padding */
+    box-sizing: border-box; /* Inkluder padding og border i bredden */
+    box-shadow: 2px 0 6px rgba(0,0,0,0.1); /* Skygge */
+}
+
+.sidebar h2 {
+    font-size: 16px; /* Ens tekststørrelse */
+    font-weight: bold;
+    margin-bottom: 24px; /* Afstand mellem header og liste */
+    text-align: left;
+    padding-left: 10px; /* Ens padding til venstre */
+    color: darkblue;
+}
+
+.sidebar ul {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    list-style-type: none;
+    padding-left: 10px; /* Ens padding */
 }
 
-/* Body */
-body {
-    font-family: 'Nunito', sans-serif; /* Using Nunito font */
-    background-color: #f4f9fb; /* Light background for contrast */
-    color: #333; /* Dark text for readability */
-    padding: 20px;
+.sidebar ul li {
+    margin-bottom: 15px;
 }
 
-/* Navigation Bar */
-.navbar {
-    background-color: #063970; /* Deep blue */
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 8px; /* Rounded corners for modern look */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 3D effect */
-    margin-bottom: 20px; /* Space between navbar and content */
-}
-
-.navbar .logo {
-    font-size: 24px;
+.sidebar ul li a {
+    text-decoration: none; /* Fjern understregning på links */
     font-weight: bold;
-    color: black;
+    color: #333; /* Mørk tekstfarve */
+    font-size: 14px; /* Ens tekststørrelse */
+    display: flex; /* For at arrangere ikon og tekst på linje */
+    align-items: center; /* Justér ikon og tekst lodret */
+    border-radius: 5px; /* Rundede hjørner for moderne design */
+    padding: 10px 15px; /* Ens padding for alle knapper */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Glidende overgangseffekt ved hover */
 }
 
-.navbar .nav-buttons a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    padding: 10px 20px;
-    background-color: #76b5c5; /* Soft greenish-blue */
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+.sidebar ul li a i {
+    font-size: 18px; /* Størrelse på ikonerne */
+    color: #333; /* Farve på ikonerne */
+    margin-right: 10px; /* Afstand mellem ikon og tekst */
 }
 
-.navbar .nav-buttons a:hover {
-    background-color: #63a0b8; /* Slightly darker greenish-blue */
+.sidebar ul li a:hover {
+    background-color: #abdbe3; /* Powder blue baggrund ved hover */
+    color: #fff; /* Hvid tekst ved hover */
 }
 
-/* Heading */
-h1 {
-    text-align: center;
-    color: #063970; /* Deeper blue */
-    margin-bottom: 20px;
+/* Styling for sidebar-content */
+.sidebar-content {
+    flex-grow: 1; /* Fyld al tilgængelig plads */
+}
+
+/* Styling for log ud-knap */
+.sidebar .logout {
+    margin-top: auto; /* Pushes the logout button to the bottom */
+}
+
+.sidebar .logout a {
+    text-decoration: none; /* Fjern understregning på links */
+    font-weight: bold;
+    color: #333; /* Mørk tekstfarve */
+    font-size: 14px; /* Ens tekststørrelse */
+    display: flex;
+    align-items: center; /* Justér ikon og tekst lodret */
+    border-radius: 5px; /* Rundede hjørner */
+    padding: 10px 15px; /* Ens padding */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Samme transition som de andre links */
+}
+
+.sidebar .logout a i {
+    margin-right: 10px; /* Afstand mellem ikon og tekst */
+    font-size: 18px; /* Størrelse på ikonerne */
+    color: #333; /* Farve på ikonerne */
+}
+
+.sidebar .logout a:hover {
+    background-color: #abdbe3; /* Powder blue baggrund ved hover */
+    color: #fff; /* Hvid tekst ved hover */
+}
+
+/* Main styling */
+main {
+    margin-left: 17%; /* Giver plads til sidebar */
+    padding: 20px; /* Indrykning for indhold */
+    display: block; /* Standard layout for indhold */
+    color: #027f66; /*farve på dataregistrering overskrift*/
 }
 
 /* Table Styling */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0 auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 3D effect */
-    background-color: white;
-    border-radius: 8px; /* Rounded corners for a more modern look */
-    overflow: hidden;
+    width: 100%; /* Tabel fylder hele indholdsområdet */
+    margin: 20px 0; /* Afstand over og under tabellen */
+    border-collapse: collapse; /* Fjerner mellemrum mellem celler */
+    background-color: white; /* Hvid baggrund for tabellen */
+    border-radius: 8px; /* Runde hjørner for et moderne udseende */
+    overflow: hidden; /* Skjuler eventuelle overskydende hjørner */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Let skygge for dybdeeffekt */
+    table-layout: auto; /* Automatisk kolonnebredde */
 }
 
-/* Table Header */
 th {
-    background-color: #063970; /* Deep blue */
-    color: #fff;
-    padding: 12px;
-    text-align: left;
+    background-color: #03997a; /* Mørkeblå baggrund for header */
+    color: #fff; /* Hvid tekstfarve */
+    padding: 12px; /* Indrykning for tekst */
+    text-align: left; /* Venstrejustering af tekst */
 }
 
-/* Table Body */
+td {
+    padding: 12px; /* Indrykning for tekst i celler */
+    text-align: left; /* Venstrejustering af tekst */
+}
+
 tbody tr:nth-child(odd) {
-    background-color: #abdbe3; /* Lighter blue */
+    background-color: #f2f2f2; /* Farve ulige rækker */
 }
 
 tbody tr:nth-child(even) {
-    background-color: #e4f0f9; /* Lighter blue, no orangey tones */
+    background-color: #e0e0e0; /* Farve lige rækker */
 }
 
-/* Hover effect on rows */
 tbody tr:hover {
-    background-color: #76b5c5; /* Lighter blue on hover */
-    cursor: pointer;
+    background-color: #d6d6d6; /* Mørkere blå ved hover */
+    cursor: pointer; /* Indikator for klikbar række */
 }
 
-/* Table Cells */
-td {
-    padding: 12px;
-    text-align: left;
-}
-
-/* Button Styling */
 button {
-    background-color: #76b5c5; /* Soft greenish-blue button */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    background-color: #03997a; /* Primær knapfarve */
+    color: white; /* Hvid tekstfarve */
+    padding: 10px 15px; /* Knapstørrelse */
+    border: none; /* Fjern kant */
+    border-radius: 5px; /* Runde hjørner */
+    cursor: pointer; /* Indikerer klikbarhed */
+    transition: background-color 0.3s ease; /* Glidende overgang ved hover */
 }
 
 button:hover {
-    background-color: #63a0b8; /* Slightly darker greenish-blue on hover */
-}
-
-/* Reduce space after the button */
-td a {
-    display: inline-block;
-    margin-bottom: 10px; /* Reduced space below the button */
+    background-color: #027f66; /* Mørkere grøn ved hover */
 }

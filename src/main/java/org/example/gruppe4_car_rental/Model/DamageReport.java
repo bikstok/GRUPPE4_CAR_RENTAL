@@ -1,15 +1,11 @@
 package org.example.gruppe4_car_rental.Model;
 
 public class DamageReport {
-
     private int damage_report_id;
-
     private int contract_id;
-
     private double total_repair_price;
 
     public DamageReport(){
-
     }
 
     public DamageReport(int damage_report_id, int contract_id, double total_repair_price) {

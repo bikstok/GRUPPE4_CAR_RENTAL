@@ -46,6 +46,12 @@ public class DamageController {
         return "skade_og_udbedring/damageFrontPage";
     }
 
+    @GetMapping("skade_og_udbedring/showDamageReports")
+    public String fetchAllDamageReports(Model model) {
+        List<DamageReport> damageReports = this.damageService.fetchAllDamageReports();
+        model.addAttribute("damageReports", damageReports);
+        return "skade_og_udbedring/showDamageReports";
+    }
     @GetMapping("/createDamageReport/{contract_id}")
     public String redirectToDamageReportForm(@PathVariable("contract_id") String contract_id, Model model) {
         model.addAttribute("contract_id", contract_id);
@@ -57,21 +63,33 @@ public class DamageController {
     @PostMapping("/skade_og_udbedring/createDamageReport")
     public String createDamageReport(
             @RequestParam("contract_id") int contract_id,
-            @RequestParam("damage_prices") List<Double> damage_prices,
+            @RequestParam(value = "damage_prices", required = false) List<Double> damage_prices,
             Model model) {
 
         double total_repair_price = 0.0;
-        for (double damage_price : damage_prices) {
-            total_repair_price += damage_price;
+        if (damage_prices !=null) {
+            for (double damage_price : damage_prices) {
+                total_repair_price += damage_price;
+            }
         }
 
         this.damageService.createDamageReport(new DamageReport(-1, contract_id, total_repair_price));
 
-        return "redirect:/dataregistrering/cars";
+        return "redirect:/skade_og_udbedring/showDamageReports";
     }
 
-    @GetMapping("/skade_og_udbedring/skade")
-    public String showDamagePage() {
-        return "skade_og_udbedring/skade";
+    @GetMapping("/deleteDamageReport/{contract_id}")
+    public String deleteDamageReport(@PathVariable("contract_id") int contract_id) {
+        this.damageService.deleteDamageReport(contract_id);
+        return "redirect:/skade_og_udbedring/showDamageReports";
+    }
+
+    @GetMapping("/editDamageReport/{contract_id}")
+    public String editDamageReport(@PathVariable("contract_id") int contract_id, Model model) {
+        this.damageService.deleteDamageReport(contract_id);
+        model.addAttribute("contract_id", contract_id);
+        List<DamageType> damageTypes = this.damageService.fetchAllDamageTypes();
+        model.addAttribute("damageTypes", damageTypes);
+        return "skade_og_udbedring/createDamageReport";
     }
 }

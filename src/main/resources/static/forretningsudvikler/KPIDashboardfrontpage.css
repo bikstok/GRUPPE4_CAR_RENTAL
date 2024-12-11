@@ -1,23 +1,15 @@
 /* Generelle indstillinger */
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: Nunito, sans-serif;
     background-color: #f9f9f9; /* Baggrund for hele siden */
-}
-
-/* Header-stil */
-header {
-    background-color: white; /* Grøn-hvid farve */
-    color: black; /* Sort tekstfarve for synlighed */
-    padding: 8px; /* Størrelse af kant */
-    text-align: center;
-    font-size: 10px;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tilføjer en skygge */
 }
 
 /* Sidebar-stil */
 .sidebar {
+    display: flex;
+    flex-direction: column; /* Organiser sidebar-indholdet lodret */
+    justify-content: space-between; /* Sørg for plads mellem indholdet og bunden */
     background-color: white; /* Baggrundsfarve */
     width: 17%; /* Ensartet bredde */
     height: 100vh; /* Fylder hele højden */
@@ -25,7 +17,8 @@ header {
     top: 0;
     left: 0;
     padding: 10px; /* Ens padding */
-    box-sizing: border-box; /* Inkluder padding og border i breddeberegningen */
+    box-sizing: border-box; /* Inkluder padding og border i bredden */
+    box-shadow: 2px 0 6px rgba(0,0,0,0.1); /* skygge */
 }
 
 .sidebar h2 {
@@ -34,7 +27,7 @@ header {
     margin-bottom: 24px; /* Afstand mellem header og liste */
     text-align: left;
     padding-left: 10px; /* Ens padding til venstre */
-    color: black;
+    color: darkblue;
 }
 
 .sidebar ul {
@@ -51,17 +44,53 @@ header {
 .sidebar ul li a {
     text-decoration: none;
     font-weight: bold;
-    color: darkgrey;
+    color: #333;
     font-size: 14px; /* Ens tekststørrelse */
-    display: block; /* Sørger for hele knappen er klikbar */
+    display: flex; /* For at arrangere ikon og tekst på linje */
+    align-items: center; /* Justér ikon og tekst lodret */
+    border-radius: 5px; /* Rundede hjørner for moderne design */
     padding: 10px 15px; /* Ens padding for alle knapper */
     transition: color 0.3s ease, background-color 0.3s ease;
 }
 
+.sidebar ul li a i {
+    font-size: 18px; /* Størrelse på ikonerne */
+    color: #333; /* Farve på ikonerne */
+    margin-right: 10px; /* Afstand mellem ikon og tekst */
+}
+
 .sidebar ul li a:hover {
-    color: #abdbe3;
-    background-color: #f2f2f2; /* Baggrundsfarve ved hover */
-    transform: translateX(5px);
+    background-color: #abdbe3; /* Powder blue baggrund ved hover */
+    color: #fff; /* Hvid tekst ved hover */
+}
+
+/* Styling for sidebar-content */
+.sidebar-content {
+    flex-grow: 1; /* Fyld al tilgængelig plads */
+}
+
+/* Styling for log ud-knap */
+.logout a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+    font-size: 14px; /* Ens tekststørrelse */
+    display: flex;
+    align-items: center; /* Justér ikon og tekst lodret */
+    border-radius: 5px; /* Rundede hjørner */
+    padding: 10px 15px; /* Ens padding */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Samme transition som de andre links */
+}
+
+.logout a i {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.logout a:hover {
+    background-color: #abdbe3; /* Powder blue baggrund ved hover */
+    color: #fff; /* Hvid tekst ved hover */
 }
 
 /* Main styling */
