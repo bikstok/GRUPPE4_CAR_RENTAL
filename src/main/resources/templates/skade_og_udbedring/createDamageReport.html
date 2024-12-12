@@ -4,33 +4,39 @@
     <meta charset="UTF-8">
     <title>Udfyld skaderapport</title>
     <link rel="stylesheet" href="/skade_og_udbedring/createDamageReport.css">
+    <link rel="stylesheet" href="/red.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 <main>
+    <h1>Opret en skade</h1>
+
+
+
     <form action="/skade_og_udbedring/createDamageReport" method="post">
         <input type="hidden" name="contract_id" th:value="${contract_id}">
         <table>
             <thead>
             <tr>
-                <th>Damage Name</th>
-                <th>Damage Price</th>
-                <th>Select</th>
+                <th>Skade navn</th>
+                <th>Pris på skade</th>
+                <th>Vælg skade</th>
             </tr>
             </thead>
             <tbody>
             <!-- Example of rendering dynamic data -->
             <tr th:each="damageType : ${damageTypes}">
                 <td th:text="${damageType.damage_name}">Damage Name</td>
-                <td th:text="${damageType.damage_price}">Damage Price</td>
+                <td th:text="${damageType.damage_price + ' DKK'}">Damage Price</td>
                 <td>
-                    <input type="checkbox" name="damage_prices" th:value="${damageType.damage_price}">
+                    <input type="checkbox" th:value="${damageType.damage_price}">
                 </td>
             </tr>
             </tbody>
         </table>
-        <button type="submit">Submit</button>
+        <button type="submit" style="background-color: green; color: white;">Opret skadesrapport</button>
+        <!--<button type="cancel">Annuller skadesrapport</button>-->
     </form>
 </main>
 </body>

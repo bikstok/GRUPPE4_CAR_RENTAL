@@ -24,6 +24,7 @@ public class DamageController {
     public String fetchContractsWithPendingInspections(Model model) {
         int days = 2;
         List<Car> carsWithPendingInspections = this.damageService.getCarsWithPendingInspectionsForXDays(days);
+        //carsWithPendingInspections.add(new Car("test","test2","test3","test4","test5","test6",2,3,4,5));
         if (!carsWithPendingInspections.isEmpty()) {
             String dage = days > 1 ? "dage" : "dag";
             int antalBiler = carsWithPendingInspections.size();

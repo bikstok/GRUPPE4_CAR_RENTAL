@@ -1,0 +1,120 @@
+/* Generelle indstillinger */
+body {
+    margin: 0;
+    font-family: Nunito, sans-serif;
+    background-color: #f4f9fb;
+    color: #333;
+}
+
+/* Sidebar-stil */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    width: 17%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 2px 0 6px rgba(0,0,0,0.1);
+    transition: width 0.3s ease, padding 0.3s ease;
+}
+
+.sidebar h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    text-align: left;
+    padding-left: 10px;
+    color: darkblue;
+}
+
+.sidebar ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.sidebar ul li a i {
+    font-size: 18px;
+    color: #333;
+    margin-right: 10px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #abdbe3;
+    color: #fff;
+}
+
+.sidebar-content {
+    flex-grow: 1;
+}
+
+/* Styling for log ud-knap */
+.sidebar .logout {
+    margin-top: auto;
+}
+
+.sidebar .logout a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.sidebar .logout a i {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.sidebar .logout a:hover {
+    background-color: #abdbe3;
+    color: #fff;
+}
+
+/* Styling for the toggle button */
+.sidebar-toggle {
+    display: none;
+}
+
+.sidebar-toggle-label {
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: -30px; /* Placer knappen uden for sidebar */
+}
+
+.sidebar-toggle:checked + .sidebar-content {
+    display: none; /* Skjul sidebar-indholdet når togglet */
+}
+
+.sidebar-toggle:checked + .sidebar-content + .sidebar .logout {
+    display: none; /* Skjul logout-knappen når sidebar er foldet ind */
+}

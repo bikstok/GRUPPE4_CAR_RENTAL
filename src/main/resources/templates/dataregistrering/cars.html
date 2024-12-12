@@ -2,11 +2,62 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Alle biler</title>
-    <link rel="stylesheet" href="/dataregistrering/showCars.css">
+   
+    <link rel="stylesheet" href="/table.css">
+    <link rel="stylesheet" href="/dataregistrering/carsTable.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>Bilabonnement A/S
+        <!-- Fold ud/ind funktion -->
+        <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle">
+        <label for="sidebar-toggle" class="sidebar-toggle-label">
+            <i class="fas fa-bars"></i>
+        </label>
+    </h2>
+    <div class="sidebar-content">
+        <ul>
+            <li>
+                <a href="/dataregistrering/dataFrontPage">
+                    <i class="fas fa-house"></i> Home
+                </a>
+            </li>
+            <li>
+                <a href="/dataregistrering/customers">
+                    <i class="fas fa-user"></i> Kunder
+                </a>
+            </li>
+            <li>
+                <a href="/dataregistrering/showRentalContracts">
+                    <i class="fas fa-folder-open"></i> Lejekontrakter
+                </a>
+            </li>
+            <li>
+                <a href="/dataregistrering/showCarPurchases">
+                    <i class="fas fa-folder-open"></i> Forhåndsaftaler
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="logout">
+        <a href="/">
+            <i class="fa-solid fa-right-from-bracket"></i> Log ud
+        </a>
+    </div>
+</div>
+
+<!-- Sidebar toggle checkbox -->
+<input type="checkbox" id="sidebar-toggle" class="sidebar-toggle-checkbox" />
+<label for="sidebar-toggle" class="sidebar-toggle-label">
+    <i class="fas fa-bars"></i>
+</label>
+
+
+
 <h1>Alle biler</h1>
 <table border="1">
     <thead>
@@ -21,6 +72,8 @@
         <th><a th:href="@{'/dataregistrering/cars?sortBy=c.monthly_sub_price&previousSortBy=' + ${sortBy}}">Månedlig abonnementspris</a></th>
         <th><a th:href="@{'/dataregistrering/cars?sortBy=c.odometer&previousSortBy=' + ${sortBy}}">Odometer</a></th>
         <th><a th:href="@{'/dataregistrering/cars?sortBy=c.original_price&previousSortBy=' + ${sortBy}}">Original pris</a></th>
+        <th>Rediger</th>
+        <th>Slet</th>
     </tr>
     </thead>
     <tbody>
@@ -40,10 +93,12 @@
                 <a th:href="@{'/deleteCar/'+${car.frame_number}}">
                     <button >Slet bil</button>
                 </a>
-
+        </td>
+        <td>
                 <a th:href="@{'/editCar/' + ${car.frame_number}}">
-                <button>Rediger bil</button>
+                    <button>Rediger bil</button>
                 </a>
+        </td>
         </td>
     </tr>
     </tbody>

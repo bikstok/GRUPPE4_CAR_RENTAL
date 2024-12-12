@@ -1,0 +1,57 @@
+main {
+    margin-left: 17%; /* Giver plads til sidebar */
+    padding: 20px; /* Indrykning for indhold */
+    display: block; /* Standard layout for indhold */
+    color: #027f66; /*farve på dataregistrering overskrift*/
+}
+
+/* Table Styling */
+table {
+    width: 100%; /* Tabel fylder hele indholdsområdet */
+    margin: 20px 0; /* Afstand over og under tabellen */
+    border-collapse: collapse; /* Fjerner mellemrum mellem celler */
+    background-color: white; /* Hvid baggrund for tabellen */
+    border-radius: 8px; /* Runde hjørner for et moderne udseende */
+    overflow: hidden; /* Skjuler eventuelle overskydende hjørner */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Let skygge for dybdeeffekt */
+    table-layout: auto; /* Automatisk kolonnebredde */
+}
+
+th {
+    background-color: #03997a; /* Mørkeblå baggrund for header */
+    color: #fff; /* Hvid tekstfarve */
+    padding: 12px; /* Indrykning for tekst */
+    text-align: left; /* Venstrejustering af tekst */
+}
+
+td {
+    padding: 12px; /* Indrykning for tekst i celler */
+    text-align: left; /* Venstrejustering af tekst */
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Farve ulige rækker */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e0e0e0; /* Farve lige rækker */
+}
+
+tbody tr:hover {
+    background-color: #d6d6d6; /* Mørkere blå ved hover */
+    cursor: pointer; /* Indikator for klikbar række */
+}
+
+button {
+    background-color: #03997a; /* Primær knapfarve */
+    color: white; /* Hvid tekstfarve */
+    padding: 10px 15px; /* Knapstørrelse */
+    border: none; /* Fjern kant */
+    border-radius: 5px; /* Runde hjørner */
+    cursor: pointer; /* Indikerer klikbarhed */
+    transition: background-color 0.3s ease; /* Glidende overgang ved hover */
+}
+
+button:hover {
+    background-color: #027f66; /* Mørkere grøn ved hover */
+}

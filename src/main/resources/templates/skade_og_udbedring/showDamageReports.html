@@ -1,49 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Alle Skaderapporter</title>
+    <title>Alle skaderapporter</title>
+    <link rel="stylesheet" href="/sidebar.css">
+    <link rel="stylesheet" href="/table.css">
+    <link rel="stylesheet" href="/red.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-<h1>Alle Skaderapporter</h1>
-<table border="1">
-    <thead>
-    <tr>
-        <th>Skaderapport ID</th>
-        <th>Kontrakt ID</th>
-        <th>Total Reperationspris</th>
-        <th>Rediger skaderapport</th>
-        <th>Slet skaderapport</th>
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>Bilabonnement A/S</h2>
+    <div class="sidebar-content">
+        <ul>
+            <li>
+                <a href="/skade_og_udbedring/damageFrontPage">
+                    <i class="fas fa-house"></i> Home
+                </a>
+            </li>
+            <li>
+                <a href="/skade_og_udbedring/showDamageReports">
+                    <i class="fas fa-user"></i> Skaderapporter
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="logout">
+        <a href="/">
+            <i class="fa-solid fa-right-from-bracket"></i> Log ud
+        </a>
+    </div>
+</div>
 
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="damageReport : ${damageReports}">
-        <td th:text="${damageReport.damage_report_id}"></td>
-        <td th:text="${damageReport.contract_id}"></td>
-        <td th:text="${damageReport.total_repair_price}"></td>
-        <td>
-            <a th:href="@{'/editDamageReport/' + ${damageReport.contract_id}}">
-                <button>Rediger skaderapport</button>
-            </a>
-        </td>
-        <td>
-            <!-- Slet knap udfra kontraktens id  -->
-            <a th:href="@{'/deleteDamageReport/'+${damageReport.contract_id}}">
-                <button >Slet skaderapport</button>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-</body>
-</html>
-<body>
-
+<!-- Main Content -->
+<main>
+    <h1>Alle skaderapporter</h1>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Skaderapport ID</th>
+            <th>Kontrakt ID</th>
+            <th>Total Reperationspris</th>
+            <th>Rediger skaderapport</th>
+            <th>Slet skaderapport</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="damageReport : ${damageReports}">
+            <td th:text="${damageReport.damage_report_id}"></td>
+            <td th:text="${damageReport.contract_id}"></td>
+            <td th:text="${damageReport.total_repair_price}"></td>
+            <td>
+                <a th:href="@{'/editDamageReport/' + ${damageReport.contract_id}}">
+                    <button
+                            style="background-color: #303030;"
+                            onmouseover="this.style.backgroundColor='#262626'"
+                            onmouseout="this.style.backgroundColor='#303030'">
+                        Rediger skaderapport
+                    </button>
+                </a>
+            </td>
+            <td>
+                <!-- Slet knap udfra kontraktens id  -->
+                <a th:href="@{'/deleteDamageReport/'+${damageReport.contract_id}}">
+                    <button >Slet skaderapport</button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
 </body>
 </html>

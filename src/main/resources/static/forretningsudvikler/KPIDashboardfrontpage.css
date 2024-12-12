@@ -97,12 +97,76 @@ body {
 main {
     margin-left: 17%; /* Giver plads til sidebar */
     padding: 20px;
-    display: grid; /* Grid layout for at arrangere sektioner */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Kolonner justeres efter plads */
-    gap: 20px; /* Afstand mellem sektioner */
 }
 
-/* KPI sektion styling */
-.kpi, .top-rented-cars, .monthly-earnings, .returned-cars {
+/* Dashboard overskrift styling */
+.dashboard-title {
+    text-align: left;
+    margin-bottom: 20px; /* Afstand til næste element */
+    padding: 10px;
+}
+
+.dashboard-title h1 {
+    font-size: 28px; /* Stor og tydelig titel */
+    color: darkblue;
+    font-weight: 600;
+    display: flex;
+    align-items: center; /* Justér ikon og tekst lodret */
+    gap: 10px; /* Luft mellem ikon og tekst */
+}
+
+/* KPI-bokse styling */
+.kpi-boxes {
+    display: flex;
+    justify-content: space-between; /* Sørg for jævn afstand mellem boksene */
+    gap: 20px; /* Afstand mellem boksene */
+    margin-top: 20px;
+}
+
+.kpi-box {
+    flex: 1; /* Ensartet størrelse */
+    max-width: 450px; /* Maksimal bredde */
+    background-color: #e1effe; /* Blå baggrund */
+    border-radius: 10px; /* Runde hjørner */
+    padding: 20px; /* Luft inden i boksen */
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Let skygge */
+    transition: transform 0.3s ease;
+}
+
+.kpi-box:hover {
+    transform: scale(1.05); /* Effekt ved hover */
+}
+
+/* Lange KPI-bokse styling */
+.large-kpi-boxes {
+    display: flex;
+    gap: 20px; /* Afstand mellem boksene */
+    margin-top: 20px;
+    justify-content: space-between; /* Placer boksene med mellemrum */
+}
+
+.large-kpi-box {
+    flex: 1;
+    max-width: 570px; /* Aflang boks */
+    background-color: #def7ec; /* Blå baggrund */
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Let skygge */
+    transition: transform 0.3s ease;
+}
+
+.large-kpi-box:hover {
+    transform: scale(1.05); /* Effekt ved hover */
+}
+
+/* Returnerede biler styling */
+.kpi-returneredebiler {
+    margin-top: 30px;
+    text-align: center;
     background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }

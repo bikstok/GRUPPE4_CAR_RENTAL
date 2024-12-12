@@ -1,49 +1,88 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
+    <meta charset="UTF-8">
     <title>Skade og registrering forside</title>
+    <link rel="stylesheet" href="/sidebar.css">
+    <link rel="stylesheet" href="/table.css">
+    <link rel="stylesheet" href="/red.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-<table border="0" width="100%">
-    <tr valign="top">
-        <td>
-            <!-- Left Content -->
-            <h1>Alle biler</h1>
-            <table border="1" width="100%">
-                <thead>
-                <tr>
-                    <th>Kontrakt ID</th>
-                    <th>CPR Nummer</th>
-                    <th>Stel nummer</th>
-                    <th>Start dato</th>
-                    <th>Slut dato</th>
-                    <th>Forsikring</th>
-                    <th>Opret skaderapport</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="rentalContract : ${rentalContracts}">
-                    <td th:text="${rentalContract.contract_id}"></td>
-                    <td th:text="${rentalContract.cpr_number}"></td>
-                    <td th:text="${rentalContract.frame_number}"></td>
-                    <td th:text="${rentalContract.start_date}"></td>
-                    <td th:text="${rentalContract.end_date}"></td>
-                    <td th:text="${rentalContract.insurance}"></td>
-                    <td>
-                        <a th:href="@{'/createDamageReport/'+${rentalContract.contract_id}}">
-                            <button>Opret skaderapport</button>
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </td>
-        <td width="37.5%">
-            <!-- Right Content -->
-            <h3 class="error" th:if="${notification_title}" th:text="${notification_title}" style="color: red;"></h3>
-            <p class="error" th:if="${notification}" th:text="${notification}" style="color: red;"></p>
-        </td>
-    </tr>
-</table>
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>Bilabonnement A/S</h2>
+    <div class="sidebar-content">
+        <ul>
+            <li>
+                <a href="/skade_og_udbedring/damageFrontPage">
+                    <i class="fas fa-house"></i> Home
+                </a>
+            </li>
+            <li>
+                <a href="/skade_og_udbedring/showDamageReports">
+                    <i class="fas fa-user"></i> Skaderapporter
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="logout">
+        <a href="/">
+            <i class="fa-solid fa-right-from-bracket"></i> Log ud
+        </a>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main>
+    <h1>Skade og registrering</h1>
+
+    <div class="error" th:if="${notification_title}">
+        <div class="error__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none">
+                <path fill="#393a37" d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z"></path>
+            </svg>
+        </div>
+        <!--<h3 class="error__title" th:text="${notification_title}" style="color: white;"></h3>-->
+        <div class="error__title" th:if="${notification}" th:text="${notification}" style="color: white;"></div>
+        <div class="error__close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20">
+                <path fill="#393a37" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path>
+            </svg>
+        </div>
+    </div>
+
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Kontrakt ID</th>
+            <th>CPR Nummer</th>
+            <th>Stel nummer</th>
+            <th>Start dato</th>
+            <th>Slut dato</th>
+            <th>Forsikring</th>
+            <th>Opret skaderapport</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="rentalContract : ${rentalContracts}">
+            <td th:text="${rentalContract.contract_id}"></td>
+            <td th:text="${rentalContract.cpr_number}"></td>
+            <td th:text="${rentalContract.frame_number}"></td>
+            <td th:text="${rentalContract.start_date}"></td>
+            <td th:text="${rentalContract.end_date}"></td>
+            <td th:text="${rentalContract.insurance}"></td>
+            <td>
+                <a th:href="@{'/createDamageReport/'+${rentalContract.contract_id}}">
+                    <button >Opret skaderapport</button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
 </body>
 </html>

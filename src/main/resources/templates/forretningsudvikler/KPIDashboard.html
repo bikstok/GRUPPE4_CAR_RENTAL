@@ -40,63 +40,49 @@
 </div>
 
 <main>
-    <!-- Aktive udlejninger -->
-    <section class="kpi">
-        <h2>Aktive Lejekontrakter</h2>
-        <div class="kpi-value" th:text="${rentedCars}">0</div>
-    </section>
+    <!-- Dashboard Overskrift -->
+    <div class="dashboard-title">
+        <h1><i class="fa-solid fa-layer-group"></i> Dashboard</h1>
+    </div>
 
-    <!-- Antal lejekontrakter -->
-    <section class="kpi">
-        <h2>Antal Lejekontrakter</h2>
-        <div class="kpi-value" th:text="${rentedCarsOverall}">0</div>
-    </section>
+    <!-- 3 KPI'er i firkantede bokse -->
+    <div class="kpi-boxes">
+        <div class="kpi-box">
+            <h3>Aktive Lejekontrakter</h3>
+            <p class="kpi-value" th:text="${rentedCars}">0</p>
+        </div>
+        <div class="kpi-box">
+            <h3>Antal Lejekontrakter</h3>
+            <p class="kpi-value" th:text="${rentedCarsOverall}">0</p>
+        </div>
+        <div class="kpi-box">
+            <h3>Bestand af Biler</h3>
+            <p class="notification" th:if="${notification}" th:text="${notification}" th:style="'color: ' + ${color}">0</p>
+        </div>
+    </div>
 
-    <!-- Top 5 Mest Udlejede Biler -->
-    <section class="top-rented-cars">
-        <h2>Top 5 Mest Udlejede Biler (All Time)</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Brand</th>
-                <th>Antal Udlejninger</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Iterér over topRentedCarBrands -->
-            <tr th:each="car : ${topRentedCarBrands}">
-                <td th:text="${car['brand']}">Brand</td>
-                <td th:text="${car['rental_count']}">0</td>
-            </tr>
-            </tbody>
-        </table>
-    </section>
+    <!-- 2 aflange KPI'er -->
+    <div class="large-kpi-boxes">
+        <div class="large-kpi-box">
+            <h3>Månedlig Indtjening</h3>
+            <p class="earnings-value" th:text="${monthlyEarnings}">0 DKK</p>
+        </div>
+        <div class="large-kpi-box">
+            <h3>Total Indtjening</h3>
+            <p class="earnings-value" th:text="${totalEarnings}">0 DKK</p>
+        </div>
+    </div>
 
-    <!-- Månedlig Indtjening -->
-    <section class="monthly-earnings">
-        <h2>Månedlig Indtjening (Denne Måned)</h2>
-        <div class="earnings-value" th:text="${monthlyEarnings}">0 DKK</div>
-    </section>
-
-    <!-- Returnerede Biler -->
-    <section class="returned-cars">
-        <h2>Returnerede Biler</h2>
+    <!-- Returnerede Biler nederst -->
+    <div class="kpi-returneredebiler">
+        <h3>Returnerede Biler</h3>
         <form action="/forretningsudvikler/returnedCars" method="get">
             <label for="end_date">Vælg en dato:</label>
             <input type="date" id="end_date" name="end_date" required>
             <button type="submit">Vis Returnerede Biler</button>
         </form>
-    </section>
-
-    <section class="Procentage">
-        <h2>Bestand af biler </h2>
-        <div class="notification" th:if="${notification}" th:text="${notification}"
-             th:style="'color: ' + ${color}"></div>
-
-    </section>
-
-    <section class="total-earnings">
-        <h2>Total Indtjening</h2>
-        <div class="earnings-value" th:text="${totalEarnings}">0 DKK</div>
-    </section>
+    </div>
 </main>
+
+</body>
+</html>
