@@ -30,13 +30,16 @@
                 <td th:text="${damageType.damage_name}">Damage Name</td>
                 <td th:text="${damageType.damage_price + ' DKK'}">Damage Price</td>
                 <td>
-                    <input type="checkbox" th:value="${damageType.damage_price}">
+                    <input type="checkbox" name="damage_prices" th:value="${damageType.damage_price}">
                 </td>
             </tr>
             </tbody>
         </table>
-        <button type="submit" style="background-color: green; color: white;">Opret skadesrapport</button>
-        <!--<button type="cancel">Annuller skadesrapport</button>-->
+        <button  type="submit" style="background-color: green; color: white;">Opret skadesrapport</button>
+        <button type="button" style="background-color: red; color: white;" onclick="window.location.href='/skade_og_udbedring/damageFrontPage'">
+            Annuller skadesrapport
+        </button>
+
     </form>
 </main>
 </body>

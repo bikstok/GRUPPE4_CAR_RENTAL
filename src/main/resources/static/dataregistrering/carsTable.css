@@ -16,20 +16,33 @@ body {
     height: 100vh;
     position: fixed;
     top: 0;
-    left: 0;
+    left: -250px; /* Sidebar start udenfor skærmen */
     padding: 10px;
     box-sizing: border-box;
     box-shadow: 2px 0 6px rgba(0,0,0,0.1);
-    transition: width 0.3s ease, padding 0.3s ease;
+    transition: left 0.3s ease; /* Animation ved fold ud/ind */
 }
 
-.sidebar h2 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 24px;
-    text-align: left;
-    padding-left: 10px;
-    color: darkblue;
+/* Når checkboxen er markeret, skubbes sidebar ind på skærmen */
+.sidebar-toggle:checked + .sidebar-toggle-label + .sidebar {
+    left: 0; /* Skub sidebar til venstre når checkboxen er tjekket */
+}
+
+/* Sidebar-label til foldknappen */
+.sidebar-toggle-label {
+    display: block;
+    background-color: #333;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+/* Sidebar-indhold */
+.sidebar-content {
+    flex-grow: 1;
 }
 
 .sidebar ul {
@@ -66,11 +79,7 @@ body {
     color: #fff;
 }
 
-.sidebar-content {
-    flex-grow: 1;
-}
-
-/* Styling for log ud-knap */
+/* Styling for logout-knap */
 .sidebar .logout {
     margin-top: auto;
 }
@@ -90,7 +99,6 @@ body {
 .sidebar .logout a i {
     margin-right: 10px;
     font-size: 18px;
-    color: #333;
 }
 
 .sidebar .logout a:hover {
@@ -98,23 +106,8 @@ body {
     color: #fff;
 }
 
-/* Styling for the toggle button */
-.sidebar-toggle {
-    display: none;
-}
-
-.sidebar-toggle-label {
+/* Styling for burger-ikon */
+.sidebar-toggle-label i {
     font-size: 24px;
-    cursor: pointer;
-    position: absolute;
-    top: 20px;
-    right: -30px; /* Placer knappen uden for sidebar */
 }
 
-.sidebar-toggle:checked + .sidebar-content {
-    display: none; /* Skjul sidebar-indholdet når togglet */
-}
-
-.sidebar-toggle:checked + .sidebar-content + .sidebar .logout {
-    display: none; /* Skjul logout-knappen når sidebar er foldet ind */
-}

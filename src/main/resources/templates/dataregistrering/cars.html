@@ -2,23 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Alle biler</title>
-   
+    <link rel="stylesheet" href="/sidebar.css">
     <link rel="stylesheet" href="/table.css">
     <link rel="stylesheet" href="/dataregistrering/carsTable.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+<!-- Checkbox for foldbar menu -->
+<input type="checkbox" id="sidebar-toggle" class="sidebar-toggle">
+<label for="sidebar-toggle" class="sidebar-toggle-label">
+    <i class="fas fa-bars"></i> <!-- Burger-ikon -->
+</label>
 
 <!-- Sidebar -->
 <div class="sidebar">
-    <h2>Bilabonnement A/S
-        <!-- Fold ud/ind funktion -->
-        <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle">
-        <label for="sidebar-toggle" class="sidebar-toggle-label">
-            <i class="fas fa-bars"></i>
-        </label>
-    </h2>
+    <h2>Bilabonnement A/S</h2>
     <div class="sidebar-content">
         <ul>
             <li>
@@ -49,14 +48,6 @@
         </a>
     </div>
 </div>
-
-<!-- Sidebar toggle checkbox -->
-<input type="checkbox" id="sidebar-toggle" class="sidebar-toggle-checkbox" />
-<label for="sidebar-toggle" class="sidebar-toggle-label">
-    <i class="fas fa-bars"></i>
-</label>
-
-
 
 <h1>Alle biler</h1>
 <table border="1">

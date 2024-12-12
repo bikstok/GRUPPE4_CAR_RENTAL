@@ -74,13 +74,22 @@
     </div>
 
     <!-- Returnerede Biler nederst -->
-    <div class="kpi-returneredebiler">
-        <h3>Returnerede Biler</h3>
+    <div>
+        <h3>Hent Returnerede Biler</h3>
         <form action="/forretningsudvikler/returnedCars" method="get">
-            <label for="end_date">Vælg en dato:</label>
-            <input type="date" id="end_date" name="end_date" required>
-            <button type="submit">Vis Returnerede Biler</button>
+            <label for="end_date">Vælg slutdato:</label>
+            <input type="date" id="end_date" name="end_date" th:value="${selectedDate}">
+            <button type="submit">Hent</button>
         </form>
+    </div>
+
+    <div>
+        <h3>Returnerede Biler</h3>
+        <ul th:if="${not #lists.isEmpty(returnedCars)}" th:each="car : ${returnedCars}">
+            <li th:text="${(car.brand ?: 'Ukendt mærke') + ' ' + (car.model ?: 'Ukendt model') +
+                  ' - Afleveret den: ' + (#dates.format(car.returnDate, 'dd-MM-yyyy'))}"></li>
+        </ul>
+        <p th:if="${#lists.isEmpty(returnedCars)}">Ingen biler blev afleveret på denne dato.</p>
     </div>
 </main>
 

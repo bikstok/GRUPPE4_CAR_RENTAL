@@ -69,14 +69,14 @@ public class BusinessController {
 
     @GetMapping("/forretningsudvikler/returnedCars")
     public String getReturnedCarsByEndDate(@RequestParam("end_date") String end_date, Model model) {
-        //System.out.println("Controller: Received end_date = " + end_date);
-        List<Car> returnedCars = this.businessService.getReturnedCarsByEndDate(LocalDate.parse(end_date));
-        //System.out.println("Controller: Returned cars size = " + returnedCars.size());
+        System.out.println("Controller method called with end_date: " + end_date);
+        LocalDate endDate = LocalDate.parse(end_date);
+        List<Car> returnedCars = businessService.getReturnedCarsByEndDate(endDate);
+
         model.addAttribute("returnedCars", returnedCars);
-        return "forretningsudvikler/returnedCars";
+        model.addAttribute("selectedDate", end_date); // Til form-visning
+        return "forretningsudvikler/KPIDashboard";
     }
-
-
 }
 
 /*this.carService.deleteCar(frame_number);

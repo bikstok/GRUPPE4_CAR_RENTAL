@@ -73,7 +73,7 @@ public class DamageController {
                 total_repair_price += damage_price;
             }
         }
-
+        this.damageService.deleteDamageReport(contract_id);
         this.damageService.createDamageReport(new DamageReport(-1, contract_id, total_repair_price));
 
         return "redirect:/skade_og_udbedring/showDamageReports";
@@ -87,7 +87,6 @@ public class DamageController {
 
     @GetMapping("/editDamageReport/{contract_id}")
     public String editDamageReport(@PathVariable("contract_id") int contract_id, Model model) {
-        this.damageService.deleteDamageReport(contract_id);
         model.addAttribute("contract_id", contract_id);
         List<DamageType> damageTypes = this.damageService.fetchAllDamageTypes();
         model.addAttribute("damageTypes", damageTypes);

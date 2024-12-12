@@ -28,8 +28,8 @@ public class BusinessService {
         return this.dataRepo.fetchAllAvailableCars().size() / (double) this.carRepo.fetchAllCars(null).size();
     }
 
-    public List<Car> getReturnedCarsByEndDate(LocalDate end_date) {
-        return this.businessRepo.findReturnedCarsByEndDate(end_date);
+    public List<Car> getReturnedCarsByEndDate(LocalDate endDate) {
+        return businessRepo.findReturnedCarsByEndDate(endDate);
     }
     public List <RentalContract> getActiveRentalOverview() {
         return this.rentalContractRepo.getActiveRentalContracts();
