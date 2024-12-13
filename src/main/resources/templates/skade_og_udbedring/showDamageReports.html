@@ -54,18 +54,15 @@
             <td th:text="${damageReport.total_repair_price}"></td>
             <td>
                 <a th:href="@{'/editDamageReport/' + ${damageReport.contract_id}}">
-                    <button
-                            style="background-color: #303030;"
-                            onmouseover="this.style.backgroundColor='#262626'"
-                            onmouseout="this.style.backgroundColor='#303030'">
-                        Rediger skaderapport
-                    </button>
+                    <button class="edit">Rediger bil</button>
                 </a>
             </td>
             <td>
                 <!-- Slet knap udfra kontraktens id  -->
                 <a th:href="@{'/deleteDamageReport/'+${damageReport.contract_id}}">
-                    <button >Slet skaderapport</button>
+                    <button class="delete">
+                        <i class="fas fa-trash-alt"></i> Slet skadesrapport
+                    </button>
                 </a>
             </td>
         </tr>

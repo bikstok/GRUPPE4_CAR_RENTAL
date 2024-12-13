@@ -53,6 +53,7 @@ public class DamageController {
         model.addAttribute("damageReports", damageReports);
         return "skade_og_udbedring/showDamageReports";
     }
+
     @GetMapping("/createDamageReport/{contract_id}")
     public String redirectToDamageReportForm(@PathVariable("contract_id") String contract_id, Model model) {
         model.addAttribute("contract_id", contract_id);
@@ -66,7 +67,6 @@ public class DamageController {
             @RequestParam("contract_id") int contract_id,
             @RequestParam(value = "damage_prices", required = false) List<Double> damage_prices,
             Model model) {
-
         double total_repair_price = 0.0;
         if (damage_prices !=null) {
             for (double damage_price : damage_prices) {
@@ -75,7 +75,6 @@ public class DamageController {
         }
         this.damageService.deleteDamageReport(contract_id);
         this.damageService.createDamageReport(new DamageReport(-1, contract_id, total_repair_price));
-
         return "redirect:/skade_og_udbedring/showDamageReports";
     }
 

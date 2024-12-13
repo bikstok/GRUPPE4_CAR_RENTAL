@@ -1,113 +1,157 @@
-/* Generelle indstillinger */
 body {
     margin: 0;
-    font-family: Nunito, sans-serif;
+    font-family: 'Nunito', sans-serif;
     background-color: #f4f9fb;
     color: #333;
 }
 
-/* Sidebar-stil */
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: white;
-    width: 17%;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: -250px; /* Sidebar start udenfor skærmen */
-    padding: 10px;
-    box-sizing: border-box;
-    box-shadow: 2px 0 6px rgba(0,0,0,0.1);
-    transition: left 0.3s ease; /* Animation ved fold ud/ind */
-}
-
-/* Når checkboxen er markeret, skubbes sidebar ind på skærmen */
-.sidebar-toggle:checked + .sidebar-toggle-label + .sidebar {
-    left: 0; /* Skub sidebar til venstre når checkboxen er tjekket */
-}
-
-/* Sidebar-label til foldknappen */
-.sidebar-toggle-label {
-    display: block;
-    background-color: #333;
-    padding: 10px;
-    color: white;
-    cursor: pointer;
-    position: fixed;
+.go-back {
+    position: absolute;
     top: 10px;
-    left: 10px;
+    left: 20px;
 }
 
-/* Sidebar-indhold */
-.sidebar-content {
-    flex-grow: 1;
+.go-back a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #03997a;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
 }
 
-.sidebar ul {
+.go-back a i {
+    margin-right: 8px;
+}
+
+.go-back a:hover {
+    background-color: #027f66;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+table th a {
+    color: #333;
+    text-decoration: none;
+}
+
+table th a:hover {
+    color: #007bff;
+}
+
+
+
+
+Del
+
+
+Du sagde:
+body {
     margin: 0;
-    padding: 0;
-    list-style-type: none;
-    padding-left: 10px;
-}
-
-.sidebar ul li {
-    margin-bottom: 15px;
-}
-
-.sidebar ul li a {
-    text-decoration: none;
-    font-weight: bold;
+    font-family: 'Nunito', sans-serif;
+    background-color: #f4f9fb;
     color: #333;
-    font-size: 14px;
+}
+
+.go-back {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+
+.go-back a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #03997a;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
     display: flex;
     align-items: center;
-    border-radius: 5px;
-    padding: 10px 15px;
-    transition: color 0.3s ease, background-color 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
-.sidebar ul li a i {
-    font-size: 18px;
-    color: #333;
-    margin-right: 10px;
+.go-back a i {
+    margin-right: 8px;
 }
 
-.sidebar ul li a:hover {
-    background-color: #abdbe3;
-    color: #fff;
+.go-back a:hover {
+    background-color: #027f66;
 }
 
-/* Styling for logout-knap */
-.sidebar .logout {
-    margin-top: auto;
+h1 {
+    text-align: center;
+    margin: 20px 0;
 }
 
-.sidebar .logout a {
-    text-decoration: none;
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #f1f1f1;
     font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+table th a {
     color: #333;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
-    padding: 10px 15px;
-    transition: color 0.3s ease, background-color 0.3s ease;
+    text-decoration: none;
 }
 
-.sidebar .logout a i {
-    margin-right: 10px;
-    font-size: 18px;
+table th a:hover {
+    color: #007bff;
 }
 
-.sidebar .logout a:hover {
-    background-color: #abdbe3;
-    color: #fff;
-}
 
-/* Styling for burger-ikon */
-.sidebar-toggle-label i {
-    font-size: 24px;
-}
+
+
 

@@ -55,3 +55,25 @@ button {
 button:hover {
     background-color: #027f66; /* Mørkere grøn ved hover */
 }
+
+/* Style for Rediger button (grey) */
+button.edit {
+    background-color: #808080;
+    color: #fff;
+}
+
+button.edit:hover {
+    background-color: #636363;
+}
+
+/* Style for Slet button (red) */
+button.delete {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+button.delete:hover {
+    background-color: #c0392b;
+}
+
+

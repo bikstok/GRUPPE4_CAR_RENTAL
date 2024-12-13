@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>test123</title>
+    <link rel="stylesheet" href="/dataregistrering/createRentalContract.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body>
-
 <main>
     <form action="/dataregistrering/createRentalContract" method="post">
         <label for="cpr_number">Cpr nummer:</label>
@@ -15,7 +15,6 @@
         <label for="start_date">Start Dato:</label>
         <input type="date" id="start_date" name="start_date" th:value="${start_date}" required><br>
 
-
         <label for="end_date">Antal måneder lejet:</label>
         <select id="end_date" name="end_date">
             <option value="3" th:selected="${end_date == 3}">3 Måneder</option>
@@ -23,12 +22,8 @@
             <option value="12" th:selected="${end_date == 12}">12 Måneder</option>
             <option value="24" th:selected="${end_date == 24}">24 Måneder</option>
             <option value="36" th:selected="${end_date == 36}">36 Måneder</option>
-            <!-- Add more options as needed -->
         </select><br>
 
-
-
-        <!-- metode til at give brugeren muligheden for at sige ja eller nej, fremfor at indtaste svar -->
         <label for="insurance">Skal bilen forsikres?</label>
         <input type="checkbox" id="insurance" name="insurance" th:checked="${insurance}"><br>
 
@@ -38,10 +33,12 @@
         <label for="voucher">Voucher:</label>
         <input type="text" id="voucher" name="voucher" th:value="${voucher}"/><br>
 
-        <button type="submit">Opret</button>
-
+        <div style="display: flex; justify-content: space-between;">
+            <a th:href="@{/dataregistrering/dataFrontPage}" class="back-button">Gå tilbage</a>
+            <button type="submit">Opret</button>
+        </div>
     </form>
-
 </main>
+
 </body>
 </html>

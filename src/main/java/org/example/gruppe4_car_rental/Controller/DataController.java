@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,15 +27,7 @@ public class DataController {
 
     //actually creates the rental contract and redirects you to view all rental contracts
     @PostMapping("/dataregistrering/createRentalContract")
-    public String createRentalContract(
-            @RequestParam("cpr_number") String cpr_number,
-            @RequestParam("frame_number") String frame_number,
-            @RequestParam("start_date") String start_date_string,
-            @RequestParam("end_date") int months,
-            @RequestParam(name = "insurance", defaultValue = "false") boolean insurance,
-            @RequestParam("max_km") String max_km_string,
-            @RequestParam("voucher") String voucher_string,
-            Model model) {
+    public String createRentalContract(@RequestParam("cpr_number") String cpr_number, @RequestParam("frame_number") String frame_number, @RequestParam("start_date") String start_date_string, @RequestParam("end_date") int months, @RequestParam(name = "insurance", defaultValue = "false") boolean insurance, @RequestParam("max_km") String max_km_string, @RequestParam("voucher") String voucher_string, Model model) {
 
         try {
             boolean voucher = voucher_string != null && !voucher_string.trim().isEmpty();
@@ -45,16 +36,16 @@ public class DataController {
             /*if (local_end_date.isBefore(local_start_date)) {//rental contract starts after it ends, ???
                 String message = "Du kan ikke vælge en slut dato i fortiden.";
                 model.addAttribute("message", message);
-                return "dataregistrering/error";
+                return "error";
             } else if (local_start_date.plusMonths(3).isAfter(local_end_date)) {
                 String message = "Kontrakten skal være på mindst 3 måneder.";
                 model.addAttribute("message", message);
-                return "dataregistrering/error";
+                return "error";
             } else */
             if (ChronoUnit.WEEKS.between(LocalDate.now(), local_start_date) > 3) {//rental contract is over 100 years in the future
                 String message = "Du kan ikke vælge en dato så langt frem i tiden";
                 model.addAttribute("message", message);
-                return "dataregistrering/error";
+                return "error";
             }
             double total_price = this.dataService.getTotalPrice(frame_number, local_start_date, local_end_date);
             Date start_date = Date.valueOf(local_start_date);
@@ -70,7 +61,7 @@ public class DataController {
             String message = "Du har indtastet et ugyldigt CPR nummer";
             model.addAttribute("message", message);
             //exception.printStackTrace();
-            return "dataregistrering/error";
+            return "error";
         }
     }
 
@@ -102,34 +93,32 @@ public class DataController {
         return "dataregistrering/dataFrontPage";
     }
 
-    public String redirectToInvoice(Model model, String customerName, double totalPrice, Car car) {
-        Map<String, Object> invoice = new HashMap<>();
-        invoice.put("date", LocalDate.now().toString());
-        invoice.put("customerName", customerName);
-
-        List<Map<String, Object>> items = new ArrayList<>();
-        Map<String, Object> carInformation = new HashMap<>();
-        carInformation.put("brand", car.getBrand());
-        carInformation.put("model", car.getModel());
-        items.add(carInformation);
-
-        invoice.put("items", items);
-        invoice.put("withoutMoms", totalPrice+ " DKK");
-        invoice.put("moms", (totalPrice * 0.25) + " DKK");
-        invoice.put("totalPrice", (totalPrice * 1.25) + " DKK");
-        double totalPriceEuro = Math.floor((totalPrice * 1.25) / 7.46);
-        invoice.put("totalPriceEuro", totalPriceEuro + " €");
-        invoice.put("paid", false);
-
-        model.addAttribute("invoice", invoice);
+    public String redirectToInvoice(Model model, String customerName, double price, Car car) {
+        Map<String, Object> invoiceInformation = new HashMap<>();
+        invoiceInformation.put("date", LocalDate.now().toString());
+        invoiceInformation.put("customerName", customerName);
+        invoiceInformation.put("brand", car.getBrand());
+        invoiceInformation.put("model", car.getModel());
+        invoiceInformation.put("withoutMoms", price + " DKK");
+        invoiceInformation.put("moms", (price * 0.25) + " DKK");
+        invoiceInformation.put("totalPrice", (price * 1.25) + " DKK");
+        final double totalPriceEuro = Math.floor((price * 1.25) / 7.46);
+        invoiceInformation.put("totalPriceEuro", totalPriceEuro + " €");
+        invoiceInformation.put("paid", false);
+        model.addAttribute("invoice", invoiceInformation);
         return "dataregistrering/invoice";
     }
 
-    //@GetMapping("dataregistrering/invoice")
-    //public String showInvoice(Model model) {
-    //  return this.redirectToInvoice(model, "name name2", 123,new Car("123", "test1", "test2", "test3", "test4", "test5", 5,6,7,8));
-    //}
-
+    @GetMapping("dataregistrering/exampleError")
+    public String exampleError(Model model) {
+        String message = "Denne bil er allerede solgt, test123";
+        model.addAttribute("message", message);
+        return "error";
+    }
+    @GetMapping("dataregistrering/exampleInvoice")
+    public String exampleInvoice(Model model) {
+        return this.redirectToInvoice(model, "name name2", 123, new Car("123", "Brand Name", "Model Name", "test3", "test4", "test5", 5, 6, 7, 8));
+    }
 
     @GetMapping("/deleteCarPurchase/{car_purchase_id}")
     public String deleteCarPurchase(@PathVariable("car_purchase_id") int car_purchase_id) {
@@ -150,7 +139,7 @@ public class DataController {
         if ("Solgt".equals(car.getCar_status())) {
             String message = "Denne bil er allerede solgt";
             model.addAttribute("message", message);
-            return "dataregistrering/error";
+            return "error";
         }
         double originalPrice = car.getOriginal_price();
         int kilometersDriven = car.getOdometer() - rentalContract.getStart_odometer();
@@ -179,15 +168,7 @@ public class DataController {
 
     //Håndterer redigeringsformularen og opdaterer i databasen.
     @PostMapping("/updateRentalContract")
-    public String updateRentalContract(
-            @RequestParam("cpr_number") String cpr_number,
-            @RequestParam("frame_number") String frame_number,
-            @RequestParam("start_date") Date start_date,
-            @RequestParam("end_date") Date end_date,
-            @RequestParam("insurance") String insurance,
-            @RequestParam("total_price") double total_price,
-            @RequestParam("max_km") int max_km,
-            @RequestParam("voucher") boolean voucher) {
+    public String updateRentalContract(@RequestParam("cpr_number") String cpr_number, @RequestParam("frame_number") String frame_number, @RequestParam("start_date") Date start_date, @RequestParam("end_date") Date end_date, @RequestParam("insurance") String insurance, @RequestParam("total_price") double total_price, @RequestParam("max_km") int max_km, @RequestParam("voucher") boolean voucher) {
         //System.out.println("update rentalContract method called");
 
         //Opretter et ny rentalContract-objekt som er en opdateret version af det eksisterende.

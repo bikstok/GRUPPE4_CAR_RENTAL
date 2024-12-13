@@ -20,23 +20,15 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    //Viser alle kunder (UDEN SORTERING)
-    // @GetMapping("dataregistrering/customers")
-    // public String getAllCustomers(Model model) {
-    //     List<Customer> customers = this.customerService.fetchAllCustomers();
-    //     model.addAttribute("customers", customers);
-    //     return "dataregistrering/customers";
-    // }
-
     //Sletter en kunde ud fra cpr_number
     @GetMapping("/deleteCustomer/{cpr_number}")
     public String deleteCustomer(@PathVariable("cpr_number") String cpr_number){
         this.customerService.deleteCustomer(cpr_number);
-        return "redirect:/dataregistrering/customers";
+        return "redirect:/dataregistrering/showCustomers";
     }
 
     //Håndterer forespørgsler til visning af kunder med sorteringsmuligheder.
-    @GetMapping("/dataregistrering/customers")
+    @GetMapping("/dataregistrering/showCustomers")
     public String showAllCustomers(
             @RequestParam(value = "previousSortBy", required = false) String previousSortBy,
             @RequestParam(value = "sortBy", required = false) String sortBy,
@@ -60,7 +52,7 @@ public class CustomerController {
         //Henter liste af kunder fra service-laget, sorteret efter sortBy-parameteren
         List<Customer> customers = customerService.fetchAllCustomers(sortBy);
         model.addAttribute("customers", customers);
-        return "dataregistrering/customers";// Returnerer til customers.html
+        return "dataregistrering/showCustomers";// Returnerer til showCustomers.html
     }
 
     //Henviser til redigeringsformular for en specifik kunde baseret på cpr_number, hvor man indtaster nye værdier.
@@ -89,7 +81,7 @@ public class CustomerController {
         Customer customer = new Customer(cpr_number, first_name, last_name, email, phone_number, address, city, zip_code);
 
         this.customerService.updateCustomer(customer); //Opdaterer kunde i databasen via CustomerService
-        return "redirect:/dataregistrering/customers";
+        return "redirect:/dataregistrering/showCustomers";
     }
 }
 

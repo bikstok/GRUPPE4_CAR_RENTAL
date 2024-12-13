@@ -5,45 +5,34 @@
     <link rel="stylesheet" href="/invoice.css">
 </head>
 <body>
-<h1>Faktura</h1>
+<h1 class="invoice-title">Faktura</h1>
 
-<div>
-    <p><strong>Date:</strong> <span th:text="${invoice.date}"></span></p>
-    <p th:if="${invoice.customerName != null}">
-        <strong>Kunde Navn:</strong> <span th:text="${invoice.customerName}"></span>
-    </p>
-    <p th:if="${invoice.customerName == null}">
-        <strong>Kunde Navn:</strong> Anonym
-    </p>
+<div class="invoice-container">
+    <div class="invoice-details">
+        <p><strong>Date:</strong> <span th:text="${invoice.date}"></span></p>
+        <p>
+            <strong>Kunde Navn:</strong> <span th:text="${invoice.customerName}"></span>
+        </p>
+    </div>
+
+    <div class="invoice-items">
+        <p><strong>Brand:</strong> <span th:text="${invoice.brand}"></span></p>
+        <p><strong>Model:</strong> <span th:text="${invoice.model}"></span></p>
+        <p><strong>Pris:</strong> <span th:text="${invoice.withoutMoms}"></span></p>
+        <p><strong>Moms:</strong> <span th:text="${invoice.moms}"></span></p>
+        <p><strong>Total med moms:</strong> <span th:text="${invoice.totalPrice}"></span></p>
+        <p><strong>Total pris i euro:</strong> <span th:text="${invoice.totalPriceEuro}"></span></p>
+    </div>
+
+    <div class="invoice-status">
+        <p>
+            <strong>Status:</strong> <span class="unpaid">Ikke betalt</span>
+        </p>
+    </div>
+
+    <div class="action-buttons">
+        <a href="/dataregistrering/dataFrontPage" class="btn">Forside</a>
+    </div>
 </div>
-
-<!--<h2>Items</h2>-->
-<table border="1">
-    <thead>
-    <tr>
-        <th>Model</th>
-        <th>Brand</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="item : ${invoice.items}">
-        <td th:text="${item.brand}"></td>
-        <td th:text="${item.model}"></td>
-    </tr>
-    </tbody>
-</table>
-
-<!--<h3>Total</h3>-->
-<p><strong>Pris:</strong> <span th:text="${invoice.withoutMoms}"></span></p>
-<p><strong>Moms:</strong> <span th:text="${invoice.moms}"></span></p>
-<p><strong>Total med moms:</strong> <span th:text="${invoice.totalPrice}"></span></p>
-<p><strong>Total pris i euro:</strong> <span th:text="${invoice.totalPriceEuro}"></span></p>
-
-<p th:if="${invoice.paid}">
-    <strong>Status:</strong> Betalt
-</p>
-<p th:if="${!invoice.paid}">
-    <strong>Status:</strong> Ikke betalt
-</p>
 </body>
 </html>

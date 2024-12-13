@@ -3,7 +3,6 @@ package org.example.gruppe4_car_rental.Controller;
 import org.example.gruppe4_car_rental.Model.Car;
 import org.example.gruppe4_car_rental.Service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ public class CarController {
     private CarService carService;
 
     //Håndterer forespørgsler til visning af biler med sorteringsmuligheder.
-    @GetMapping("/dataregistrering/cars")
+    @GetMapping("/dataregistrering/showCars")
     public String showAllCars(
             @RequestParam(value = "previousSortBy", required = false) String previousSortBy,
             @RequestParam(value = "sortBy", required = false) String sortBy,
@@ -36,14 +35,14 @@ public class CarController {
         //Henter listen af biler baseret på den valgte sortering.
         List<Car> cars = this.carService.fetchAllCars(sortBy);
         model.addAttribute("cars", cars);
-        return "dataregistrering/cars";
+        return "dataregistrering/showCars";
     }
 
     //Sletter en bil fra databasen baseret på frame_number.
     @GetMapping("/deleteCar/{frame_number}")
     public String deleteCar(@PathVariable("frame_number") String frame_number) {
         this.carService.deleteCar(frame_number);
-        return "redirect:/dataregistrering/cars";
+        return "redirect:/dataregistrering/showCars";
     }
 
     //Henviser til redigeringsformular for en specifik bil baseret på frame_number, hvor man indtaster nye værdier.
@@ -74,7 +73,7 @@ public class CarController {
         Car car = new Car(frame_number, model, brand, car_status, fuel_type, gear_type, year_produced, monthly_sub_price, odometer, original_price);
 
         this.carService.updateCar(car);  // Opdaterer bil i databasen via CarService
-        return "redirect:/dataregistrering/cars";  // Omidigerer til biloversigt
+        return "redirect:/dataregistrering/showCars";  // Omidigerer til biloversigt
     }
 }
 

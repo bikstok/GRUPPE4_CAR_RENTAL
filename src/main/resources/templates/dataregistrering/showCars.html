@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Alle biler</title>
+    <link rel="stylesheet" href="table.css">
+    <link rel="stylesheet" href="/dataregistrering/carsTable.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Go Back Button -->
+<div class="go-back">
+    <a href="/dataregistrering/dataFrontPage">
+        <i class="fas fa-arrow-left"></i> Gå tilbage
+    </a>
+</div>
+
+<h1>Alle biler</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.frame_number&previousSortBy=' + ${sortBy}}">Stelnummer</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=m.brand&previousSortBy=' + ${sortBy}}">Brand</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.model&previousSortBy=' + ${sortBy}}">Model</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.car_status&previousSortBy=' + ${sortBy}}">Status</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.fuel_type&previousSortBy=' + ${sortBy}}">Brændstof</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.gear_type&previousSortBy=' + ${sortBy}}">Gear type</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.year_produced&previousSortBy=' + ${sortBy}}">Produktionsår</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.monthly_sub_price&previousSortBy=' + ${sortBy}}">Abonn. pris</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.odometer&previousSortBy=' + ${sortBy}}">Odometer</a></th>
+        <th><a th:href="@{'/dataregistrering/cars?sortBy=c.original_price&previousSortBy=' + ${sortBy}}">Original pris</a></th>
+        <th>Rediger</th>
+        <th>Slet</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.frame_number}"></td>
+        <td th:text="${car.brand}"></td>
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.car_status}"></td>
+        <td th:text="${car.fuel_type}"></td>
+        <td th:text="${car.gear_type}"></td>
+        <td th:text="${car.year_produced}"></td>
+        <td th:text="${car.monthly_sub_price}"></td>
+        <td th:text="${car.odometer}"></td>
+        <td th:text="${car.original_price}"></td>
+        <td>
+            <a th:href="@{'/editCar/' + ${car.frame_number}}">
+                <button class="edit">Rediger bil</button>
+            </a>
+        </td>
+        <td>
+            <a th:href="@{'/deleteCar/'+${car.frame_number}}">
+                <button class="delete">
+                    <i class="fas fa-trash-alt"></i> Slet bil
+                </button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
