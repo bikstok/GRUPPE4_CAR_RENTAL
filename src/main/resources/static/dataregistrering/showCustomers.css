@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    background-color: #f4f9fb; /* Lys baggrundsfarve */
+    color: #333; /* Tekstfarve */
+}
+
+/* Stil for 'Tilbage' knappen */
+.go-back {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+
+/* Styling af 'Tilbage' linket */
+.go-back a {
+    text-decoration: none;
+    color: #fff; /* Hvid tekst */
+    background-color: #03997a; /* Grøn baggrund */
+    padding: 10px 15px;
+    border-radius: 5px; /* Runde hjørner */
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease; /* Glidende effekt ved hover */
+}
+
+/* Afstand mellem ikonet og teksten i 'Tilbage' knappen */
+.go-back a i {
+    margin-right: 8px;
+}
+
+/* Hover-effekt på 'Tilbage' knappen */
+.go-back a:hover {
+    background-color: #027f66; /* Mørkere grøn ved hover */
+}
+
+/* Stil for overskriften */
+h1 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Tabel styling */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse; /* Fjern mellemrum mellem celler */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Let skygge rundt om tabellen */
+}
+
+/* Styling af tabelhoved og celler */
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd; /* Let grå kant */
+    text-align: left; /* Venstrestillet tekst */
+}
+
+/* Baggrundsfarve for tabelhoved */
+table th {
+    background-color: #f1f1f1; /* Lys grå baggrund */
+    font-weight: bold;
+}
+
+/* Styling af ulige rækker i tabellen */
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Lysere baggrund for lige rækker */
+}
+
+/* Hover-effekt på rækkerne i tabellen */
+table tbody tr:hover {
+    background-color: #f0f0f0; /* Mørkere baggrund ved hover */
+}
+
+/* Styling af links i tabeloverskrifter */
+table th a {
+    color: #333; /* Mørk tekstfarve */
+    text-decoration: none; /* Fjern understregning */
+}
+
+/* Hover-effekt på links i tabeloverskrifter */
+table th a:hover {
+    color: #007bff; /* Blå farve ved hover */
+}
+

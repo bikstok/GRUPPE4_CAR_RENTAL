@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Udfyld skaderapport</title>
     <link rel="stylesheet" href="/skade_og_udbedring/createDamageReport.css">
-    <link rel="stylesheet" href="/red.css">
+    <link rel="stylesheet" href="/skade_og_udbedring/damage.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -35,10 +35,12 @@
             </tr>
             </tbody>
         </table>
-        <button  type="submit" style="background-color: green; color: white;">Opret skadesrapport</button>
-        <button type="button" style="background-color: red; color: white;" onclick="window.location.href='/skade_og_udbedring/damageFrontPage'">
-            Annuller skadesrapport
-        </button>
+        <div>
+            <button type="submit" style="background-color: green;">Opret skadesrapport</button>
+            <button type="button" style="background-color: red;" onclick="window.location.href='/skade_og_udbedring/damageFrontPage'">
+                Annuller skadesrapport
+            </button>
+        </div>
 
     </form>
 </main>

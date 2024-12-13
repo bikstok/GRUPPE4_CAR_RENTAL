@@ -45,7 +45,7 @@ public class DataController {
             if (ChronoUnit.WEEKS.between(LocalDate.now(), local_start_date) > 3) {//rental contract is over 100 years in the future
                 String message = "Du kan ikke vælge en dato så langt frem i tiden";
                 model.addAttribute("message", message);
-                return "error";
+                return "showError";
             }
             double total_price = this.dataService.getTotalPrice(frame_number, local_start_date, local_end_date);
             Date start_date = Date.valueOf(local_start_date);
@@ -61,7 +61,7 @@ public class DataController {
             String message = "Du har indtastet et ugyldigt CPR nummer";
             model.addAttribute("message", message);
             //exception.printStackTrace();
-            return "error";
+            return "showError";
         }
     }
 
@@ -106,14 +106,14 @@ public class DataController {
         invoiceInformation.put("totalPriceEuro", totalPriceEuro + " €");
         invoiceInformation.put("paid", false);
         model.addAttribute("invoice", invoiceInformation);
-        return "dataregistrering/invoice";
+        return "showInvoice";
     }
 
     @GetMapping("dataregistrering/exampleError")
     public String exampleError(Model model) {
         String message = "Denne bil er allerede solgt, test123";
         model.addAttribute("message", message);
-        return "error";
+        return "showError";
     }
     @GetMapping("dataregistrering/exampleInvoice")
     public String exampleInvoice(Model model) {
@@ -139,7 +139,7 @@ public class DataController {
         if ("Solgt".equals(car.getCar_status())) {
             String message = "Denne bil er allerede solgt";
             model.addAttribute("message", message);
-            return "error";
+            return "showError";
         }
         double originalPrice = car.getOriginal_price();
         int kilometersDriven = car.getOdometer() - rentalContract.getStart_odometer();

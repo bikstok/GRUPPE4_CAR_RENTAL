@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Alle Lejekontrakter</title>
+    <link rel="stylesheet" href="/table.css">
+    <link rel="stylesheet" href="/dataregistrering/showCustomers.css">
+    <link rel="stylesheet" href="/dataregistrering/showRentalContracts.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+<!-- Go Back Button -->
+<div class="go-back">
+    <a href="/dataregistrering/dataFrontPage">
+        <i class="fas fa-arrow-left"></i> Gå tilbage
+    </a>
+</div>
+
 <h1>Alle lejekontrakter</h1>
 <table border="1">
     <thead>
@@ -21,7 +33,6 @@
         <th>Rediger lejekontrakt</th>
         <th>Slet lejekontrakt</th>
         <th>Opret forhåndsaftale</th>
-
     </tr>
     </thead>
     <tbody>
@@ -37,18 +48,24 @@
         <td th:text="${rentalContract.start_odometer}"></td>
         <td>
             <a th:href="@{'/editRentalContract/' + ${rentalContract.contract_id}}">
-                <button>Rediger lejekontrakt</button>
+                <button class ="edit">
+                    Rediger lejekontrakt
+                </button>
             </a>
         </td>
         <td>
             <!-- Slet knap udfra kontraktens id  -->
             <a th:href="@{'/deleteRentalContract/'+${rentalContract.contract_id}}">
-                <button >Slet lejekontrakt</button>
+                <button class="delete">
+                    <i class="fas fa-trash-alt"></i> Slet lejekontrakt
+                </button>
             </a>
         </td>
         <td>
             <a th:href="@{'/createCarPurchase/'+${rentalContract.contract_id}}">
-                <button >Opret forhåndsaftale</button>
+                <button class ="create" >
+                   <i class="fa-solid fa-file-pen"></i> Opret forhåndsaftale
+                </button>
             </a>
         </td>
     </tr>

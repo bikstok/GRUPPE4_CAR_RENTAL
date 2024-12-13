@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Display Message</title>
+  <link rel="stylesheet" href="/showError.css">
+  <meta charset="UTF-8">
+</head>
+<body>
+<div class="error-container">
+  <h1>Message from the Server:</h1>
+  <p th:text="${message}">Fejl.</p>
+  <!-- Button to redirect to another page -->
+  <a href="/dataregistrering/dataFrontPage" class="error-button">Forside</a>
+</div>
+</body>
+</html>

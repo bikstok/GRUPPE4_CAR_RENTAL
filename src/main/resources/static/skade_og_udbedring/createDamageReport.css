@@ -47,6 +47,9 @@ td {
 
 /* Button Style */
 button {
+    display: block; /* Placerer hver knap på en ny linje */
+    width: 100%;    /* Får knapperne til at fylde hele bredden af deres container */
+    margin-top: 10px; /* Giver lidt afstand mellem knapperne */
     background-color: #d21e1e;
     color: white;
     border: none;
@@ -54,10 +57,7 @@ button {
     font-size: 16px;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 20px;
 }
-
-
 
 button:hover {
     background-color: #1e1e1e;

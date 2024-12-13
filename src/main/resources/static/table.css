@@ -76,4 +76,14 @@ button.delete:hover {
     background-color: #c0392b;
 }
 
+/* Style for Opret forhåndsaftale button (grøn) */
+button.create {
+    background-color: #28a745; /* Grøn farve */
+    color: #fff;
+}
+
+button.create:hover {
+    background-color: #218838; /* Mørkere grøn farve ved hover */
+}
+
 
