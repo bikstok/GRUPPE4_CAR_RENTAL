@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: Nunito, sans-serif; /* Brug en moderne sans-serif skrifttype */
-    background-color: #f4f9fb; /* Lys baggrund for god kontrast */
+    background-color: white; /* Lys baggrund for god kontrast */
     color: #333; /* Mørk tekst for bedre læsbarhed */
 }
 

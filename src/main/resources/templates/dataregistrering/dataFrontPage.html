@@ -5,6 +5,7 @@
     <title>Dataregistrering forside</title>
     <link rel="stylesheet" href="/sidebar.css">
     <link rel="stylesheet" href="/table.css">
+    <link rel="stylesheet" href="/buttons.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -68,7 +69,9 @@
             <td>
                 <span>
                 <a th:href="@{'/createRentalContract/'+${car.frame_number}}">
-                    <button>Opret lejekontrakt</button>
+                <button class="create">
+                    <i class="fa-solid fa-plus"></i> Opret lejekontrakt
+                </button>
                 </a>
                 </span>
             </td>

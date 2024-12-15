@@ -1,38 +1,8 @@
 body {
     margin: 0;
     font-family: 'Nunito', sans-serif;
-    background-color: #f4f9fb; /* Lys baggrundsfarve */
+    background-color: white; /* Lys baggrundsfarve */
     color: #333; /* Tekstfarve */
-}
-
-/* Stil for 'Tilbage' knappen */
-.go-back {
-    position: absolute;
-    top: 10px;
-    left: 20px;
-}
-
-/* Styling af 'Tilbage' linket */
-.go-back a {
-    text-decoration: none;
-    color: #fff; /* Hvid tekst */
-    background-color: #03997a; /* Grøn baggrund */
-    padding: 10px 15px;
-    border-radius: 5px; /* Runde hjørner */
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    transition: background-color 0.3s ease; /* Glidende effekt ved hover */
-}
-
-/* Afstand mellem ikonet og teksten i 'Tilbage' knappen */
-.go-back a i {
-    margin-right: 8px;
-}
-
-/* Hover-effekt på 'Tilbage' knappen */
-.go-back a:hover {
-    background-color: #027f66; /* Mørkere grøn ved hover */
 }
 
 /* Stil for overskriften */
@@ -58,7 +28,8 @@ table th, table td {
 
 /* Baggrundsfarve for tabelhoved */
 table th {
-    background-color: #f1f1f1; /* Lys grå baggrund */
+    background-color: #cce3cc; /* kolonne overskrift baggrundsfarve*/
+    color: #333; /* Mørk tekstfarve for kontrast */
     font-weight: bold;
 }
 

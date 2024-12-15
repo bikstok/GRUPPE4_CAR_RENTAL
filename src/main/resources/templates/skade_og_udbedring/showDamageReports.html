@@ -54,7 +54,9 @@
             <td th:text="${damageReport.total_repair_price}"></td>
             <td>
                 <a th:href="@{'/editDamageReport/' + ${damageReport.contract_id}}">
-                    <button class="edit">Rediger bil</button>
+                    <button class="edit">
+                        <i class="fa-solid fa-pen"></i>Rediger skadesrapport
+                    </button>
                 </a>
             </td>
             <td>

@@ -42,48 +42,6 @@ tbody tr:hover {
     cursor: pointer; /* Indikator for klikbar række */
 }
 
-button {
-    background-color: #03997a; /* Primær knapfarve */
-    color: white; /* Hvid tekstfarve */
-    padding: 10px 15px; /* Knapstørrelse */
-    border: none; /* Fjern kant */
-    border-radius: 5px; /* Runde hjørner */
-    cursor: pointer; /* Indikerer klikbarhed */
-    transition: background-color 0.3s ease; /* Glidende overgang ved hover */
-}
 
-button:hover {
-    background-color: #027f66; /* Mørkere grøn ved hover */
-}
-
-/* Style for Rediger button (grey) */
-button.edit {
-    background-color: #808080;
-    color: #fff;
-}
-
-button.edit:hover {
-    background-color: #636363;
-}
-
-/* Style for Slet button (red) */
-button.delete {
-    background-color: #e74c3c;
-    color: #fff;
-}
-
-button.delete:hover {
-    background-color: #c0392b;
-}
-
-/* Style for Opret forhåndsaftale button (grøn) */
-button.create {
-    background-color: #28a745; /* Grøn farve */
-    color: #fff;
-}
-
-button.create:hover {
-    background-color: #218838; /* Mørkere grøn farve ved hover */
-}
 
 

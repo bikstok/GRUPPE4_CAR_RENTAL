@@ -2,43 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>test123</title>
-    <link rel="stylesheet" href="/dataregistrering/createRentalContract.css">
+    <title>Opret Lejekontrakt</title>
+    <link rel="stylesheet" href="/buttons.css">
+    <link rel="stylesheet" href="/dataregistrering/createRentalContractUPDATE.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
+<body>
+
+<div class="go-back">
+    <a href="/dataregistrering/dataFrontPage">
+        <i class="fas fa-arrow-left"></i> Gå tilbage
+    </a>
+</div>
+
 <main>
     <form action="/dataregistrering/createRentalContract" method="post">
-        <label for="cpr_number">Cpr nummer:</label>
-        <input type="text" id="cpr_number" name="cpr_number" th:value="${cpr_number}" pattern="^\d{10}$" required title="Indtast venligst et cpr nummer"><br>
+        <div class="form-group">
+            <label for="cpr_number">Cpr nummer:</label>
+            <input type="text" id="cpr_number" name="cpr_number" th:value="${cpr_number}" pattern="^\d{10}$" required title="Indtast venligst et cpr nummer">
+        </div>
+
         <input type="hidden" name="frame_number" th:value="${frame_number}">
 
-        <label for="start_date">Start Dato:</label>
-        <input type="date" id="start_date" name="start_date" th:value="${start_date}" required><br>
+        <div class="form-group">
+            <label for="start_date">Start Dato:</label>
+            <input type="date" id="start_date" name="start_date" th:value="${start_date}" required>
+        </div>
 
-        <label for="end_date">Antal måneder lejet:</label>
-        <select id="end_date" name="end_date">
-            <option value="3" th:selected="${end_date == 3}">3 Måneder</option>
-            <option value="6" th:selected="${end_date == 6}">6 Måneder</option>
-            <option value="12" th:selected="${end_date == 12}">12 Måneder</option>
-            <option value="24" th:selected="${end_date == 24}">24 Måneder</option>
-            <option value="36" th:selected="${end_date == 36}">36 Måneder</option>
-        </select><br>
+        <div class="form-group">
+            <label for="end_date">Antal måneder lejet:</label>
+            <select id="end_date" name="end_date">
+                <option value="3" th:selected="${end_date == 3}">3 Måneder</option>
+                <option value="6" th:selected="${end_date == 6}">6 Måneder</option>
+                <option value="12" th:selected="${end_date == 12}">12 Måneder</option>
+                <option value="24" th:selected="${end_date == 24}">24 Måneder</option>
+                <option value="36" th:selected="${end_date == 36}">36 Måneder</option>
+            </select>
+        </div>
 
-        <label for="insurance">Skal bilen forsikres?</label>
-        <input type="checkbox" id="insurance" name="insurance" th:checked="${insurance}"><br>
+        <div class="form-group">
+            <label for="insurance">Skal bilen forsikres?</label>
+            <input type="checkbox" id="insurance" name="insurance" th:checked="${insurance}">
+        </div>
 
+        <div class="form-group">
+            <label for="max_km">Max km:</label>
+            <input type="text" id="max_km" name="max_km" th:value="${max_km}" pattern="^\d{1,9}$" required title="Indtast venligst et gyldigt nummer">
+        </div>
 
-        <label for="max_km">Max km:</label>
-        <input type="text" id="max_km" name="max_km" th:value="${max_km}" pattern="^\d{1,9}$" required title="Indtast venligst et gyldigt nummer"><br>
+        <div class="form-group">
+            <label for="voucher">Voucher:</label>
+            <input type="text" id="voucher" name="voucher" th:value="${voucher}">
+        </div>
 
-        <label for="voucher">Voucher:</label>
-        <input type="text" id="voucher" name="voucher" th:value="${voucher}"/><br>
-
-
-        <button  type="submit" style="background-color: green; color: white;">Opret lejekontrakt</button>
-        <button type="button" style="background-color: red; color: white;" onclick="window.location.href='/dataregistrering/dataFrontPage'">
-            Annuller lejekontrakt
-        </button>
+        <div class="form-actions">
+            <button type="submit" class="create">Opret lejekontrakt</button>
+            <button type="button" class="cancel-btn" onclick="window.location.href='/dataregistrering/dataFrontPage'">Annuller lejekontrakt</button>
+        </div>
     </form>
 </main>
 

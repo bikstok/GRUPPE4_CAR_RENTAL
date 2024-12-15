@@ -1,0 +1,81 @@
+/* Grundlæggende opsætning af body */
+body {
+    font-family: 'Nunito', sans-serif; /* Brug af Nunito font for moderne og læselig tekst */
+    background-color: #f4f4f4; /* Lys grå baggrund for hele siden */
+    margin: 0; /* Fjern standard margin */
+    padding: 0; /* Fjern standard padding */
+}
+
+/* Styling af overskriften */
+h1 {
+    font-size: 1.8em; /* Større skriftstørrelse for overskriften */
+    color: white; /* Hvid tekstfarve */
+    padding: 20px; /* Lidt ekstra plads omkring teksten */
+    margin: 0; /* Fjern marginen omkring overskriften */
+    background-color: #84c1d7; /* Mørk baggrund for overskriften */
+    text-align: center; /* Centrer tekst */
+    border-radius: 8px 8px 0 0; /* Rundede hjørner på toppen */
+}
+
+/* Container for formular og header */
+.container {
+    width: 100%; /* Sørger for, at containeren fylder hele bredden */
+    max-width: 800px; /* Maksimal bredde på containeren */
+    margin: 40px auto; /* Centrer containeren med 40px margin på toppen og bunden */
+}
+
+/* Styling af formularen */
+.form-container {
+    background-color: white; /* Hvid baggrund for formularen */
+    padding: 30px; /* Lidt ekstra plads indvendigt i formularen */
+    border-radius: 8px; /* Rundede hjørner */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtil skygge for at give dybde */
+}
+
+/* Form grupper for hvert input felt */
+.form-group {
+    margin-bottom: 20px; /* Afstand mellem hvert formfelt */
+}
+
+/* Styling af label (etiketten) */
+label {
+    display: block; /* Sørger for, at labelen står på en separat linje */
+    font-size: 1.1em; /* Lidt større skriftstørrelse */
+    margin-bottom: 5px; /* Lidt afstand mellem label og inputfelt */
+    color: #333; /* Mørk grå farve for labelen */
+}
+
+/* Styling af inputfelter */
+input[type="text"],
+input[type="number"] {
+    width: 100%; /* Sørger for, at inputfelterne fylder hele bredden */
+    padding: 12px; /* Lidt ekstra plads inde i inputfelterne */
+    border-radius: 4px; /* Rundede hjørner for inputfelterne */
+    border: 1px solid #ccc; /* Lys grå kant rundt om inputfelterne */
+    box-sizing: border-box; /* Sørger for, at padding og border tælles med i elementets bredde */
+    font-size: 1em; /* Standard skriftstørrelse */
+    transition: all 0.3s ease; /* Blød overgang ved ændringer (f.eks. ved hover eller focus) */
+}
+
+/* Fokus på inputfelter (når brugeren klikker på dem) */
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #007bff; /* Ændrer kanten til blå, når inputfeltet er i fokus */
+    outline: none; /* Fjerner standard outline (den ekstra markering rundt om inputfeltet) */
+}
+
+/* Responsivt design for små skærme */
+@media (max-width: 600px) {
+    .container {
+        margin: 20px; /* Mindre margin på små skærme */
+    }
+
+    h1 {
+        font-size: 1.6em; /* Mindre skriftstørrelse på overskriften på små skærme */
+        padding: 15px; /* Mindre padding på overskriften */
+    }
+
+    .form-container {
+        padding: 20px; /* Mindre padding i formularen på små skærme */
+    }
+}

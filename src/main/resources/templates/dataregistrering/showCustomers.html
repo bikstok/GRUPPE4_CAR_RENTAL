@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Alle kunder</title>
-    <link rel="stylesheet" href="/table.css">
-    <link rel="stylesheet" href="/dataregistrering/showCustomers.css">
+    <link rel="stylesheet" href="/buttons.css">
+    <link rel="stylesheet" href="/dataregistrering/showTables.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -19,14 +19,24 @@
 <table border="1">
     <thead>
     <tr>
-        <th><a th:href="@{'/dataregistrering/showCustomers?sortBy=c.cpr_number&previousSortBy=' + ${sortBy}}">CPR nummer</a></th>
-        <th><a th:href="@{'/dataregistrering/showCustomers?sortBy=c.first_name&previousSortBy=' + ${sortBy}}">Fornavn</a></th>
-        <th><a th:href="@{'/dataregistrering/showCustomers?sortBy=c.last_name&previousSortBy=' + ${sortBy}}">Efternavn</a></th>
-        <th><a th:href="@{'/dataregistrering/showCustomers?sortBy=c.email&previousSortBy=' + ${sortBy} }">E-mail</a></th>
-        <th><a th:href="@{'/dataregistrering/showCustomers?sortBy=c.phone_number&previousSortBy=' + ${sortBy}}">Telefonnummer</a></th>
-        <th><a th:href="@{'/dataregistrering/showCustomers?sortBy=c.address&previousSortBy=' + ${sortBy}}">Addresse</a></th>
+        <th><a th:href="@{'/dataregistrering/showCustomers?sortBy=c.cpr_number&previousSortBy=' + ${sortBy}}">CPR
+            nummer</a></th>
+        <th>
+            <a th:href="@{'/dataregistrering/showCustomers?sortBy=c.first_name&previousSortBy=' + ${sortBy}}">Fornavn</a>
+        </th>
+        <th>
+            <a th:href="@{'/dataregistrering/showCustomers?sortBy=c.last_name&previousSortBy=' + ${sortBy}}">Efternavn</a>
+        </th>
+        <th><a th:href="@{'/dataregistrering/showCustomers?sortBy=c.email&previousSortBy=' + ${sortBy} }">E-mail</a>
+        </th>
+        <th><a th:href="@{'/dataregistrering/showCustomers?sortBy=c.phone_number&previousSortBy=' + ${sortBy}}">Telefonnummer</a>
+        </th>
+        <th><a th:href="@{'/dataregistrering/showCustomers?sortBy=c.address&previousSortBy=' + ${sortBy}}">Addresse</a>
+        </th>
         <th><a th:href="@{'/dataregistrering/showCustomers?sortBy=z.city&previousSortBy=' + ${sortBy}}">By</a></th>
-        <th><a th:href="@{'/dataregistrering/showCustomers?sortBy=c.zip_code&previousSortBy=' + ${sortBy}}">Postnummer</a></th>
+        <th>
+            <a th:href="@{'/dataregistrering/showCustomers?sortBy=c.zip_code&previousSortBy=' + ${sortBy}}">Postnummer</a>
+        </th>
         <th>Rediger</th>
         <th>Slet</th>
     </tr>
@@ -43,7 +53,9 @@
         <td th:text="${customer.zip_code}"></td>
         <td>
             <a th:href="@{'/editCustomer/' + ${customer.cpr_number}}">
-                <button class="edit">Rediger kunde</button>
+                <button class="edit">
+                    <i class="fa-solid fa-pen"></i> Rediger kunde
+                </button>
             </a>
         </td>
         <td>

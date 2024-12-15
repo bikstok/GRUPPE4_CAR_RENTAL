@@ -1,0 +1,71 @@
+/* Grundlæggende opsætning af body */
+body {
+    font-family: 'Nunito', sans-serif; /* Brug af Nunito font for moderne og læselig tekst */
+    background-color: #f7f7f7; /* Lys grå baggrund for hele siden */
+    margin: 0; /* Fjern standard margin */
+    padding: 0; /* Fjern standard padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Styling af formularen */
+main {
+    background-color: #ffffff; /* Hvid baggrund for formularen */
+    border: 1px solid #ddd; /* Lys kant rundt om formularen */
+    border-radius: 8px; /* Rundede hjørner */
+    padding: 20px; /* Lidt ekstra plads indvendigt i formularen */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtil skygge for at give dybde */
+    width: 400px; /* Fast bredde for formularen */
+}
+
+/* Form grupper for hvert input felt */
+.form-group {
+    margin-bottom: 15px; /* Afstand mellem hvert formfelt */
+}
+
+/* Styling af label (etiketten) */
+label {
+    font-size: 14px; /* Standard skriftstørrelse */
+    margin-bottom: 5px; /* Lidt afstand mellem label og inputfelt */
+    color: #333; /* Mørk grå farve for labelen */
+}
+
+/* Styling af inputfelter */
+input[type="text"],
+input[type="date"],
+select {
+    padding: 10px; /* Lidt ekstra plads inde i inputfelterne */
+    margin-bottom: 15px; /* Afstand mellem inputfelter */
+    border: 1px solid #ccc; /* Lys grå kant rundt om inputfelterne */
+    border-radius: 4px; /* Rundede hjørner for inputfelterne */
+    font-size: 14px; /* Standard skriftstørrelse */
+    width: 100%; /* Sørger for, at inputfelterne fylder hele bredden */
+    box-sizing: border-box; /* Sørger for, at padding og border tælles med i elementets bredde */
+}
+
+/* Styling af checkbox */
+input[type="checkbox"] {
+    margin: 0;
+    width: auto;
+    height: auto;
+}
+
+/* Styling af knapper */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+/* Responsive justeringer */
+@media (max-width: 480px) {
+    main {
+        width: 90%; /* Formularen fylder 90% af skærmbredden på små skærme */
+    }
+}

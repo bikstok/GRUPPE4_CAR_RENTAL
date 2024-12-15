@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Alle biler</title>
-    <link rel="stylesheet" href="/table.css">
-    <link rel="stylesheet" href="/dataregistrering/showCars.css">
+    <link rel="stylesheet" href="/buttons.css">
+    <link rel="stylesheet" href="/dataregistrering/showTables.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -19,16 +19,23 @@
 <table border="1">
     <thead>
     <tr>
-        <th><a th:href="@{'/dataregistrering/showCars?sortBy=c.frame_number&previousSortBy=' + ${sortBy}}">Stelnummer</a></th>
+        <th>
+            <a th:href="@{'/dataregistrering/showCars?sortBy=c.frame_number&previousSortBy=' + ${sortBy}}">Stelnummer</a>
+        </th>
         <th><a th:href="@{'/dataregistrering/showCars?sortBy=m.brand&previousSortBy=' + ${sortBy}}">Brand</a></th>
         <th><a th:href="@{'/dataregistrering/showCars?sortBy=c.model&previousSortBy=' + ${sortBy}}">Model</a></th>
         <th><a th:href="@{'/dataregistrering/showCars?sortBy=c.car_status&previousSortBy=' + ${sortBy}}">Status</a></th>
-        <th><a th:href="@{'/dataregistrering/showCars?sortBy=c.fuel_type&previousSortBy=' + ${sortBy}}">Brændstof</a></th>
-        <th><a th:href="@{'/dataregistrering/showCars?sortBy=c.gear_type&previousSortBy=' + ${sortBy}}">Gear type</a></th>
-        <th><a th:href="@{'/dataregistrering/showCars?sortBy=c.year_produced&previousSortBy=' + ${sortBy}}">Produktionsår</a></th>
-        <th><a th:href="@{'/dataregistrering/showCars?sortBy=c.monthly_sub_price&previousSortBy=' + ${sortBy}}">Abonn. pris</a></th>
+        <th><a th:href="@{'/dataregistrering/showCars?sortBy=c.fuel_type&previousSortBy=' + ${sortBy}}">Brændstof</a>
+        </th>
+        <th><a th:href="@{'/dataregistrering/showCars?sortBy=c.gear_type&previousSortBy=' + ${sortBy}}">Gear type</a>
+        </th>
+        <th><a th:href="@{'/dataregistrering/showCars?sortBy=c.year_produced&previousSortBy=' + ${sortBy}}">Produktionsår</a>
+        </th>
+        <th><a th:href="@{'/dataregistrering/showCars?sortBy=c.monthly_sub_price&previousSortBy=' + ${sortBy}}">Abonn.
+            pris</a></th>
         <th><a th:href="@{'/dataregistrering/showCars?sortBy=c.odometer&previousSortBy=' + ${sortBy}}">Odometer</a></th>
-        <th><a th:href="@{'/dataregistrering/showCars?sortBy=c.original_price&previousSortBy=' + ${sortBy}}">Original pris</a></th>
+        <th><a th:href="@{'/dataregistrering/showCars?sortBy=c.original_price&previousSortBy=' + ${sortBy}}">Original
+            pris</a></th>
         <th>Rediger</th>
         <th>Slet</th>
     </tr>
@@ -47,7 +54,9 @@
         <td th:text="${car.original_price}"></td>
         <td>
             <a th:href="@{'/editCar/' + ${car.frame_number}}">
-                <button class="edit">Rediger bil</button>
+                <button class="edit">
+                    <i class="fa-solid fa-pen"></i>Rediger bil
+                </button>
             </a>
         </td>
         <td>
