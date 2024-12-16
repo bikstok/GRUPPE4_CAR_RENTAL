@@ -43,7 +43,7 @@ public class HomeController {
                 correctPasword = "d14b79333f72d51553d643d5c47dd5dede15d85d6f64e417ce612f12c79b812b";
                 break;
             case "damageNerds":
-                redirectUrl = "skade_og_udbedring/skade";
+                redirectUrl = "skade_og_udbedring/damageFrontPage";
                 correctPasword = "16cc78d498a0a5d3d8b45813d0f0a24be06243c89c18b3c2d8353d5bedc6cf2e";
                 break;
             case "businessNerds":

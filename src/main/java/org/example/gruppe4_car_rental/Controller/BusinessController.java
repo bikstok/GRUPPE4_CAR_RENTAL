@@ -53,33 +53,25 @@ public class BusinessController {
         return "forretningsudvikler/KPIDashboard";
     }
 
-    @GetMapping("/forretningsudvikler/BilopkobOversigt")
+    @GetMapping("/forretningsudvikler/showCarPurchaseOverview")
     public String carPurchaseOverview(Model model) {
         List<Map<String, Object>> carPurchaseSummary = this.businessService.overviewOfCarPurchases();
         model.addAttribute("carPurchaseSummary", carPurchaseSummary);
-        return "forretningsudvikler/BilopkobOversigt";
+        return "forretningsudvikler/showCarPurchaseOverview";
     }
 
-    @GetMapping("/forretningsudvikler/LejekontraktOversigt")
+    @GetMapping("/forretningsudvikler/showActiveRentalContracts")
     public String getActiveRentalContracts(Model model) {
         List<RentalContract> getActiveRentalContracts = this.businessService.getActiveRentalOverview();
         model.addAttribute("rentalContracts", getActiveRentalContracts);
-        return "forretningsudvikler/LejekontraktOversigt";
+        return "forretningsudvikler/showActiveRentalContracts";
     }
-
-    @GetMapping("/forretningsudvikler/returnedCars")
+    @GetMapping("/forretningsudvikler/showReturnedCars")
     public String getReturnedCarsByEndDate(@RequestParam("end_date") String end_date, Model model) {
-        System.out.println("Controller method called with end_date: " + end_date);
-        LocalDate endDate = LocalDate.parse(end_date);
-        List<Car> returnedCars = businessService.getReturnedCarsByEndDate(endDate);
-
+        //System.out.println("Controller: Received end_date = " + end_date);
+        List<Car> returnedCars = this.businessService.getReturnedCarsByEndDate(LocalDate.parse(end_date));
+        //System.out.println("Controller: Returned cars size = " + returnedCars.size());
         model.addAttribute("returnedCars", returnedCars);
-        model.addAttribute("selectedDate", end_date); // Til form-visning
-        return "forretningsudvikler/KPIDashboard";
+        return "forretningsudvikler/showReturnedCars";
     }
 }
-
-/*this.carService.deleteCar(frame_number);
-        return "redirect:/dataregistrering/cars";*/
-
-

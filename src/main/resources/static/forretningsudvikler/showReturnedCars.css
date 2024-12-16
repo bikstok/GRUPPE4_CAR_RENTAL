@@ -1,0 +1,63 @@
+/* Generelle indstillinger */
+body {
+    font-family: 'Nunito', sans-serif; /* Elegant og let læselig skrifttype */
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; /* Lys grå baggrund */
+    color: #333; /* Mørk grå tekst */
+    line-height: 1.6; /* Giver bedre luft mellem linjer */
+}
+
+
+/* Overskrift */
+h1 {
+    text-align: center;
+    color: #2C3E50; /* Blålig farve */
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Besked om antal biler */
+p {
+    text-align: center;
+    font-size: 18px;
+    color: #555; /* Let grålig tekst */
+    margin: 10px 0;
+}
+
+/* Liste med returnerede biler */
+ul {
+    list-style-type: none; /* Fjern punktopstilling */
+    padding: 0;
+    margin: 20px auto; /* Centrerer listen */
+    max-width: 600px; /* Begrænser bredden af listen */
+    background: #ffffff; /* Hvid baggrund */
+    border-radius: 10px; /* Runde hjørner */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Let skygge */
+    overflow: hidden; /* Runde hjørner gælder også for indholdet */
+}
+
+/* Individuelle listeelementer */
+ul li {
+    padding: 10px 15px;
+    border-bottom: 1px solid #e0e0e0; /* Lys grå separator mellem biler */
+    display: flex;
+    justify-content: space-between; /* Sørger for mellemrum mellem bil-info */
+    align-items: center;
+}
+
+ul li:last-child {
+    border-bottom: none; /* Fjern linje fra sidste element */
+}
+
+/* Tekst i listeelementer */
+ul li span {
+    font-size: 16px;
+    color: #333; /* Standard mørkegrå */
+}
+
+/* Hover-effekt for listeelementer */
+ul li:hover {
+    background-color: #f1f1f1; /* Lys baggrund ved hover */
+    transition: background-color 0.3s ease;
+}

@@ -5,37 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bilopkøb - Oversigt</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/forretningsudvikler/BilopkobOversigt.css">
+    <link rel="stylesheet" href="/forretningsudvikler/showCarPurchaseOverview.css">
+    <link rel="stylesheet" href="/sidebar.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 
 </head>
 <body>
-
+<!-- Sidebar -->
 <div class="sidebar">
     <h2>Bilabonnement A/S</h2>
-    <ul>
-        <li>
-            <a href="/forretningsudvikler/KPIDashboard">
-                <i class="fas fa-house"></i> Dashboard
-            </a>
-        </li>
-        <li>
-            <a href="/forretningsudvikler/BilopkobOversigt">
-                <i class="fas fa-car"></i> Bilopkøb
-            </a>
-        </li>
-        <li>
-            <a href="/forretningsudvikler/LejekontraktOversigt">
-                <i class="fa-regular fa-folder-open"></i> Aktive lejekontrakter
-            </a>
-        </li>
-        <li>
-            <a href="/">
-                <i class="fa-solid fa-right-from-bracket"></i> Log ud
-            </a>
-        </li>
-    </ul>
+    <div class="sidebar-content">
+        <ul>
+            <li>
+                <a href="/forretningsudvikler/KPIDashboard">
+                    <i class="fas fa-house"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="/forretningsudvikler/showCarPurchaseOverview">
+                    <i class="fas fa-car"></i> Bilopkøb
+                </a>
+            </li>
+            <li>
+                <a href="/forretningsudvikler/showActiveRentalContracts">
+                    <i class="fa-regular fa-folder-open"></i> Aktive lejekontrakter
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="logout">
+        <a href="/">
+            <i class="fa-solid fa-right-from-bracket"></i> Log ud
+        </a>
+    </div>
 </div>
 
 

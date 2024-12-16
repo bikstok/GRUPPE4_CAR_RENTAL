@@ -6,10 +6,3 @@ th {
     background-color: #990303; /* baggrundsfarve for header */
 }
 
-button {
-    background-color: #990303; /* Primær knapfarve */
-}
-
-button:hover {
-    background-color: #7C0202; /* farve ved hover */
-}

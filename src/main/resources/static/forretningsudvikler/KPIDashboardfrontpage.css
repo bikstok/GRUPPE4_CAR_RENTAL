@@ -161,12 +161,89 @@ main {
     transform: scale(1.05); /* Effekt ved hover */
 }
 
-/* Returnerede biler styling */
+/* Styling til Returnerede Biler-sektionen */
 .kpi-returneredebiler {
-    margin-top: 30px;
-    text-align: center;
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centrerer indholdet vandret */
+    background-color: #ffffff; /* Hvid baggrund */
+    border-radius: 10px; /* Runde hjørner */
+    padding: 20px; /* Luft inde i boksen */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Let skygge */
+    max-width: 1300px; /* Begræns bredden */
+    margin: 20px auto; /* Centrerer boksen og giver luft til siderne */
+    position: relative; /* Sikrer, at det kan placeres korrekt */
+    bottom: 0; /* Placeres i bunden af siden */
+}
+
+/* Juster input og knap-styling */
+.kpi-returneredebiler input[type="date"],
+.kpi-returneredebiler button {
+    padding: 8px 12px; /* Luft omkring indholdet */
+    font-size: 14px; /* Skaleret tekststørrelse */
+    margin-top: 10px; /* Afstand mellem elementerne */
+    border: 1px solid #ccc; /* Lys grå kant */
+    border-radius: 5px; /* Runde hjørner */
+    outline: none; /* Fjern fokus-kant */
+}
+
+.kpi-returneredebiler button {
+    background-color: #4CAF50; /* Grøn baggrund */
+    color: white; /* Hvid tekst */
+    font-weight: bold;
+    cursor: pointer; /* Musen ændres til hånd */
+    transition: background-color 0.3s ease;
+}
+
+.kpi-returneredebiler button:hover {
+    background-color: #45a049; /* Mørkere grøn ved hover */
+}
+
+/* Styling for Top 5 biler */
+.top-5-cars {
+    margin-top: 30px; /* Luft over sektionen */
+    background-color: #ffffff; /* Hvid baggrund */
+    border-radius: 10px; /* Runde hjørner */
+    padding: 20px; /* Luft inde i boksen */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Let skygge */
+    max-width: 600px; /* Begræns bredden */
+    margin-left: auto; /* Centrerer boksen */
+    margin-right: auto; /* Centrerer boksen */
+}
+
+.top-5-cars h3 {
+    text-align: center; /* Centrer overskriften */
+    color: #03997a; /* Grøn tekstfarve */
+    font-size: 20px; /* Størrelse på overskriften */
+    margin-bottom: 15px; /* Luft under overskriften */
+}
+
+.top-5-cars table {
+    width: 100%; /* Fyld boksen */
+    border-collapse: collapse; /* Fjern mellemrum mellem celler */
+    border-radius: 10px; /* Runde hjørner på container */
+    text-align: left; /* Venstrejusteret tekst */
+}
+
+.top-5-cars th {
+    background-color: #03997a; /* Grøn baggrund */
+    color: white; /* Hvid tekst */
+    padding: 10px;
+    text-transform: uppercase; /* Store bogstaver */
+}
+
+.top-5-cars td {
+    padding: 10px;
+    border: 1px solid #ddd; /* Lys grå kant */
+}
+
+.top-5-cars tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Lys grå for ulige rækker */
+}
+
+.top-5-cars tbody tr:nth-child(even) {
+    background-color: #e0e0e0; /* Meget lys grå for lige rækker */
+}
+
+.top-5-cars tbody tr:hover {
+    background-color: #d6d6d6; /* Mørkere grå ved hover */
+    transition: background-color 0.3s ease; /* Glidende overgang */
 }

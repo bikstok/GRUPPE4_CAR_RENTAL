@@ -1,0 +1,79 @@
+/* Generelle indstillinger */
+body {
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    background-color: #f9f9f9; /* Baggrund for hele siden */
+}
+
+/* Sidebar Styling */
+.sidebar {
+    position: fixed; /* Sidebar er fast placeret */
+    top: 0;
+    left: 0;
+    width: 17%; /* Sidebar fylder 17% af bredden */
+    height: 100vh; /* Sidebar fylder hele højden */
+    background-color: white;
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Content Styling */
+.content {
+    margin-left: 18%; /* Flytter indholdet til højre for sidebar */
+    padding: 20px; /* Luft omkring indholdet */
+    box-sizing: border-box;
+    width: 80%; /* Sørger for, at indholdet ikke fylder hele bredden */
+}
+
+/* Table Container */
+table {
+    width: 100%; /* Tabellen fylder hele content-bredden */
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Let skygge */
+    table-layout: auto; /* Juster kolonnebredder automatisk */
+}
+
+/* Header Styling */
+th {
+    background-color: #03997a; /* Grøn baggrund for header */
+    color: #fff;
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Cell Styling */
+td {
+    padding: 12px;
+    text-align: left;
+    color: #333;
+}
+
+/* Alternating Row Colors */
+tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Lys grå baggrund for ulige rækker */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e0e0e0; /* Meget lys grå for lige rækker */
+}
+
+/* Hover Effekt */
+tbody tr:hover {
+    background-color: #d6d6d6; /* Mørkere baggrund ved hover */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+body .content h2 {
+    color: #027f66;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}

@@ -45,24 +45,6 @@ td {
     background-color: #f9f9f9;
 }
 
-/* Button Style */
-button {
-    display: block; /* Placerer hver knap på en ny linje */
-    width: 100%;    /* Får knapperne til at fylde hele bredden af deres container */
-    margin-top: 10px; /* Giver lidt afstand mellem knapperne */
-    background-color: #d21e1e;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #1e1e1e;
-}
-
 /* Checkbox Style */
 input[type="checkbox"] {
     margin-left: 10px;
@@ -79,4 +61,23 @@ input[type="checkbox"] {
     button {
         width: 100%;
     }
+}
+
+
+/* Button Style */
+button {
+    display: block; /* Placerer hver knap på en ny linje */
+    width: 100%;    /* Får knapperne til at fylde hele bredden af deres container */
+    margin-top: 10px; /* Giver lidt afstand mellem knapperne */
+    background-color: #d21e1e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1e1e1e;
 }

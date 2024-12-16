@@ -101,8 +101,7 @@ public class BusinessRepo {
         return jdbcTemplate.queryForList(sql);
     }
 
-    public List<Car> findReturnedCarsByEndDate(LocalDate endDate) {
-        // SQL-forespørgsel til at finde returnerede biler
+    public List<Car> findReturnedCarsByEndDate(LocalDate end_date) {
         String sql = "SELECT c.frame_number, c.model, cm.brand, c.car_status, c.fuel_type, " +
                 "c.gear_type, c.year_produced, c.monthly_sub_price, c.odometer, c.original_price " +
                 "FROM Cars c " +
@@ -110,11 +109,8 @@ public class BusinessRepo {
                 "JOIN RentalContract r ON c.frame_number = r.frame_number " +
                 "WHERE r.end_date = ?";
 
-        // RowMapper til at mappe resultater til Car-objekter
-        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
-
-        // Udfør forespørgslen og returnér resultatet
-        return this.jdbcTemplate.query(sql, rowMapper, endDate);
+        RowMapper rowMapper = new BeanPropertyRowMapper(Car.class);
+        return this.jdbcTemplate.query(sql, rowMapper, end_date);
     }
 
 }

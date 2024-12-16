@@ -32,6 +32,7 @@ button.delete:hover {
     background-color: #c0392b;
 }
 
+
 /* Style for Opret forhåndsaftale button (grøn) */
 button.create {
     background-color: #28a745; /* Grøn farve */
@@ -53,7 +54,7 @@ button.create:hover {
 .go-back a {
     text-decoration: none;
     color: #fff; /* Hvid tekst */
-    background-color: #03997a; /* Grøn baggrund */
+    background-color: lightgray; /* Grøn baggrund */
     padding: 10px 15px;
     border-radius: 5px; /* Runde hjørner */
     font-weight: bold;
@@ -69,7 +70,7 @@ button.create:hover {
 
 /* Hover-effekt på 'Tilbage' knappen */
 .go-back a:hover {
-    background-color: #027f66; /* Mørkere grøn ved hover */
+    background-color: #C0C0C0; /* Mørkere grøn ved hover */
 }
 
 /* Styling for the update button */

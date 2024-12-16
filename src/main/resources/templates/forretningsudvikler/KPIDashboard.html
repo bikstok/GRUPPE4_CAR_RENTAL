@@ -21,12 +21,12 @@
                 </a>
             </li>
             <li>
-                <a href="/forretningsudvikler/BilopkobOversigt">
+                <a href="/forretningsudvikler/showCarPurchaseOverview">
                     <i class="fas fa-car"></i> Bilopkøb
                 </a>
             </li>
             <li>
-                <a href="/forretningsudvikler/LejekontraktOversigt">
+                <a href="/forretningsudvikler/showActiveRentalContracts">
                     <i class="fa-regular fa-folder-open"></i> Aktive lejekontrakter
                 </a>
             </li>
@@ -74,23 +74,34 @@
     </div>
 
     <!-- Returnerede Biler nederst -->
-    <div>
-        <h3>Hent Returnerede Biler</h3>
-        <form action="/forretningsudvikler/returnedCars" method="get">
+    <div class="kpi-returneredebiler">
+        <h3>Se hvilke biler som er returneret for den specifikke dag</h3>
+        <form action="/forretningsudvikler/showReturnedCars" method="get">
             <label for="end_date">Vælg slutdato:</label>
             <input type="date" id="end_date" name="end_date" th:value="${selectedDate}">
             <button type="submit">Hent</button>
         </form>
     </div>
 
-    <div>
-        <h3>Returnerede Biler</h3>
-        <ul th:if="${not #lists.isEmpty(returnedCars)}" th:each="car : ${returnedCars}">
-            <li th:text="${(car.brand ?: 'Ukendt mærke') + ' ' + (car.model ?: 'Ukendt model') +
-                  ' - Afleveret den: ' + (#dates.format(car.returnDate, 'dd-MM-yyyy'))}"></li>
-        </ul>
-        <p th:if="${#lists.isEmpty(returnedCars)}">Ingen biler blev afleveret på denne dato.</p>
+    <!-- Top 5 Mest Udlejede Bilmærker -->
+    <div class="top-5-cars">
+        <h3>Top 5 Mest Udlejede Bilmærker</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Brand</th>
+                <th>Antal Udlejninger</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="car : ${topRentedCarBrands}">
+                <td th:text="${car.brand}">Brand</td>
+                <td th:text="${car.rental_count}">Antal Udlejninger</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+
 </main>
 
 </body>
