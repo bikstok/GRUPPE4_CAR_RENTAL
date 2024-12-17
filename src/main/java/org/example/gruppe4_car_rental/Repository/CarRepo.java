@@ -64,7 +64,7 @@ public class CarRepo {
         this.jdbcTemplate.update(
                 "INSERT INTO CarModels (model, brand) " +
                         "VALUES (?, ?) " +
-                        "ON DUPLICATE KEY UPDATE city = VALUES(brand)",
+                        "ON DUPLICATE KEY UPDATE brand = VALUES(brand)",
             car.getModel(), car.getBrand()
         );
 
