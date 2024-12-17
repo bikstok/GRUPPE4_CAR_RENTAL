@@ -1,8 +1,6 @@
 package org.example.gruppe4_car_rental.Controller;
 
-import org.example.gruppe4_car_rental.Model.Car;
 import org.example.gruppe4_car_rental.Model.Customer;
-import org.example.gruppe4_car_rental.Service.CarService;
 import org.example.gruppe4_car_rental.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/*
+CustomerController håndterer HTTP-anmodninger vedrørende kunder i systemet.
+Controlleren giver funktionalitet som visning, sletning, redigering og opdatering af kunder.
+ */
 @Controller
 public class CustomerController {
 
@@ -22,7 +24,7 @@ public class CustomerController {
 
     //Sletter en kunde ud fra cpr_number
     @GetMapping("/deleteCustomer/{cpr_number}")
-    public String deleteCustomer(@PathVariable("cpr_number") String cpr_number){
+    public String deleteCustomer(@PathVariable("cpr_number") String cpr_number) {
         this.customerService.deleteCustomer(cpr_number);
         return "redirect:/dataregistrering/showCustomers";
     }
@@ -37,18 +39,14 @@ public class CustomerController {
         //System.out.println("show all customers called with sortby " + sortBy);
         //System.out.println("existing attribute is " + previousSortBy);
 
-       /*vi tilføjer previousSortBy for at kunne holde fast i når en overskrift er blevet klikket på.
-        sortBy = ASC order
-        previousSortBy = DESV
-        Hvis brugeren klikker på samme kolonne igen, ændres sorteringsrækkefølgen til DESC (omvendt).
-        Første klik på en kolonne sorterer stigende (ASC).
-        Andet klik på samme kolonne sorterer faldende (DESC).*/
-         if (sortBy != null && sortBy.equals(previousSortBy)) {
-             sortBy += " DESC";
+        /*Vi tilføjer previousSortBy for at kunne holde fast i når en overskrift er blevet klikket på.
+        Hvis brugeren klikker på samme kolonne igen, ændres sorteringsrækkefølgen til det omvendte.*/
+        if (sortBy != null && sortBy.equals(previousSortBy)) {
+            sortBy += " DESC";
         } else {
-             //Denne linje gør at man kan få fat i previousSortBy næste gang.
-             model.addAttribute("sortBy", sortBy);
-         }
+            //Denne linje gør at man kan få fat i previousSortBy næste gang.
+            model.addAttribute("sortBy", sortBy);
+        }
         //Henter liste af kunder fra service-laget, sorteret efter sortBy-parameteren
         List<Customer> customers = customerService.fetchAllCustomers(sortBy);
         model.addAttribute("customers", customers);
@@ -61,7 +59,7 @@ public class CustomerController {
     public String showEditForm(@PathVariable("cpr_number") String cpr_number, Model model) {
         Customer customer = this.customerService.findByCprNumber(cpr_number);
         model.addAttribute("customer", customer);
-        return "dataregistrering/editCustomer";  // Returner Thymeleaf-template for redigering
+        return "dataregistrering/editCustomer";
     }
 
     //Håndterer redigeringsformularen og opdaterer i databasen.

@@ -20,10 +20,6 @@ public class CarController {
             @RequestParam(value = "previousSortBy", required = false) String previousSortBy,
             @RequestParam(value = "sortBy", required = false) String sortBy,
             Model model) {
-
-        //System.out.println("show all cars called with sortby " + sortBy);
-        //System.out.println("existing attribute is " + previousSortBy);
-
         /*Hvis brugeren klikker på samme kolonne igen, ændres sorteringsrækkefølgen til DESC (omvendt).
         Første klik på en kolonne sorterer stigende (ASC).
         Andet klik på samme kolonne sorterer faldende (DESC).*/
@@ -67,7 +63,6 @@ public class CarController {
             @RequestParam("monthly_sub_price") double monthly_sub_price,
             @RequestParam("odometer") int odometer,
             @RequestParam("original_price") double original_price) {
-        //System.out.println("update car method called");
 
         //Opretter et ny Car-objekt som er en opdateret version af det eksisterende.
         Car car = new Car(frame_number, model, brand, car_status, fuel_type, gear_type, year_produced, monthly_sub_price, odometer, original_price);

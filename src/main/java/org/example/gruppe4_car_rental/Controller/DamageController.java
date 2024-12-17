@@ -26,6 +26,7 @@ public class DamageController {
         List<Car> carsWithPendingInspections = this.damageService.getCarsWithPendingInspectionsForXDays(days);
         //carsWithPendingInspections.add(new Car("test","test2","test3","test4","test5","test6",2,3,4,5));
         if (!carsWithPendingInspections.isEmpty()) {
+            // Dynamisk opbygning af notifikationsbesked
             String dage = days > 1 ? "dage" : "dag";
             int antalBiler = carsWithPendingInspections.size();
             String biler = antalBiler > 1 ? "biler" : "bil";
@@ -42,6 +43,8 @@ public class DamageController {
             model.addAttribute("notification_title", "Notifikation om statusændringer");
             model.addAttribute("notification", message);
         }
+
+        // Henter kontrakter med manglende inspektioner
         List<RentalContract> rentalContracts = this.damageService.fetchContractsWithPendingInspections();
         model.addAttribute("rentalContracts", rentalContracts);
         return "skade_og_udbedring/damageFrontPage";
@@ -68,11 +71,12 @@ public class DamageController {
             @RequestParam(value = "damage_prices", required = false) List<Double> damage_prices,
             Model model) {
         double total_repair_price = 0.0;
-        if (damage_prices !=null) {
+        if (damage_prices != null) {
             for (double damage_price : damage_prices) {
                 total_repair_price += damage_price;
             }
         }
+        // Sletter eksisterende rapport og opretter en ny
         this.damageService.deleteDamageReport(contract_id);
         this.damageService.createDamageReport(new DamageReport(-1, contract_id, total_repair_price));
         return "redirect:/skade_og_udbedring/showDamageReports";

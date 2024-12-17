@@ -20,11 +20,11 @@ public class HomeController {
     @Autowired
     private HomeService homeService;
 
-    // Index forside/login siden
+    //Viser login-forsiden og opdaterer bilstatus.
     @GetMapping("/")
     public String index() {
-        this.homeService.changeStatusOfCarsToRented();//when they have an active rental contract
-        this.homeService.changeStatusOfCarsToPendingInspection();//when the rental contract expires
+        this.homeService.changeStatusOfCarsToRented();
+        this.homeService.changeStatusOfCarsToPendingInspection();
         return "index";
     }
 
@@ -58,8 +58,8 @@ public class HomeController {
 
         if (correctPasword != null) {
             // Brug switch til at validere loginoplysninger
-            // Sætter login i et hash som gemmer login
             try {
+                // Hash'er adgangskode med SHA-256 (secure hash algorithm)
                 MessageDigest digest = MessageDigest.getInstance("SHA-256");
                 byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
                 final StringBuilder hexString = new StringBuilder();

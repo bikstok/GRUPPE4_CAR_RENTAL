@@ -100,17 +100,6 @@ public class DamageRepo {
 
     public List<DamageReport> fetchAllDamageReports() {
         String sql = "SELECT damage_report_id, contract_id, total_repair_price FROM DamageReport";
-        //
-        //        return jdbcTemplate.query(sql, new RowMapper<DamageReport>() {
-        //            @Override
-        //            public DamageReport mapRow(ResultSet rs, int rowNum) throws SQLException {
-        //                DamageReport damageReport = new DamageReport();
-        //                damageReport.setDamageReportId(rs.getInt("damage_report_id"));
-        //                damageReport.setContractId(rs.getInt("contract_id"));
-        //                damageReport.setTotalRepairPrice(rs.getDouble("total_repair_price"));
-        //                return damageReport;
-        //            }
-        //        });
         return this.jdbcTemplate.query(sql, RowMapperUtil.DAMAGE_REPORT_ROW_MAPPER);
     }
 

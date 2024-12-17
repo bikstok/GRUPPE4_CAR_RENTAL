@@ -1,7 +1,6 @@
 package org.example.gruppe4_car_rental.Repository;
 
 import org.example.gruppe4_car_rental.Model.CarPurchase;
-import org.example.gruppe4_car_rental.Model.Customer;
 import org.example.gruppe4_car_rental.Model.RentalContract;
 import org.example.gruppe4_car_rental.RowMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,6 @@ public class RentalContractRepo {
     public List<RentalContract> fetchAllRentalContracts() {
         String sql = "SELECT RentalContract.contract_id, RentalContract.cpr_number,RentalContract.frame_number, RentalContract.start_date, RentalContract.end_date, RentalContract.insurance," +
                 "RentalContract.total_price, RentalContract.max_km, RentalContract.voucher, RentalContract.start_odometer FROM RentalContract";
-
         return this.jdbcTemplate.query(sql, RowMapperUtil.RENTAL_CONTRACT_ROW_MAPPER);
     }
 

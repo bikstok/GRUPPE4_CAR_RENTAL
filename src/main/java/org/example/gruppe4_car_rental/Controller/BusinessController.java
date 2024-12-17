@@ -13,6 +13,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+/*
+BusinessController er ansvarlig for at håndtere anmodninger fra "forretningsudvikler"-relaterede sider.
+Controlleren henter data fra BusinessService og sender det videre til HTML-visninger.
+ */
 @Controller
 public class BusinessController {
     @Autowired
@@ -37,8 +41,10 @@ public class BusinessController {
         double monthlyEarnings = Math.round(this.businessService.calculateMonthlyEarningsJava() * 100.0) / 100.0;
         model.addAttribute("monthlyEarnings", monthlyEarnings + " DKK");
 
-
+        // Henter total indtjening og sender det til modellen
         model.addAttribute("totalEarnings", this.businessService.getTotalEarnings() + " DKK");
+
+        // Beregner procentdelen af ledige biler og afrunder til nærmeste heltal
         int percentOfAvailableCars = (int) Math.round(this.businessService.getPercentOfAvailableCars() * 100);
         model.addAttribute("notification", "Der er " + percentOfAvailableCars + "% ledige biler");
         if (percentOfAvailableCars >= 75) {
@@ -53,6 +59,7 @@ public class BusinessController {
         return "forretningsudvikler/KPIDashboard";
     }
 
+    // Henter oversigt over bilkøb og sender det til modellen
     @GetMapping("/forretningsudvikler/showCarPurchaseOverview")
     public String carPurchaseOverview(Model model) {
         List<Map<String, Object>> carPurchaseSummary = this.businessService.overviewOfCarPurchases();
@@ -60,17 +67,18 @@ public class BusinessController {
         return "forretningsudvikler/showCarPurchaseOverview";
     }
 
+    // Henter aktive lejekontrakter og sender det til modellen
     @GetMapping("/forretningsudvikler/showActiveRentalContracts")
     public String getActiveRentalContracts(Model model) {
         List<RentalContract> getActiveRentalContracts = this.businessService.getActiveRentalOverview();
         model.addAttribute("rentalContracts", getActiveRentalContracts);
         return "forretningsudvikler/showActiveRentalContracts";
     }
+
+    // Konverterer end_date (String) til LocalDate og henter returnerede biler baseret på dato
     @GetMapping("/forretningsudvikler/showReturnedCars")
     public String getReturnedCarsByEndDate(@RequestParam("end_date") String end_date, Model model) {
-        //System.out.println("Controller: Received end_date = " + end_date);
         List<Car> returnedCars = this.businessService.getReturnedCarsByEndDate(LocalDate.parse(end_date));
-        //System.out.println("Controller: Returned cars size = " + returnedCars.size());
         model.addAttribute("returnedCars", returnedCars);
         return "forretningsudvikler/showReturnedCars";
     }

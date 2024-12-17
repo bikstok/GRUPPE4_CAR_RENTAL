@@ -1,5 +1,6 @@
 package org.example.gruppe4_car_rental.Repository;
 
+import org.example.gruppe4_car_rental.Model.Car;
 import org.example.gruppe4_car_rental.Model.RentalContract;
 import org.example.gruppe4_car_rental.RowMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +9,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
-import java.time.LocalDate;
-import org.example.gruppe4_car_rental.Model.Car;
 
 @Repository
 public class BusinessRepo {
@@ -83,21 +83,21 @@ public class BusinessRepo {
         //5. Joiner Customers for at få kundens detaljer fra lejekontrakten
         //6. Grupperer resultaterne efter kunde, baseret på CPR-nummer
         String sql = """
-        SELECT
-            CONCAT(Customers.first_name, ' ', Customers.last_name) AS buyer_name, 
-            COUNT(CarPurchase.car_purchase_id) AS cars_purchased,
-            SUM(CarPurchase.purchase_price) AS total_spent
-        FROM
-            CarPurchase
-        JOIN
-            RentalContract ON CarPurchase.contract_id = RentalContract.contract_id
-        JOIN
-            Customers ON RentalContract.cpr_number = Customers.cpr_number
-        GROUP BY
-            Customers.cpr_number
-        ORDER BY
-            total_spent DESC;
-    """;
+                    SELECT
+                        CONCAT(Customers.first_name, ' ', Customers.last_name) AS buyer_name, 
+                        COUNT(CarPurchase.car_purchase_id) AS cars_purchased,
+                        SUM(CarPurchase.purchase_price) AS total_spent
+                    FROM
+                        CarPurchase
+                    JOIN
+                        RentalContract ON CarPurchase.contract_id = RentalContract.contract_id
+                    JOIN
+                        Customers ON RentalContract.cpr_number = Customers.cpr_number
+                    GROUP BY
+                        Customers.cpr_number
+                    ORDER BY
+                        total_spent DESC;
+                """;
         return jdbcTemplate.queryForList(sql);
     }
 

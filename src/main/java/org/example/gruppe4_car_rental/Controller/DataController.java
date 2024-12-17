@@ -47,6 +47,10 @@ public class DataController {
                 model.addAttribute("message", message);
                 return "showError";
             }
+
+            //Lægger months til slut dato
+            LocalDate local_end_date = local_start_date.plusMonths(months);
+            // Beregner totalpris og opretter kontrakt
             double total_price = this.dataService.getTotalPrice(frame_number, local_start_date, local_end_date);
             Date start_date = Date.valueOf(local_start_date);
             Date end_date = Date.valueOf(local_end_date);
@@ -54,6 +58,7 @@ public class DataController {
             RentalContract rentalContract = new RentalContract(-1, cpr_number, frame_number, start_date, end_date, insurance, total_price, max_km, voucher, this.dataService.getCarFromFrameNumber(frame_number).getOdometer());
             this.dataService.createRentalContract(rentalContract);
 
+            // Henter kundens data og viser faktura
             Customer customer = this.dataService.getCustomerFromCprNumber(cpr_number);
             return this.redirectToInvoice(model, customer.getFirst_name() + " " + customer.getLast_name(), rentalContract.getTotal_price(), this.dataService.getCarFromFrameNumber(frame_number));
             // return "redirect:/dataregistrering/showRentalContracts";
@@ -115,6 +120,7 @@ public class DataController {
         model.addAttribute("message", message);
         return "showError";
     }
+
     @GetMapping("dataregistrering/exampleInvoice")
     public String exampleInvoice(Model model) {
         return this.redirectToInvoice(model, "name name2", 123, new Car("123", "Brand Name", "Model Name", "test3", "test4", "test5", 5, 6, 7, 8));
@@ -134,20 +140,26 @@ public class DataController {
 
     @GetMapping("/createCarPurchase/{contract_id}")
     public String createCarPurchase(@PathVariable("contract_id") int contract_id, Model model) {
+        // Henter lejekontrakt og biloplysninger baseret på kontrakt-ID
         RentalContract rentalContract = this.dataService.getRentalContractFromContractId(contract_id);
         Car car = this.dataService.getCarFromFrameNumber(rentalContract.getFrame_number());
+        // Validerer om bilen allerede er solgt
         if ("Solgt".equals(car.getCar_status())) {
             String message = "Denne bil er allerede solgt";
             model.addAttribute("message", message);
             return "showError";
         }
+        // Beregner købspris baseret på bilens alder og kørte kilometer
         double originalPrice = car.getOriginal_price();
         int kilometersDriven = car.getOdometer() - rentalContract.getStart_odometer();
         int excessKilometers = Math.max(kilometersDriven - rentalContract.getMax_km(), 0);
         int years = LocalDate.now().getYear() - car.getYear_produced();
         double purchase_price = (originalPrice * Math.pow(0.9, years)) + (0.75 * excessKilometers);
+        // Opretter en ny CarPurchase-objekt med afrundet købspris
         CarPurchase carPurchase = new CarPurchase(-1, contract_id, Math.round(purchase_price * 100.0) / 100.0);
+        // Opdaterer databasen med det nye bilkøb
         this.dataService.createCarPurchase(carPurchase, rentalContract, car);
+        // Henter kundens oplysninger og redirecter til faktura
         Customer customer = this.dataService.getCustomerFromCprNumber(rentalContract.getCpr_number());
         return this.redirectToInvoice(model, customer.getFirst_name() + " " + customer.getLast_name(), carPurchase.getPurchase_price(), car);
         //if (!this.dataService.createCarPurchase(contract_id)) {
@@ -163,7 +175,7 @@ public class DataController {
     public String showEditForm(@PathVariable("contract_id") int contract_id, Model model) {
         RentalContract rentalContract = this.dataService.getRentalContractFromContractId(contract_id);
         model.addAttribute("rentalContract", rentalContract);
-        return "dataregistrering/editRentalContract";  // Returner Thymeleaf-template for redigering
+        return "dataregistrering/editRentalContract";
     }
 
     //Håndterer redigeringsformularen og opdaterer i databasen.
