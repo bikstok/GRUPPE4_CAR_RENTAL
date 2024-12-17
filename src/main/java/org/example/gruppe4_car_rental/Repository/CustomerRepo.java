@@ -21,7 +21,6 @@ public class CustomerRepo {
         String sql = "SELECT Customers.cpr_number, Customers.first_name, Customers.last_name, Customers.email, Customers.phone_number, Customers.address, Customers.zip_code, ZipCodes.city " +
                 "FROM Customers " +
                 "JOIN ZipCodes ON Customers.zip_code = ZipCodes.zip_code";
-        //String sql = "SELECT * FROM Customers"; // SQL query to fetch all customers
 
         //Kører SQL'en og map'per resultaterne til Customer-objekter vha. RowMapper.
         return jdbcTemplate.query(sql, RowMapperUtil.CUSTOMER_ROW_MAPPER); // udfører query og mapper resultatet som objekter i en liste/table

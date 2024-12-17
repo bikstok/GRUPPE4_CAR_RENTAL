@@ -66,15 +66,11 @@ public class RentalContractRepo {
         return this.jdbcTemplate.query(sql, RowMapperUtil.RENTAL_CONTRACT_ROW_MAPPER);
     }
 
-
     public void updateRentalContract(RentalContract rentalContract) {
-        //System.out.println("we are updating rentalcontract " + rentalContract);
-        //System.out.println("updating in repo");
-
         /*For at opdatere i RentalContracts tabellen.
         Vi redigerer IKKE contract_id men skal bruge det til at tage fat i den rentalContract man vil redigere.*/
 
-        String sql = "UPDATE RentalContract SET cpr_number = ?, frame_number = ?, start_date = ?, end_start = ?, insurance = ?, total_price = ?, max_km = ?, voucher = ? WHERE contract_id = ?";
+        String sql = "UPDATE RentalContract SET cpr_number = ?, frame_number = ?, start_date = ?, end_date = ?, insurance = ?, total_price = ?, max_km = ?, voucher = ?, start_odometer = ? WHERE contract_id = ?";
         this.jdbcTemplate.update(sql,
                 rentalContract.getCpr_number(),
                 rentalContract.getFrame_number(),
@@ -83,9 +79,11 @@ public class RentalContractRepo {
                 rentalContract.isInsurance(),
                 rentalContract.getTotal_price(),
                 rentalContract.getMax_km(),
-                rentalContract.getVoucher()
-
+                rentalContract.getVoucher(),
+                rentalContract.getStart_odometer(),
+                rentalContract.getContract_id()
         );
+
     }
 }
 

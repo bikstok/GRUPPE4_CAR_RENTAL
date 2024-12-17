@@ -15,16 +15,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/*
+DamageController er ansvarlig for at håndtere anmodninger fra "Damage"/skade og udbedrings-relaterede sider.
+Controlleren henter data fra DamageService (som kalder metoder fra DamageRepo og sender det videre til HTML-visninger.)
+ */
+
 @Controller
 public class DamageController {
     @Autowired
     private DamageService damageService;
 
+
+    //Viser en oversigt over kontrakter med manglende tilsyn
     @GetMapping("skade_og_udbedring/damageFrontPage")
     public String fetchContractsWithPendingInspections(Model model) {
-        int days = 2;
+        int days = 2; // Antal dage før en inspektion betragtes som forsinket
+
+        // Henter biler med forsinkede inspektioner
         List<Car> carsWithPendingInspections = this.damageService.getCarsWithPendingInspectionsForXDays(days);
-        //carsWithPendingInspections.add(new Car("test","test2","test3","test4","test5","test6",2,3,4,5));
         if (!carsWithPendingInspections.isEmpty()) {
             // Dynamisk opbygning af notifikationsbesked
             String dage = days > 1 ? "dage" : "dag";
@@ -50,6 +58,7 @@ public class DamageController {
         return "skade_og_udbedring/damageFrontPage";
     }
 
+    //Viser alle skadesrapporter
     @GetMapping("skade_og_udbedring/showDamageReports")
     public String fetchAllDamageReports(Model model) {
         List<DamageReport> damageReports = this.damageService.fetchAllDamageReports();
@@ -57,6 +66,7 @@ public class DamageController {
         return "skade_og_udbedring/showDamageReports";
     }
 
+    //opret kontrakt (med et kontrakt id)
     @GetMapping("/createDamageReport/{contract_id}")
     public String redirectToDamageReportForm(@PathVariable("contract_id") String contract_id, Model model) {
         model.addAttribute("contract_id", contract_id);
@@ -65,6 +75,7 @@ public class DamageController {
         return "skade_og_udbedring/createDamageReport";
     }
 
+    //Opret skadesrapport
     @PostMapping("/skade_og_udbedring/createDamageReport")
     public String createDamageReport(
             @RequestParam("contract_id") int contract_id,
@@ -82,12 +93,15 @@ public class DamageController {
         return "redirect:/skade_og_udbedring/showDamageReports";
     }
 
+
+    //Slet skadesrapport
     @GetMapping("/deleteDamageReport/{contract_id}")
     public String deleteDamageReport(@PathVariable("contract_id") int contract_id) {
         this.damageService.deleteDamageReport(contract_id);
         return "redirect:/skade_og_udbedring/showDamageReports";
     }
 
+    //Rediger skadesrapport
     @GetMapping("/editDamageReport/{contract_id}")
     public String editDamageReport(@PathVariable("contract_id") int contract_id, Model model) {
         model.addAttribute("contract_id", contract_id);

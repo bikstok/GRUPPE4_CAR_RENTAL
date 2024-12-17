@@ -34,10 +34,7 @@ public class CustomerController {
     public String showAllCustomers(
             @RequestParam(value = "previousSortBy", required = false) String previousSortBy,
             @RequestParam(value = "sortBy", required = false) String sortBy,
-                                   Model model) {
-
-        //System.out.println("show all customers called with sortby " + sortBy);
-        //System.out.println("existing attribute is " + previousSortBy);
+            Model model) {
 
         /*Vi tilføjer previousSortBy for at kunne holde fast i når en overskrift er blevet klikket på.
         Hvis brugeren klikker på samme kolonne igen, ændres sorteringsrækkefølgen til det omvendte.*/
@@ -54,7 +51,7 @@ public class CustomerController {
     }
 
     //Henviser til redigeringsformular for en specifik kunde baseret på cpr_number, hvor man indtaster nye værdier.
-    //den tager kundens parametre med over i formularen så man ikke skal indtaste alle informationer.
+    //kundens parametre følger med i formularen så man ikke skal genindtaste alle informationer.
     @GetMapping("/editCustomer/{cpr_number}")
     public String showEditForm(@PathVariable("cpr_number") String cpr_number, Model model) {
         Customer customer = this.customerService.findByCprNumber(cpr_number);
@@ -73,12 +70,11 @@ public class CustomerController {
             @RequestParam("address") String address,
             @RequestParam("city") String city,
             @RequestParam("zip_code") String zip_code) {
-        //System.out.println("update customer method called");
 
         //Opretter et ny Customer-objekt som er en opdateret version af det eksisterende.
         Customer customer = new Customer(cpr_number, first_name, last_name, email, phone_number, address, city, zip_code);
 
-        this.customerService.updateCustomer(customer); //Opdaterer kunde i databasen via CustomerService
+        this.customerService.updateCustomer(customer);
         return "redirect:/dataregistrering/showCustomers";
     }
 }

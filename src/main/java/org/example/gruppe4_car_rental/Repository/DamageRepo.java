@@ -42,6 +42,7 @@ public class DamageRepo {
         return jdbcTemplate.query(sql, RowMapperUtil.RENTAL_CONTRACT_ROW_MAPPER);
     }
 
+    //Henter alle damage types så vi senere kan udregne totalprisen af skader.
     public List<DamageType> fetchAllDamageTypes() {
         String sql = "SELECT damage_name, damage_price FROM DamageType";
         RowMapper<DamageType> rowMapper = (rs, rowNum) -> new DamageType(
@@ -51,19 +52,21 @@ public class DamageRepo {
         return jdbcTemplate.query(sql, rowMapper);
     }
 
+    //For at oprette skadesrapport ud fra contract_id med udregning af totalpris af skaderne
     public void createDamageReport(DamageReport damageReport) {
         String frameNumber = this.jdbcTemplate.queryForObject(
                 "SELECT frame_number FROM RentalContract WHERE contract_id = ?",
                 String.class,
                 damageReport.getContract_id()
         );
-
+/*I princippet et simpelt if/else statement,som tjekker om reperationsprisen er større end 0 :
+Hvis ja =skadet, hvis nej = ledig. */
         String status = damageReport.getTotal_repair_price() > 0 ? "Skadet" : "Ledig";
         this.jdbcTemplate.update(
                 "UPDATE Cars SET car_status = '" + status + "' WHERE frame_number = ?",
                 frameNumber
         );
-
+        //skadesrapport indsættes og opdateres i DamageReport tabel
         String sql = "INSERT INTO DamageReport (contract_id, total_repair_price) VALUES (?, ?)";
         this.jdbcTemplate.update(sql,
                 damageReport.getContract_id(),
@@ -71,6 +74,7 @@ public class DamageRepo {
         );
     }
 
+    //Finde antal biler der mangler tilsyn
     public List<Car> getCarsWithPendingInspectionsForXDays(int days) {
         List<Car> results = new ArrayList<>();
         List<Car> carsWithPendingInspection = this.jdbcTemplate.query(
@@ -80,13 +84,20 @@ public class DamageRepo {
                         "WHERE c.car_status = 'Mangler tilsyn'",
                 RowMapperUtil.CAR_ROW_MAPPER
         );
+
+        /*For each loop går igennem biler som mangler tilsyn
+        SQL-forespørgsel for at hente alle lejekontrakter for en bil,
+        sorteret efter slutdato, den nyeste først*/
         for (Car car : carsWithPendingInspection) {
             String fetchContractsSql = "SELECT * FROM RentalContract WHERE frame_number = ? ORDER BY end_date DESC";
-            List<RentalContract> rentalContracts = jdbcTemplate.query(
+            List<RentalContract> rentalContracts = this.jdbcTemplate.query(
                     fetchContractsSql,
                     new Object[]{car.getFrame_number()},
                     RowMapperUtil.RENTAL_CONTRACT_ROW_MAPPER
             );
+            /*Må kun stå i mangler tilsyn i 2 dage. Tager fat i den nyeste lejekontrakt
+             Finder dens slutdato og ser om det er før 2 dage siden
+             ergo er den for længe i "mangler tilsyn" tilstand*/
             if (!rentalContracts.isEmpty()) {
                 RentalContract latestContract = rentalContracts.get(0);
                 LocalDate endDate = latestContract.getEnd_date().toLocalDate();
@@ -97,7 +108,6 @@ public class DamageRepo {
         }
         return results;
     }
-
     public List<DamageReport> fetchAllDamageReports() {
         String sql = "SELECT damage_report_id, contract_id, total_repair_price FROM DamageReport";
         return this.jdbcTemplate.query(sql, RowMapperUtil.DAMAGE_REPORT_ROW_MAPPER);

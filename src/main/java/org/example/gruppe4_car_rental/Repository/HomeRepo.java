@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
+/*Primært bilstatus og ændringer heraf.*/
 @Repository
 public class HomeRepo {
     @Autowired

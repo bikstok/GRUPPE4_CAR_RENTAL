@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/*
+CarController er ansvarlig for at håndtere anmodninger fra "customer"-relaterede sider fra Dataregistrering.
+Controlleren henter data fra CustomerService og sender det videre til HTML-visninger.
+ */
 @Controller
 public class CarController {
     @Autowired
@@ -42,7 +46,7 @@ public class CarController {
     }
 
     //Henviser til redigeringsformular for en specifik bil baseret på frame_number, hvor man indtaster nye værdier.
-    //den tager bilens parametre med over i formularen så man ikke skal indtaste alle informationer.
+    //Den tager bilens parametre med over i formularen så man ikke skal indtaste alle informationer.
     @GetMapping("/editCar/{frame_number}")
     public String showEditForm(@PathVariable("frame_number") String frame_number, Model model) {
         Car car = this.carService.findByFrameNumber(frame_number);  //Henter bil fra CarService
@@ -67,8 +71,8 @@ public class CarController {
         //Opretter et ny Car-objekt som er en opdateret version af det eksisterende.
         Car car = new Car(frame_number, model, brand, car_status, fuel_type, gear_type, year_produced, monthly_sub_price, odometer, original_price);
 
-        this.carService.updateCar(car);  // Opdaterer bil i databasen via CarService
-        return "redirect:/dataregistrering/showCars";  // Omidigerer til biloversigt
+        this.carService.updateCar(car);
+        return "redirect:/dataregistrering/showCars";
     }
 }
 

@@ -63,7 +63,7 @@ public class BusinessRepo {
             LocalDate local_start_date = rentalContract.getStart_date().toLocalDate();
             LocalDate local_end_date = rentalContract.getEnd_date().toLocalDate();
 
-            long months = ChronoUnit.MONTHS.between(local_start_date, local_end_date); //Den kan beregne forskellen mellem to datoer/tidspunkter i en specifik tidsenhed (f.eks. antal dage, måneder, år osv.).
+            long months = ChronoUnit.MONTHS.between(local_start_date, local_end_date);
             if (months < 3 || months > 36) {
                 continue;
             }
@@ -101,6 +101,8 @@ public class BusinessRepo {
         return jdbcTemplate.queryForList(sql);
     }
 
+    /*Finder returnerede biler udfra slut-datoen af udlejningen. Vi skal have hele car objektet med
+    Alternativt kunne man lave en seperat klasse med de værdier man ønsker at fremvise*/
     public List<Car> findReturnedCarsByEndDate(LocalDate end_date) {
         String sql = "SELECT c.frame_number, c.model, cm.brand, c.car_status, c.fuel_type, " +
                 "c.gear_type, c.year_produced, c.monthly_sub_price, c.odometer, c.original_price " +
@@ -109,8 +111,6 @@ public class BusinessRepo {
                 "JOIN RentalContract r ON c.frame_number = r.frame_number " +
                 "WHERE r.end_date = ?";
 
-        RowMapper rowMapper = new BeanPropertyRowMapper(Car.class);
-        return this.jdbcTemplate.query(sql, rowMapper, end_date);
+        return this.jdbcTemplate.query(sql, RowMapperUtil.CAR_ROW_MAPPER, end_date);
     }
-
 }

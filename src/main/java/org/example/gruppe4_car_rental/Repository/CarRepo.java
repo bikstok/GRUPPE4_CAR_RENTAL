@@ -59,11 +59,7 @@ public class CarRepo {
     //Opdaterer bilens information i databasen efter redigering (via editCar redigeringsformular)
     public void updateCar(Car car) {
 
-        //System.out.println("we are updating car " + car);
-        //System.out.println("updating carModels in repo");
-        // Insert new model and brand into CarModels
-
-        /*For at vi kan redigere/og opdatere i CarModels tabellen og ikke kun Cars tabellen
+        /*For at vi kan redigere/opdatere i CarModels tabellen og ikke kun Cars tabellen laves følgende sql
         (eftersom vi skal kunne redigere vores foreign keys (model og brand fra CarModels)*/
         this.jdbcTemplate.update(
                 "INSERT INTO CarModels (model, brand) " +
@@ -71,7 +67,6 @@ public class CarRepo {
                         "ON DUPLICATE KEY UPDATE city = VALUES(brand)",
             car.getModel(), car.getBrand()
         );
-        //System.out.println("updating car in repo");
 
         /*For at opdatere i Cars tabellen.
         Vi redigerer IKKE frame_number men skal bruge det til at tage fat i den bil man vil redigere.*/

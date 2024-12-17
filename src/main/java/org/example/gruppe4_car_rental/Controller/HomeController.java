@@ -1,7 +1,5 @@
 package org.example.gruppe4_car_rental.Controller;
 
-import org.example.gruppe4_car_rental.Model.RentalContract;
-import org.example.gruppe4_car_rental.Service.DamageService;
 import org.example.gruppe4_car_rental.Service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.util.List;
 
+/*HomeController håndterer forside-login og opdatering af bilstatus.
+Controlleren tjekker loginoplysninger med hashed adgangskoder og omdirigerer brugeren til relevante dashboards.*/
 @Controller
 public class HomeController {
 
@@ -61,16 +60,19 @@ public class HomeController {
             try {
                 // Hash'er adgangskode med SHA-256 (secure hash algorithm)
                 MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                //indtastet værdi bliver til et byte array via UTF_8 (formattering, unicode transformation format )
                 byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-                final StringBuilder hexString = new StringBuilder();
+
+                /*Du laver et array af bytes, så laver du det om til hexdecimaler.
+                Hvis længden kun er 1, så sætter vi et 0 foran. */
+                String hashedPassword = "";
                 for (byte b : hash) {
                     final String hex = Integer.toHexString(0xff & b);
                     if (hex.length() == 1) {
-                        hexString.append('0');
+                        hashedPassword += "0";
                     }
-                    hexString.append(hex);
+                    hashedPassword += hex;
                 }
-                String hashedPassword = hexString.toString();
                 if (hashedPassword.equals(correctPasword)) {
                     // Omdiriger brugeren til den relevante profilside baseret på login
                     return "redirect:/" + redirectUrl;
@@ -84,10 +86,4 @@ public class HomeController {
     }
 }
 
-/*Alternativt kunne vi lave
-if (password.equals("WeLoveKPI")) {
-    redirectUrl = "forretningsudvikler/testLogin";
-} else {
-    redirectUrl = "error";
-}
-*/
+

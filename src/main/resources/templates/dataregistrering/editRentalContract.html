@@ -47,7 +47,7 @@
 
             <div class="form-group">
                 <label for="insurance">Forsikring</label>
-                <input type="text" id="insurance" name="insurance" th:value="${rentalContract.insurance}" required/>
+                <input type="checkbox" id="insurance" name="insurance" th:checked="${rentalContract.insurance ? 'checked' : null}" />
             </div>
 
             <div class="form-group">
@@ -62,7 +62,12 @@
 
             <div class="form-group">
                 <label for="voucher">Voucher</label>
-                <input type="text" id="voucher" name="voucher" th:value="${rentalContract.voucher}" required/>
+                <input type="checkbox" id="voucher" name="voucher" th:checked="${rentalContract.voucher ? 'checked' : null}" />
+            </div>
+
+            <div class="form-group">
+                <label for="start_odometer">Start odometer</label>
+                <input type="number" id="start_odometer" name="start_odometer" th:value="${rentalContract.start_odometer}" required/>
             </div>
 
             <button type="submit" class="update-button">Opdater Lejekontrakt</button>

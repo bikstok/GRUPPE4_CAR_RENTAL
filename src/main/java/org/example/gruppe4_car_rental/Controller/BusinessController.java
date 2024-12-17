@@ -55,7 +55,6 @@ public class BusinessController {
             model.addAttribute("color", "black");
         }
 
-
         return "forretningsudvikler/KPIDashboard";
     }
 
