@@ -14,6 +14,7 @@ public class HomeRepo {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    // Jakob og Albert
     public void changeStatusOfCarsToRented(List<RentalContract> activeRentalContracts) {
         for (RentalContract rentalContract : activeRentalContracts) {
             this.jdbcTemplate.update("UPDATE Cars SET car_status = 'Lejet' WHERE frame_number = ? AND car_status = 'Ledig';",
@@ -21,7 +22,7 @@ public class HomeRepo {
             );
         }
     }
-
+    // Jakob og Albert
     public void changeStatusOfCarsToPendingInspection(List<RentalContract> allRentalContracts) {
         LocalDate now = LocalDate.now();
         for (RentalContract rentalContract : allRentalContracts) {

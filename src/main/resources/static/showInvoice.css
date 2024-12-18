@@ -1,4 +1,4 @@
-/* General Body Styling */
+/*Alberrt*/
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -9,7 +9,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* Ensures it fills the entire screen height */
+    height: 100vh;
 }
 
 /* Header Styling */
@@ -17,11 +17,10 @@ body {
     text-align: center;
     color: #027f66;
     margin-bottom: 20px;
-    font-size: 36px; /* Increased font size */
-    font-weight: bold; /* Makes the text stand out more */
+    font-size: 36px;
+    font-weight: bold;
 }
 
-/* Invoice Container Styling */
 .invoice-container {
     max-width: 600px;
     background: #fff;
@@ -34,7 +33,6 @@ body {
     gap: 20px;
 }
 
-/* Sections Styling */
 .invoice-details, .invoice-items, .invoice-status {
     margin-bottom: 20px;
 }
@@ -48,13 +46,11 @@ strong {
     color: #555;
 }
 
-/* Unpaid Text Styling */
 .unpaid {
     color: red;
     font-weight: bold;
 }
 
-/* Button Styling */
 .action-buttons {
     text-align: center;
 }

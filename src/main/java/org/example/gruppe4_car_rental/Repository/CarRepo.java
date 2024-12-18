@@ -15,6 +15,7 @@ public class CarRepo {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    //Kodet i fællesskab
     public List<Car> fetchAllCars(String sortBy) {
         if (sortBy == null || sortBy.isEmpty()) {
             sortBy = "c.frame_number"; //standard sortering, hvis der ikke er klikket på nogen kategori.
@@ -32,6 +33,7 @@ public class CarRepo {
         return this.jdbcTemplate.query(sql, RowMapperUtil.CAR_ROW_MAPPER);
     }
 
+    //Kodet i fællesskab
     /*for at slette bil via frame_number skal vi først fjerne det fra RentalContract,
     da frame_number er en foreign key i RentalContract*/
     public boolean deleteCar(String frame_number) {
@@ -41,12 +43,14 @@ public class CarRepo {
         return this.jdbcTemplate.update("DELETE FROM Cars WHERE frame_number = ?", frame_number) > 0;
     }
 
+    //Simone
     //Metode til at tælle antallet af biler med en bestemt status.
     public int countByCarStatus(String status) {
         String sql = "SELECT COUNT(*) FROM Cars WHERE car_status = ?";
         return jdbcTemplate.queryForObject(sql, Integer.class, status);
     }
 
+    //Nunu & Albert
     //Henter bil ud fra det valgte frame_number for at kunne redigere i bilen.
     public Car findByFrameNumber(String frameNumber) {
         String sql = "SELECT c.*, cm.brand " +
@@ -56,6 +60,7 @@ public class CarRepo {
         return this.jdbcTemplate.queryForObject(sql, new Object[]{frameNumber}, RowMapperUtil.CAR_ROW_MAPPER);
     }
 
+    //Nunu & Albert
     //Opdaterer bilens information i databasen efter redigering (via editCar redigeringsformular)
     public void updateCar(Car car) {
 

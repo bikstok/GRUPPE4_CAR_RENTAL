@@ -22,6 +22,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    //Kodet i fællesskab
     //Sletter en kunde ud fra cpr_number
     @GetMapping("/deleteCustomer/{cpr_number}")
     public String deleteCustomer(@PathVariable("cpr_number") String cpr_number) {
@@ -29,6 +30,7 @@ public class CustomerController {
         return "redirect:/dataregistrering/showCustomers";
     }
 
+    //Nunu
     //Håndterer forespørgsler til visning af kunder med sorteringsmuligheder.
     @GetMapping("/dataregistrering/showCustomers")
     public String showAllCustomers(
@@ -50,6 +52,7 @@ public class CustomerController {
         return "dataregistrering/showCustomers";// Returnerer til showCustomers.html
     }
 
+    //Nunu
     //Henviser til redigeringsformular for en specifik kunde baseret på cpr_number, hvor man indtaster nye værdier.
     //kundens parametre følger med i formularen så man ikke skal genindtaste alle informationer.
     @GetMapping("/editCustomer/{cpr_number}")
@@ -59,6 +62,7 @@ public class CustomerController {
         return "dataregistrering/editCustomer";
     }
 
+    //Nunu
     //Håndterer redigeringsformularen og opdaterer i databasen.
     @PostMapping("/updateCustomer")
     public String updateCustomer(

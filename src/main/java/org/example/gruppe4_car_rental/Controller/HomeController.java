@@ -27,6 +27,7 @@ public class HomeController {
         return "index";
     }
 
+    //Albert & Nunu
     // Håndtering af login-formularen
     @PostMapping("/login")
     public String handleLogin(@RequestParam("username") String username,
@@ -55,6 +56,7 @@ public class HomeController {
                 break;
         }
 
+        // Albert
         if (correctPasword != null) {
             // Brug switch til at validere loginoplysninger
             try {

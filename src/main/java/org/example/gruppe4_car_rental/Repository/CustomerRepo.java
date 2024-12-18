@@ -15,6 +15,7 @@ public class CustomerRepo {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    //Kodet i fællesskab
     public List<Customer> fetchAllCustomers() {
         /*Da vores tabeller er normaliseret, så zipcode og city står i egen tabel, så er brand en foreign key i Customers tabellen.
         Derfor skal vi join ZipCode tablenne til vores Customers tabel så vi kan få zipcode og city værdien med. */
@@ -26,6 +27,7 @@ public class CustomerRepo {
         return jdbcTemplate.query(sql, RowMapperUtil.CUSTOMER_ROW_MAPPER); // udfører query og mapper resultatet som objekter i en liste/table
     }
 
+    //Nunu
     //Vise liste af kunder efter den valgte sorteringsmulighed
     public List<Customer> fetchAllCustomers(String sortBy) {
         // Hvis sortBy er null eller tom, brug standard sortering efter fornavn
@@ -52,6 +54,7 @@ public class CustomerRepo {
         return jdbcTemplate.query(sql, rowMapper);
     }
 
+    //Kodet i fællesskab
     //Sletter en kunde baseret på cpr_number
     public boolean deleteCustomer(String cpr_number) {
         this.jdbcTemplate.update("DELETE FROM CarPurchase WHERE contract_id IN (SELECT contract_id FROM RentalContract WHERE cpr_number = ?)", cpr_number);
@@ -60,6 +63,7 @@ public class CustomerRepo {
         return this.jdbcTemplate.update("DELETE FROM Customers WHERE cpr_number = ?", cpr_number) > 0;
     }
 
+    //Nunu
     //Henter kunde ud fra det valgte cpr_number for at kunne redigere i kunden.
     public Customer findByCprNumber(String CprNumber) {
         String sql = "SELECT c.*, z.city " +

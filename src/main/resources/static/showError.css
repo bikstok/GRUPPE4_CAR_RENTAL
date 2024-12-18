@@ -1,6 +1,5 @@
-/* showError.css */
+/*Albert*/
 
-/* Set a background color for the entire page */
 body {
     font-family: Arial, sans-serif;
     background-color: #f8d7da;
@@ -14,7 +13,6 @@ body {
     flex-direction: column;
 }
 
-/* Error container to center everything together */
 .error-container {
     text-align: center;
     padding: 20px;
@@ -26,7 +24,6 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Style the main heading */
 h1 {
     font-size: 2.5rem;
     font-weight: bold;
@@ -34,7 +31,6 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Style the message */
 p {
     font-size: 1.5rem;
     font-weight: normal;
@@ -44,7 +40,6 @@ p {
     border-radius: 5px;
 }
 
-/* Button style */
 .error-button {
     display: inline-block;
     padding: 10px 20px;
@@ -60,12 +55,10 @@ p {
     background-color: #027f66;
 }
 
-/* Add a slight animation for the page appearance */
 body {
     animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Animation effect */
 @keyframes fadeIn {
     0% {
         opacity: 0;

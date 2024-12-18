@@ -29,7 +29,7 @@ class DataServiceTest {
         // Initialiserer mocks og injecter dem i dataService før hver test.
         MockitoAnnotations.openMocks(this);
     }
-
+    // Jakob med hjælp fra ChatGPT til brug af mockito
     @Test
     void testGetTotalPrice_NormalCase() {
         //  Sæt testens inputdata og forventede resultater
@@ -47,7 +47,7 @@ class DataServiceTest {
         //  Verificér, at den samlede pris er korrekt beregnet
         assertEquals(300.0, totalPrice); // 3 * 100
     }
-
+    // Jakob med hjælp fra ChatGPT til brug af mockito
     @Test
     void testGetTotalPrice_DiscountApplied() {
         //  Opsæt testdata for et leje, der varer præcis 12 måneder (med rabat)
@@ -65,7 +65,7 @@ class DataServiceTest {
         // Verificér den korrekte rabatberegning
         assertEquals(1080.0, totalPrice); // 12 * 100 * 0.90
     }
-
+    // Jakob med hjælp fra ChatGPT til brug af mockito
     @Test
     void testGetTotalPrice_OverOneYear() {
         //  Test for et leje, der varer mere end ét år (17 måneder)

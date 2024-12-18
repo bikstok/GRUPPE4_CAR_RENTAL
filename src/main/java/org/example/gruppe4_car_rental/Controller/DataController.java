@@ -31,6 +31,7 @@ public class DataController {
     @Autowired
     private DataService dataService;
 
+    // Albert & Jakob
     //Opret lejekontrakt
     @PostMapping("/dataregistrering/createRentalContract")
     public String createRentalContract(@RequestParam("cpr_number") String cpr_number, @RequestParam("frame_number") String frame_number, @RequestParam("start_date") String start_date_string, @RequestParam("end_date") int months, @RequestParam(name = "insurance", defaultValue = "false") boolean insurance, @RequestParam("max_km") String max_km_string, @RequestParam("voucher") String voucher_string, Model model) {
@@ -89,6 +90,7 @@ public class DataController {
         return "dataregistrering/showRentalContracts";
     }
 
+    //Kodet i fællesskab
     @GetMapping("dataregistrering/dataFrontPage")
     public String fetchAllAvailableCars(Model model) {
         List<Car> cars = this.dataService.fetchAllAvailableCars();
@@ -130,6 +132,7 @@ public class DataController {
         return "redirect:/dataregistrering/showCarPurchases";
     }
 
+    // Albert
     @GetMapping("/deleteRentalContract/{contract_id}")
     public String deleteRentalContract(@PathVariable("contract_id") int contract_id) {
         this.dataService.deleteRentalContract(contract_id);
@@ -171,6 +174,7 @@ public class DataController {
         return "dataregistrering/editRentalContract";
     }
 
+    //Nunu
     //Håndterer redigeringsformularen og opdaterer i databasen.
     @PostMapping("/updateRentalContract")
     public String updateRentalContract(@RequestParam("contract_id") int contract_id, @RequestParam("cpr_number") String cpr_number, @RequestParam("frame_number") String frame_number, @RequestParam("start_date") String start_date_string, @RequestParam("end_date") String end_date_string, @RequestParam(name = "insurance", defaultValue = "false") boolean insurance, @RequestParam("total_price") double total_price, @RequestParam("max_km") int max_km, @RequestParam(name = "voucher", defaultValue = "false") boolean voucher, @RequestParam("start_odometer") double start_odometer) {

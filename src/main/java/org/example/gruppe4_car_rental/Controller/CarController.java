@@ -18,6 +18,7 @@ public class CarController {
     @Autowired
     private CarService carService;
 
+    //Nunu
     //Håndterer forespørgsler til visning af biler med sorteringsmuligheder.
     @GetMapping("/dataregistrering/showCars")
     public String showAllCars(
@@ -38,6 +39,7 @@ public class CarController {
         return "dataregistrering/showCars";
     }
 
+    //Kodet i fællesskab
     //Sletter en bil fra databasen baseret på frame_number.
     @GetMapping("/deleteCar/{frame_number}")
     public String deleteCar(@PathVariable("frame_number") String frame_number) {
@@ -45,6 +47,7 @@ public class CarController {
         return "redirect:/dataregistrering/showCars";
     }
 
+    //Nunu & Albert
     //Henviser til redigeringsformular for en specifik bil baseret på frame_number, hvor man indtaster nye værdier.
     //Den tager bilens parametre med over i formularen så man ikke skal indtaste alle informationer.
     @GetMapping("/editCar/{frame_number}")
@@ -54,6 +57,7 @@ public class CarController {
         return "dataregistrering/editCar";
     }
 
+    //Nunu
     //Håndterer redigeringsformularen og opdaterer i databasen.
     @PostMapping("/updateCar")
     public String updateCar(

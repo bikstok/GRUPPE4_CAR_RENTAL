@@ -26,6 +26,7 @@ public class DamageController {
     private DamageService damageService;
 
 
+    // Jakob og Albert
     //Viser en oversigt over kontrakter med manglende tilsyn
     @GetMapping("skade_og_udbedring/damageFrontPage")
     public String fetchContractsWithPendingInspections(Model model) {
@@ -57,7 +58,7 @@ public class DamageController {
         model.addAttribute("rentalContracts", rentalContracts);
         return "skade_og_udbedring/damageFrontPage";
     }
-
+    // Jakob og Albert
     //Viser alle skadesrapporter
     @GetMapping("skade_og_udbedring/showDamageReports")
     public String fetchAllDamageReports(Model model) {
@@ -65,7 +66,7 @@ public class DamageController {
         model.addAttribute("damageReports", damageReports);
         return "skade_og_udbedring/showDamageReports";
     }
-
+    // Jakob og Albert
     //opret kontrakt (med et kontrakt id)
     @GetMapping("/createDamageReport/{contract_id}")
     public String redirectToDamageReportForm(@PathVariable("contract_id") String contract_id, Model model) {
@@ -75,12 +76,14 @@ public class DamageController {
         return "skade_og_udbedring/createDamageReport";
     }
 
+    // Jakob og Albert
     //Opret skadesrapport
     @PostMapping("/skade_og_udbedring/createDamageReport")
     public String createDamageReport(
             @RequestParam("contract_id") int contract_id,
             @RequestParam(value = "damage_prices", required = false) List<Double> damage_prices,
             Model model) {
+        // Jakob og Albert
         double total_repair_price = 0.0;
         if (damage_prices != null) {
             for (double damage_price : damage_prices) {
@@ -93,14 +96,14 @@ public class DamageController {
         return "redirect:/skade_og_udbedring/showDamageReports";
     }
 
-
+    // Albert
     //Slet skadesrapport
     @GetMapping("/deleteDamageReport/{contract_id}")
     public String deleteDamageReport(@PathVariable("contract_id") int contract_id) {
         this.damageService.deleteDamageReport(contract_id);
         return "redirect:/skade_og_udbedring/showDamageReports";
     }
-
+    // Albert
     //Rediger skadesrapport
     @GetMapping("/editDamageReport/{contract_id}")
     public String editDamageReport(@PathVariable("contract_id") int contract_id, Model model) {

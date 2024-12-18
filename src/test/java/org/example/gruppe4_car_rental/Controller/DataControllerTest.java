@@ -35,7 +35,7 @@ class DataControllerTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
     }
-
+    // Jakob med hjælp fra ChatGPT til brug af mockito.
     @Test
     void testCreateCarPurchase_CarAlreadySold() {
         // Test data setup
@@ -45,13 +45,13 @@ class DataControllerTest {
                 contractId, "3456721098", "CDE3456789012", // Kunde-ID og bilens stelnummer.
                 Date.valueOf(LocalDate.of(2024, 12, 1)),  // Kontraktens startdato.
                 Date.valueOf(LocalDate.of(2025, 12, 31)), // Kontraktens slutdato.
-                true, 20000, 4000, true, 10000            // Forskellige kontraktbetingelser (fx aktiv status, beløb mv.).
+                true, 20000, 4000, true, 10000            // Forskellige kontraktbetingelser.
         );
 
         Car car = new Car(
                 "CDE3456789012", "Tesla", "Model S",     // Stelnummer, mærke og model.
                 "Solgt", "El", "Automatisk", 2023,       // Status, brændstoftype, gearkasse og årgang.
-                500.0, 10000, 70000.0                    // Dagspris, kilometer og salgspris.
+                500.0, 10000, 70000.0                    // Månedsspris, kilometer og salgspris.
         );
 
         // Mock behavior
@@ -61,10 +61,8 @@ class DataControllerTest {
         when(dataService.getCarFromFrameNumber("CDE3456789012"))
                 .thenReturn(car); // Returnerer bilen med stelnummeret "CDE3456789012".
 
-
         // Kalder metoden `createCarPurchase`, som vi tester, og sender kontrakt-ID og model som parametre.
         String viewName = dataController.createCarPurchase(contractId, model);
-
 
         // Verificerer, at metoden tilføjer den rigtige fejlmeddelelse til modellen.
         verify(model).addAttribute("message", "Denne bil er allerede solgt");
@@ -73,6 +71,7 @@ class DataControllerTest {
         assertEquals("showError", viewName);
     }
 
+    // Jakob med hjælp fra ChatGPT til brug af mockito og ArgumentCaptor
     @Test
     void testCreateCarPurchase_Calculation() {
         int contractId = 2; // Kontrakt-ID, som identificerer den udlejningskontrakt, der bruges i testen.
@@ -91,7 +90,7 @@ class DataControllerTest {
         Car car = new Car(
                 "CDE3456789012", "Tesla", "Model S",     // Stelnummer, mærke og model.
                 "Lejet", "El", "Automatisk", 2020,       // Status, brændstoftype, gearkasse og årgang.
-                500.0, 10000, 100000.0                   // Dagspris, kilometer og original pris.
+                500.0, 10000, 100000.0                   // Månedsspris, kilometer og original pris.
         );
 
 

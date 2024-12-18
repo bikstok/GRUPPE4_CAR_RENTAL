@@ -19,6 +19,7 @@ public class DamageRepo {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    // Jakob og Albert
     public List<RentalContract> fetchContractsWithPendingInspections() {
         String sql = "SELECT " +
                 "    rc.contract_id, " +
@@ -52,6 +53,7 @@ public class DamageRepo {
         return jdbcTemplate.query(sql, rowMapper);
     }
 
+    // Jakob og Albert
     //For at oprette skadesrapport ud fra contract_id med udregning af totalpris af skaderne
     public void createDamageReport(DamageReport damageReport) {
         String frameNumber = this.jdbcTemplate.queryForObject(
@@ -59,8 +61,10 @@ public class DamageRepo {
                 String.class,
                 damageReport.getContract_id()
         );
-/*I princippet et simpelt if/else statement,som tjekker om reperationsprisen er større end 0 :
-Hvis ja =skadet, hvis nej = ledig. */
+
+        // Albert
+        /*I princippet et simpelt if/else statement,som tjekker om reperationsprisen er større end 0 :
+        Hvis ja =skadet, hvis nej = ledig. */
         String status = damageReport.getTotal_repair_price() > 0 ? "Skadet" : "Ledig";
         this.jdbcTemplate.update(
                 "UPDATE Cars SET car_status = '" + status + "' WHERE frame_number = ?",
@@ -74,6 +78,7 @@ Hvis ja =skadet, hvis nej = ledig. */
         );
     }
 
+    // Jakob og Albert
     //Finde antal biler der mangler tilsyn
     public List<Car> getCarsWithPendingInspectionsForXDays(int days) {
         List<Car> results = new ArrayList<>();

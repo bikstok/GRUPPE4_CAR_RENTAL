@@ -16,12 +16,12 @@ public class DataRepo {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
+    // Jakob og Albert
     public double getMonthlySubscriptionPriceFromFrameNumber(final String frame_number) {
         String sql = "SELECT Cars.monthly_sub_price FROM Cars WHERE frame_number = ?";
         return this.jdbcTemplate.queryForObject(sql, Double.class, frame_number);
     }
-
+    // Jakob og Albert
     public Car getCarFromFrameNumber(String frame_number) {
         String sql = """
         SELECT c.frame_number, cm.brand, c.model, c.car_status, c.fuel_type, 
@@ -33,7 +33,7 @@ public class DataRepo {
        """;
         return jdbcTemplate.queryForObject(sql, RowMapperUtil.CAR_ROW_MAPPER, frame_number);
     }
-
+    // Jakob og Albert
     public List<Car> fetchAllAvailableCars() {
         String sql = "SELECT Cars.frame_number, Cars.model, Cars.car_status, Cars.fuel_type, Cars.gear_type, " +
                 "Cars.year_produced, Cars.monthly_sub_price, Cars.odometer, Cars.original_price, CarModels.brand " +
@@ -43,7 +43,7 @@ public class DataRepo {
         return jdbcTemplate.query(sql, RowMapperUtil.CAR_ROW_MAPPER);
 
     }
-
+    // Jakob og Albert
     public void createCarPurchase(CarPurchase carPurchase, RentalContract rentalContract, Car car) {
         String sql = "INSERT INTO CarPurchase (contract_id, purchase_price) VALUES (?, ?)";
         this.jdbcTemplate.update(sql, carPurchase.getContract_id(), carPurchase.getPurchase_price());
@@ -51,7 +51,7 @@ public class DataRepo {
         String updateCarStatus = "UPDATE Cars SET car_status = 'Solgt' WHERE frame_number = ?";
         this.jdbcTemplate.update(updateCarStatus, car.getFrame_number());
     }
-
+    // Jakob og Albert
     public void deleteCarPurchase(int car_purchase_id) {
         int contract_id = this.jdbcTemplate.queryForObject(
                 "SELECT contract_id FROM CarPurchase WHERE car_purchase_id = ?",

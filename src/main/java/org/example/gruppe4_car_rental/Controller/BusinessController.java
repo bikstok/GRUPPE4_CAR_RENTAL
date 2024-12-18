@@ -22,12 +22,15 @@ public class BusinessController {
     @Autowired
     private BusinessService businessService;
 
+    //Simone
     @GetMapping("/forretningsudvikler/KPIDashboard")
     public String showKPIDashboard(Model model) {
+
 
         //Henter hvor mange antal biler der står som ''lejet''
         int rentedCarsCount = this.businessService.countRentedCars();
         model.addAttribute("rentedCars", rentedCarsCount);  // Attributnavnet 'rentedCars' bruges til at vise data i HTML-filen
+
 
         //Henter antal lejekontrakter i alt
         int rentedCarsCountOverall = this.businessService.countRentedCarsOverall();
@@ -44,6 +47,7 @@ public class BusinessController {
         // Henter total indtjening og sender det til modellen
         model.addAttribute("totalEarnings", this.businessService.getTotalEarnings() + " DKK");
 
+        //Simone og Albert
         // Beregner procentdelen af ledige biler og afrunder til nærmeste heltal
         int percentOfAvailableCars = (int) Math.round(this.businessService.getPercentOfAvailableCars() * 100);
         model.addAttribute("notification", "Der er " + percentOfAvailableCars + "% ledige biler");
@@ -58,6 +62,7 @@ public class BusinessController {
         return "forretningsudvikler/KPIDashboard";
     }
 
+    //Simone
     // Henter oversigt over bilkøb og sender det til modellen
     @GetMapping("/forretningsudvikler/showCarPurchaseOverview")
     public String carPurchaseOverview(Model model) {
@@ -66,6 +71,7 @@ public class BusinessController {
         return "forretningsudvikler/showCarPurchaseOverview";
     }
 
+    //Simone
     // Henter aktive lejekontrakter og sender det til modellen
     @GetMapping("/forretningsudvikler/showActiveRentalContracts")
     public String getActiveRentalContracts(Model model) {
@@ -74,6 +80,7 @@ public class BusinessController {
         return "forretningsudvikler/showActiveRentalContracts";
     }
 
+    //Nunu
     // Konverterer end_date (String) til LocalDate og henter returnerede biler baseret på dato
     @GetMapping("/forretningsudvikler/showReturnedCars")
     public String getReturnedCarsByEndDate(@RequestParam("end_date") String end_date, Model model) {

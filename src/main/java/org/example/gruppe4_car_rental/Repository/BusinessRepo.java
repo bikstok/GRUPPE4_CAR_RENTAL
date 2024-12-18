@@ -13,26 +13,26 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
-
+//Simone
 @Repository
 public class BusinessRepo {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
+    //Simone
     //Viser antallet af udlejede biler lige nu (som i at den er startet)
     public int countRentedCars() {
         //Viser antallet af hvor mange gange der står 'Lejet' i vores sql.
         String sql = "SELECT COUNT(*) FROM Cars WHERE car_status = ?";
         return jdbcTemplate.queryForObject(sql, Integer.class, "Lejet");
     }
-
+    //Simone
     //Viser antallet af lejekontrakter overall (på alle tidspunkter og frem)
     public int countRentedCarsOverall() {
         String sql = "SELECT COUNT(*) FROM RentalContract";
         return jdbcTemplate.queryForObject(sql, Integer.class);
     }
-
+    //Simone
     public List<Map<String, Object>> getTopRentedCarBrands() {
         //udfører en SQL-forespørgsel, der finder de 5 mest udlejede bilbrands baseret på antallet af lejeaftaler.
         //Antallet af gange, et brand er blevet lejet, beregnes ved at:
@@ -48,7 +48,7 @@ public class BusinessRepo {
                 "LIMIT 5";
         return jdbcTemplate.queryForList(sql);
     }
-
+    //Simone
     public double calculateMonthlyEarningsJava() {
         // SQL: Hent alle kontrakter, der er aktive i øjeblikket
         // 1. Beregning af den samlede månedlige indtjening
@@ -74,7 +74,7 @@ public class BusinessRepo {
         }
         return totalMonthlyEarnings;
     }
-
+    //Simone
     public List<Map<String, Object>> overviewOfCarPurchases() {
         //1. Sammensætter køberens fulde navn (fornavn og efternavn)
         //2. Tæller antal biler købt af hver kunde
@@ -101,6 +101,7 @@ public class BusinessRepo {
         return jdbcTemplate.queryForList(sql);
     }
 
+    //Nunu
     /*Finder returnerede biler udfra slut-datoen af udlejningen. Vi skal have hele car objektet med
     Alternativt kunne man lave en seperat klasse med de værdier man ønsker at fremvise*/
     public List<Car> findReturnedCarsByEndDate(LocalDate end_date) {

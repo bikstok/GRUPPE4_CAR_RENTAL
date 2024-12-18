@@ -19,21 +19,25 @@ public class CustomerService {
         return customerRepo.fetchAllCustomers();
     }
 
+    //Kodet i fællesskab
     //Sletter kunden ud fra cpr_number
     public boolean deleteCustomer(String cpr_number) {
         return this.customerRepo.deleteCustomer(cpr_number);
     }
 
+    //Nunu
     //Returnerer liste af sorterede kunder efter den valgte sortBy
     public List<Customer> fetchAllCustomers(String sortBy) {
         return customerRepo.fetchAllCustomers(sortBy);
     }
 
+    //Nunu
     //Redigerer kunde ud fra cpr_number
     public Customer findByCprNumber(String cpr_number) {
         return customerRepo.findByCprNumber(cpr_number);  // Brug CustomerRepo til at hente bilen
     }
 
+    //Nunu
     //Opdaterer kundens information efter redigering
     public void updateCustomer(Customer customer) {
         this.customerRepo.updateCustomer(customer);  // Brug CustomerRepo til at opdatere bilen i databasen

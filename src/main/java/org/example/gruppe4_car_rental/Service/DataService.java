@@ -28,7 +28,7 @@ public class DataService {
     public Customer getCustomerFromCprNumber(final String cpr_number) {
         return this.customerRepo.findByCprNumber(cpr_number);
     }
-
+    // Jakob og Albert
     public double getTotalPrice(String frame_number, LocalDate start_date, LocalDate end_date) {
         double monthly_sub_price = this.dataRepo.getMonthlySubscriptionPriceFromFrameNumber(frame_number);
         long monthsBetween = ChronoUnit.MONTHS.between(start_date, end_date);
@@ -43,26 +43,29 @@ public class DataService {
         return total_price;
     }
 
+
+    // Albert og Jakob
     public void createRentalContract(RentalContract rentalContract) {
         this.rentalContractRepo.createRentalContract(rentalContract);
     }
-
+    // Jakob og Albert
     public List<CarPurchase> fetchAllCarPurchases() {
         return this.rentalContractRepo.fetchAllCarPurchases();
     }
-
+    // Jakob og Albert
     public List<RentalContract> fetchAllRentalContracts() {
         return this.rentalContractRepo.fetchAllRentalContracts();
     }
-
+    // Jakob og Albert
     public List<Car> fetchAllAvailableCars() {
         return this.dataRepo.fetchAllAvailableCars();
     }
 
+    // Albert
     public boolean deleteRentalContract(int contract_id) {
         return this.rentalContractRepo.deleteRentalContract(contract_id);
     }
-
+    // Jakob og Albert
     public void createCarPurchase(CarPurchase carPurchase, RentalContract rentalContract, Car car) {
         this.dataRepo.createCarPurchase(carPurchase, rentalContract,car);
     }
@@ -81,20 +84,20 @@ public class DataService {
     //    this.dataRepo.createCarPurchase(new CarPurchase(-1, contract_id, Math.round(purchase_price * 100.0) / 100.0), rentalContract, car);
     //    return null;
     //}
-
+    // Jakob og Albert
     public Car getCarFromFrameNumber(String frameNumber) {
         return this.dataRepo.getCarFromFrameNumber(frameNumber);
     }
-
+    // Jakob og Albert
     public RentalContract getRentalContractFromContractId(int contract_id) {
         return this.rentalContractRepo.getRentalContractFromContractId(contract_id);
     }
-
+    // Jakob og Albert
     //Opdaterer lejekontraktens information efter redigering
     public void updateRentalContract(RentalContract rentalContract) {
         this.rentalContractRepo.updateRentalContract(rentalContract);  // Brug rentalContractRepo til at opdatere lejekontrakten i databasen
     }
-
+    // Albert
     public void deleteCarPurchase(int car_purchase_id) {
         this.dataRepo.deleteCarPurchase(car_purchase_id);
     }

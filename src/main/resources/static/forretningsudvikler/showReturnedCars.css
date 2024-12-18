@@ -1,10 +1,12 @@
+/*Simone*/
+
 /* Generelle indstillinger */
 body {
     font-family: 'Nunito', sans-serif; /* Elegant og let læselig skrifttype */
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9; /* Lys grå baggrund */
-    color: #333; /* Mørk grå tekst */
+    background-color: #f9f9f9;
+    color: #333;
     line-height: 1.6; /* Giver bedre luft mellem linjer */
 }
 
@@ -12,7 +14,7 @@ body {
 /* Overskrift */
 h1 {
     text-align: center;
-    color: #2C3E50; /* Blålig farve */
+    color: #2C3E50;
     margin-bottom: 20px;
     font-weight: 600;
 }
@@ -21,7 +23,7 @@ h1 {
 p {
     text-align: center;
     font-size: 18px;
-    color: #555; /* Let grålig tekst */
+    color: #555;
     margin: 10px 0;
 }
 
@@ -31,7 +33,7 @@ ul {
     padding: 0;
     margin: 20px auto; /* Centrerer listen */
     max-width: 600px; /* Begrænser bredden af listen */
-    background: #ffffff; /* Hvid baggrund */
+    background: #ffffff;
     border-radius: 10px; /* Runde hjørner */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Let skygge */
     overflow: hidden; /* Runde hjørner gælder også for indholdet */
@@ -53,11 +55,11 @@ ul li:last-child {
 /* Tekst i listeelementer */
 ul li span {
     font-size: 16px;
-    color: #333; /* Standard mørkegrå */
+    color: #333;
 }
 
 /* Hover-effekt for listeelementer */
 ul li:hover {
-    background-color: #f1f1f1; /* Lys baggrund ved hover */
+    background-color: #f1f1f1;
     transition: background-color 0.3s ease;
 }

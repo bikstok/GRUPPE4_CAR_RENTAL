@@ -29,47 +29,51 @@ public class BusinessService {
     @Autowired
     private RentalContractRepo rentalContractRepo;
 
-
+    //Simone
     // Beregner procentdelen af ledige biler
     public double getPercentOfAvailableCars() {
         return this.dataRepo.fetchAllAvailableCars().size() / (double) this.carRepo.fetchAllCars(null).size();
     }
 
+
+    //Nunu
     // Finder returnerede biler baseret på slutdato
     public List<Car> getReturnedCarsByEndDate(LocalDate end_date) {
         return this.businessRepo.findReturnedCarsByEndDate(end_date);
     }
 
+    //Simone
     // Henter aktive lejekontrakter
     public List<RentalContract> getActiveRentalOverview() {
         return this.rentalContractRepo.getActiveRentalContracts();
     }
 
+    //Simone
     // Henter et overblik over købte biler
     public List<Map<String, Object>> overviewOfCarPurchases() {
         return this.businessRepo.overviewOfCarPurchases();
     }
-
+    //Simone
     // Beregner månedlig indtjening
     public double calculateMonthlyEarningsJava() {
         return this.businessRepo.calculateMonthlyEarningsJava();
     }
-
+    //Simone
     // Henter top-5 mest udlejede bilmærker
     public List<Map<String, Object>> getTopRentedCarBrands() {
         return this.businessRepo.getTopRentedCarBrands();
     }
-
+    //Simone
     // Tæller det samlede antal udlejede biler
     public int countRentedCarsOverall() {
         return this.businessRepo.countRentedCarsOverall();
     }
-
+    //Simone
     // Tæller det aktuelle antal biler, der er udlejet
     public int countRentedCars() {
         return this.businessRepo.countRentedCars();
     }
-
+    //Simone
     // Beregner total indtjening
     public double getTotalEarnings() {
         List<CarPurchase> carPurchases = this.rentalContractRepo.fetchAllCarPurchases();
